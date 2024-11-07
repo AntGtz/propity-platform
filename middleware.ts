@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
+import { auth } from "@/lib/auth/auth";
 
-export function middleware(request: NextRequest) {
+export default auth((request: NextRequest) => {
   // Get the hostname from the request headers
   const hostname = request.headers.get("host") || "";
   // Split port from hostname
@@ -27,7 +28,7 @@ export function middleware(request: NextRequest) {
       headers: requestHeaders,
     },
   });
-}
+});
 
 export const config = {
   matcher: "/:path*",
