@@ -7,7 +7,7 @@ export default auth((request: NextRequest) => {
   const hostname = request.headers.get("host");
 
   // Define allowed Domains (localhost and production domain)
-  const allowedDomains = ["localhost:3000", "tudominio.com"];
+  const allowedDomains = ["localhost:3000", "tudominio.com", "propity-git-development-reylans-projects.vercel.app"];
 
   // Verify if hostname exists in allowed domains
   const isAllowedDomain =
