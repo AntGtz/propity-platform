@@ -15,15 +15,23 @@ const geistMono = localFont({
 });
 
 const galanoGrotesque = localFont({
-  src: "./fonts/GalanoGrotesqueAltRegular.otf",
+  src: [
+    {
+      path: "./fonts/GalanoGrotesqueAltRegular.otf",
+      weight: "400",
+    },
+    {
+      path: "./fonts/GalanoGrotesqueBold.otf",
+      weight: "700",
+    },
+  ],
   variable: "--font-galano-grotesque",
-  weight: "100 900",
 });
 
 const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-  variable: '--font-plus-jakarta-sans',
-  display: 'swap',
+  subsets: ["latin"],
+  variable: "--font-plus-jakarta-sans",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
