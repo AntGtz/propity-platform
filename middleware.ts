@@ -1,35 +1,38 @@
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@/lib/auth/auth";
+import { auth } from "./lib/auth/auth";
+const subdomains = [{ subdomain: "client1" }, { subdomain: "client2" }];
 
 export default auth((request: NextRequest) => {
-  // Get the hostname from the request headers
-  const hostname = request.headers.get("host") || "";
-  // Split port from hostname
-  const [host] = hostname.split(":");
-  // Split subdomain from hostname
-  const hostParts = host.split(".");
+  const url = request.nextUrl;
+  const hostname = request.headers.get("host");
 
-  let subdomain = null;
-  if (hostParts.length > 1) {
-    subdomain = hostParts[0];
-  }
+  // Define allowed Domains (localhost and production domain)
+  const allowedDomains = ["localhost:3000", "tudominio.com"];
 
-  if (!subdomain || subdomain === "www" || subdomain === "localhost") {
+  // Verify if hostname exists in allowed domains
+  const isAllowedDomain =
+    hostname && allowedDomains.some((domain) => hostname.includes(domain));
+
+  // Extract the possible subdomain in the URL
+  const subdomain = hostname ? hostname.split(".")[0] : "";
+
+  // If we stay in a allowed domain and its not a subdomain, allow the request.
+  if (isAllowedDomain && !subdomains.some((d) => d.subdomain === subdomain)) {
     return NextResponse.next();
   }
 
-  // Create a new Headers object with the request headers
-  const requestHeaders = new Headers(request.headers);
-  requestHeaders.set("x-subdomain", subdomain);
+  const subdomainData = subdomains.find((d) => d.subdomain === subdomain);
 
-  // Return the modified request headers
-  return NextResponse.next({
-    request: {
-      headers: requestHeaders,
-    },
-  });
+  if (subdomainData) {
+    // Rewrite the URL in the dynamic route based in the subdomain
+    return NextResponse.rewrite(
+      new URL(`/${subdomain}${url.pathname}`, request.url)
+    );
+  }
+
+  return new Response(null, { status: 404 });
 });
 
 export const config = {
-  matcher: "/:path*",
+  matcher: ["/((?!api/|_next/|_static/|_vercel|[\\w-]+\\.\\w+).*)"],
 };

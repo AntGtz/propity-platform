@@ -5,6 +5,7 @@ const config: Config = {
     content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
+	"./components/common/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
@@ -51,6 +52,17 @@ const config: Config = {
   				'5': 'hsl(var(--chart-5))'
   			}
   		},
+		fontFamily: {
+			sans: ['var(--font-geist-sans)'],
+			mono: ['var(--font-geist-mono)'],
+			galano: ['var(--font-galano-grotesque)'],
+			jakarta: ['var(--font-plus-jakarta-sans)'],
+		},
+		screens: {
+			'2xl': '1440px',
+			'3xl': '1536px',
+			'4xl': '1728px',
+		},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
@@ -58,6 +70,7 @@ const config: Config = {
   		}
   	}
   },
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   plugins: [require("tailwindcss-animate")],
 };
 export default config;
