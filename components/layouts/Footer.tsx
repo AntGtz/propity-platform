@@ -87,7 +87,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className="mt-16 pt-8 border-t border-gray-400">
+      <div className="mt-16 pt-8 border-t border-gray-300">
         <p className="text-sm text-gray-500">
           Propity 2024 Todos los derechos reservados
         </p>

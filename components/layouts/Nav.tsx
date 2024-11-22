@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { Button } from "../common/button";
+import { Dialog, DialogContent, DialogTrigger } from "../common/dialog";
+import AuthDialog from "../features/login/AuthDialog";
 
 export default async function Nav() {
   return (
@@ -27,7 +29,10 @@ export default async function Nav() {
             Contacto
           </a>
         </li>
-        <Link href={`/`} className="text-sm font-medium absolute top-0 left-1/2 -translate-x-1/2 transform">
+        <Link
+          href={`/`}
+          className="text-sm font-medium absolute top-0 left-1/2 -translate-x-1/2 transform"
+        >
           <Image
             src={`/propitylogo.png`}
             height={60}
@@ -37,13 +42,28 @@ export default async function Nav() {
           />
         </Link>
         <div className="flex items-center gap-4">
-          <Button variant={"ghost"} className="hover:bg-transparent font-medium font-jakarta">
-            Ingresar
-          </Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <>
+                <Button
+                  variant={"ghost"}
+                  className="hover:bg-transparent font-medium font-jakarta"
+                >
+                  Ingresar
+                </Button>
+              </>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[550px] px-14 my-5">
+              <AuthDialog />
+            </DialogContent>
+          </Dialog>
           {
-          // TODO: add button variant
+            // TODO: add button variant
           }
-          <Button size={"lg"} className="font-medium bg-green-600 text-white hover:bg-green-500 font-jakarta">
+          <Button
+            size={"lg"}
+            className="font-medium bg-green-600 text-white hover:bg-green-500 font-jakarta"
+          >
             Registrarse
           </Button>
         </div>
