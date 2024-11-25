@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function PropertyCard() {
   return (
-    <article className="w-[264px] flex flex-col min-h-32 font-galano">
+    <article className="max-w-[264px] w-full flex flex-col min-h-32 font-galano">
       <header className="w-full relative h-[320px] rounded-md overflow-hidden">
         <div className="w-full flex justify-between">
           <span className="bg-[#69D790] rounded-3xl px-2.5 py-1.5 absolute z-10 text-xs font-jakarta ml-4 top-4">

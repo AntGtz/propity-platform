@@ -8,7 +8,7 @@ import AuthDialog from "../features/login/AuthDialog";
 export default async function Nav() {
   return (
     <>
-      <nav className="flex items-center justify-between gap-4 px-4 py-3 sm:px-16 sm:py-4 xl:px-36 relative">
+      <nav className="flex items-center justify-between gap-4 px-4 py-3 sm:px-16 sm:py-4 xl:px-36 relative shadow-md">
         <li className="flex items-center gap-4 font-galano">
           <a href="#" className="text-sm font-medium">
             Desarrollos
