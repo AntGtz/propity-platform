@@ -8,7 +8,7 @@ import AuthDialog from "../features/login/AuthDialog";
 import { useTenantTheme } from "@/hooks/useTenantTheme";
 import { useAppSelector } from "@/lib/store/hooks";
 
-export default function Nav() {
+export default function NavTenant() {
   const tenantData = useAppSelector((state) => state.tenant.tenant);
   useTenantTheme(tenantData?.theme?.color);
   return (
