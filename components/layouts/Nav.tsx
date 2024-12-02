@@ -1,11 +1,16 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { Button } from "../common/button";
 import { Dialog, DialogContent, DialogTrigger } from "../common/dialog";
 import AuthDialog from "../features/login/AuthDialog";
+import { useTenantTheme } from "@/hooks/useTenantTheme";
+import { useAppSelector } from "@/lib/store/hooks";
 
-export default async function Nav() {
+export default function Nav() {
+  const tenantData = useAppSelector((state) => state.tenant.tenant);
+  useTenantTheme(tenantData?.theme?.color);
   return (
     <>
       <nav className="flex items-center justify-between gap-4 px-4 py-3 sm:px-16 sm:py-4 xl:px-36 relative shadow-md">
@@ -44,14 +49,12 @@ export default async function Nav() {
         <div className="flex items-center gap-4">
           <Dialog>
             <DialogTrigger asChild>
-              <>
-                <Button
-                  variant={"ghost"}
-                  className="hover:bg-transparent font-medium font-jakarta"
-                >
-                  Ingresar
-                </Button>
-              </>
+              <Button
+                variant={"ghost"}
+                className="hover:bg-gray-200 font-medium font-jakarta"
+              >
+                Ingresar
+              </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[550px] px-14 my-5">
               <AuthDialog />
@@ -60,10 +63,7 @@ export default async function Nav() {
           {
             // TODO: add button variant
           }
-          <Button
-            size={"lg"}
-            className="font-medium bg-green-600 text-white hover:bg-green-500 font-jakarta"
-          >
+          <Button size={"lg"} className={`font-medium font-jakarta`}>
             Registrarse
           </Button>
         </div>

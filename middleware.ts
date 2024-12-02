@@ -1,13 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "./lib/auth/auth";
-const subdomains = [{ subdomain: "client1" }, { subdomain: "client2" }];
+
+const subdomains = [
+  { subdomain: "client1" },
+  { subdomain: "client2" },
+  { subdomain: "jom" },
+];
 
 export default auth((request: NextRequest) => {
   const url = request.nextUrl;
   const hostname = request.headers.get("host");
 
   // Define allowed Domains (localhost and production domain)
-  const allowedDomains = ["localhost:3000", "tudominio.com", "propity-git-development-reylans-projects.vercel.app"];
+  const allowedDomains = [
+    "localhost:3000",
+    "tudominio.com",
+    "propity-git-development-reylans-projects.vercel.app",
+  ];
 
   // Verify if hostname exists in allowed domains
   const isAllowedDomain =
@@ -26,7 +35,7 @@ export default auth((request: NextRequest) => {
   if (subdomainData) {
     // Rewrite the URL in the dynamic route based in the subdomain
     return NextResponse.rewrite(
-      new URL(`/${subdomain}${url.pathname}`, request.url)
+      new URL(`/${subdomain}${url.pathname}`, request.url),
     );
   }
 
