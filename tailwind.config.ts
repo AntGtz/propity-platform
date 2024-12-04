@@ -57,6 +57,8 @@ const config: Config = {
           "linear-gradient(180deg, rgba(0, 177, 64, 0.04) 0%, rgba(0, 177, 64, 0.2) 100%)",
         demoImg:
           "linear-gradient(180deg, rgba('#7ed56f',0.8), rgba('#28b485',0.8)), url('/demoImg.png')",
+        "green-gradient":
+          "linear-gradient(180deg, rgba(0, 177, 64, 0.1) 0%, rgba(0, 177, 64, 0.44) 100%)",
       },
       fontFamily: {
         sans: ["var(--font-geist-sans)"],
