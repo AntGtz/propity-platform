@@ -21,6 +21,10 @@ const galanoGrotesque = localFont({
       weight: "400",
     },
     {
+      path: "./fonts/GalanoGrotesqueMedium.otf",
+      weight: "500",
+    },
+    {
       path: "./fonts/GalanoGrotesqueBold.otf",
       weight: "700",
     },
