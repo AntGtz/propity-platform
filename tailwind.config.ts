@@ -52,6 +52,12 @@ const config: Config = {
           "5": "hsl(var(--chart-5))",
         },
       },
+      backgroundImage: {
+        propity:
+          "linear-gradient(180deg, rgba(0, 177, 64, 0.04) 0%, rgba(0, 177, 64, 0.2) 100%)",
+        demoImg:
+          "linear-gradient(180deg, rgba('#7ed56f',0.8), rgba('#28b485',0.8)), url('/demoImg.png')",
+      },
       fontFamily: {
         sans: ["var(--font-geist-sans)"],
         mono: ["var(--font-geist-mono)"],
