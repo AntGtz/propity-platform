@@ -5,6 +5,7 @@ import ExploreTheProduct from "@/components/features/platform/landing/ExploreThe
 import PricingSection from "@/components/features/platform/landing/PricingSection";
 import Features from "@/components/features/platform/landing/Features";
 import LastCTA from "@/components/features/platform/landing/LastCTA";
+import FAQ from "@/components/features/platform/FAQ";
 
 export default async function Home() {
   return (
@@ -16,6 +17,7 @@ export default async function Home() {
       <PricingSection />
       <Features />
       <LastCTA />
+      <FAQ />
     </main>
   );
 }
