@@ -2,19 +2,16 @@ import Footer from "@/components/layouts/Footer";
 import NavTenant from "@/components/layouts/NavTenant";
 import StoreProvider from "@/app/(tenants)/[subdomain]/StoreProvider";
 import { TenantData } from "@/type/tenantData";
+import { ReactNode } from "react";
 
-export interface Tenant {
-  id: string;
-  subdomain: string;
+interface LayoutProps {
+  children: ReactNode;
+  params: Promise<{
+    subdomain: string;
+  }>;
 }
 
-export default async function TenantLayout({
-  children,
-  params,
-}: {
-  children: React.ReactNode;
-  params: { subdomain: string };
-}) {
+export default async function TenantLayout({ children, params }: LayoutProps) {
   const tenantsData = await fetch("https://api.propity.mx/qa/entities/");
   const tenantsList: TenantData[] = await tenantsData.json();
 

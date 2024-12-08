@@ -1,11 +1,10 @@
 import Footer from "@/components/layouts/Footer";
 import NavPlatform from "@/components/layouts/NavPlatform";
 
-export default async function TenantLayout({
+export default async function PlatformLayout({
   children,
 }: {
   children: React.ReactNode;
-  params: { subdomain: string };
 }) {
   return (
     <>

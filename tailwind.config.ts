@@ -65,6 +65,8 @@ const config: Config = {
           "linear-gradient(180deg, rgba(0, 177, 64, 0) 0%, rgba(0, 177, 64, 0.44) 100%)",
         "gray-gradient":
           "linear-gradient(180deg, rgba(4, 30, 66, 0) 0%, rgba(19, 30, 41, 0.2) 100%)",
+        "white-gradient-carrousel":
+          "linear-gradient(270deg, rgba(255, 255, 255, 0) 3.75%, #FFFFFF 100%)",
       },
       fontFamily: {
         sans: ["var(--font-geist-sans)"],
