@@ -1,4 +1,4 @@
-import Footer from "@/components/layouts/Footer";
+import FooterTenant from "@/components/layouts/FooterTenant";
 import NavTenant from "@/components/layouts/NavTenant";
 import StoreProvider from "@/app/(tenants)/[subdomain]/StoreProvider";
 import { TenantData } from "@/type/tenantData";
@@ -26,7 +26,7 @@ export default async function TenantLayout({ children, params }: LayoutProps) {
       <StoreProvider tenantId={getTenant?.id || ""}>
         <NavTenant />
         {children}
-        <Footer />
+        <FooterTenant />
       </StoreProvider>
     </>
   );

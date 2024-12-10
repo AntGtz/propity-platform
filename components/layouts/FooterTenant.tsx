@@ -1,11 +1,14 @@
+"use client";
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import Image from "next/image";
+import { useAppSelector } from "@/lib/store/hooks";
 
 export default function FooterTenant() {
+  const tenantData = useAppSelector((state) => state.tenant.tenant);
   return (
     <footer className="flex flex-col gap-2 px-10 md:px-36 pt-24 pb-12 bg-white">
       <Image
-        src={"/propitylogo.png"}
+        src={tenantData?.theme?.logotype.main || "/propitylogo.png"}
         height={60}
         quality={100}
         width={150}
