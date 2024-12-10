@@ -10,13 +10,15 @@ import { Button } from "@/components/common/button";
 
 export default function DevelopmentsList() {
   return (
-    <section className="flex flex-col gap-2 3xl:px-64 xl:px-24 2xl:px-32 py-16 bg-white">
-      <h1 className="text-4xl font-galano font-bold">Desarrollos</h1>
-      <div className={"flex gap-4 mt-6"}>
+    <section className="flex flex-col gap-2 3xl:px-64 xl:px-24 2xl:px-32 md:py-16 px-6 bg-white">
+      <h1 className="md:text-4xl text-2xl font-galano font-bold">
+        Desarrollos Principales
+      </h1>
+      <div className={"flex gap-4 mt-6 w-full"}>
         <div className="w-full relative">
           <div
             className={
-              "h-full absolute top-0 left-0 w-[40px] bg-white-gradient-carrousel z-20"
+              "h-full hidden md:block md:absolute top-0 left-0 w-[40px] bg-white-gradient-carrousel z-20"
             }
           ></div>
           <Carousel className="relative">
@@ -24,7 +26,7 @@ export default function DevelopmentsList() {
               <CarouselItem>
                 <div
                   className={
-                    "flex gap-4 items-center justify-between bg-[#00B14024] text-[#252526] rounded px-4 py-4 mr-10"
+                    "flex md:flex-row flex-col gap-4 items-center justify-between bg-secondary/20 text-[#252526] rounded px-4 py-4 md:mr-10"
                   }
                 >
                   <Image
@@ -34,7 +36,7 @@ export default function DevelopmentsList() {
                     height={320}
                     className="rounded-md w-[50rem] h-[360px]"
                   />
-                  <div className="w-4/12 h-[360px] flex flex-col font-galano">
+                  <div className="md:w-4/12 w-full md:h-[360px] flex flex-col font-galano">
                     <div className={"flex items-center gap-3"}>
                       <Image
                         className=""
@@ -118,7 +120,7 @@ export default function DevelopmentsList() {
                     </div>
                     <Button
                       size={"lg"}
-                      className="w-full mt-auto bg-[#00B140] text-white [&]:py-4"
+                      className="w-full mt-6 md:mt-auto bg-primary text-white [&]:py-4"
                     >
                       Ver inventario
                     </Button>
@@ -334,12 +336,12 @@ export default function DevelopmentsList() {
                 </div>
               </CarouselItem>
             </CarouselContent>
-            <CarouselPrevious className="bg-green-400 z-30 absolute top-1/2 left-5 -translate-y-1/2" />
-            <CarouselNext className="bg-green-400 z-30 absolute top-1/2 right-5 -translate-y-1/2" />
+            <CarouselPrevious className="bg-primary text-primary-foreground z-30 absolute top-1/2 -left-5 md:left-5 -translate-y-1/2 border-0" />
+            <CarouselNext className="bg-primary text-primary-foreground z-30 absolute top-1/2 -right-5 md:right-5 -translate-y-1/2 border-0" />
           </Carousel>
           <div
             className={
-              "h-full absolute top-0 right-0 w-[140px] transform rotate-180 bg-white-gradient-carrousel z-20"
+              "h-full hidden md:block md:absolute top-0 right-0 w-[140px] transform rotate-180 bg-white-gradient-carrousel z-20"
             }
           ></div>
         </div>

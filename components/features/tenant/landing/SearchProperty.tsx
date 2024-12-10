@@ -11,7 +11,7 @@ import { ChevronDown } from "lucide-react";
 
 export default function SearchProperty() {
   return (
-    <section className="flex flex-col gap-2 3xl:px-64 xl:px-24 2xl:px-32 py-16 bg-white font-galano">
+    <section className="flex flex-col gap-2 3xl:px-64 xl:px-24 2xl:px-32 md:py-16 bg-white font-galano px-10">
       <div className={"flex items-center gap-3 w-full text-sm"}>
         <span
           className={
@@ -28,15 +28,19 @@ export default function SearchProperty() {
           Renta
         </span>
       </div>
-      <div className={"flex justify-between items-center gap-3 mt-6"}>
-        <div className={"flex items-center gap-2"}>
+      <div
+        className={
+          "flex flex-wrap md:flex-nowrap justify-between items-center gap-3 mt-6"
+        }
+      >
+        <div className={"flex items-center gap-2 w-full"}>
           <Input
             placeholder={"Buscar por dirección, ciudad, propiedad, etc"}
             className={
-              "w-full rounded border-[#131E29] [&]:px-3 [&]:py-2.5 h-full min-w-80"
+              "w-full rounded border-[#131E29] [&]:px-3 [&]:py-2.5 h-full md:w-80 text-xs md:text-base"
             }
           />
-          <Button className={"px-4 h-full py-3 rounded text-xs bg-[#00B140]"}>
+          <Button className={"px-4 h-full py-3.5 rounded text-xs bg-primary"}>
             <svg
               width="14"
               height="15"
@@ -96,7 +100,7 @@ export default function SearchProperty() {
           </Button>
         </div>
 
-        <div className={"flex items-center gap-2"}>
+        <div className={"md:flex hidden items-center gap-2"}>
           <Select>
             <SelectTrigger
               className={
@@ -143,20 +147,22 @@ export default function SearchProperty() {
           </Select>
         </div>
       </div>
-      <div className={"flex flex-col gap-2 mt-6"}>
-        <span className={"font-bold font-galano text-3xl"}>
+      <div className={"flex flex-col gap-2 mt-2 md:mt-6"}>
+        <span className={"font-bold font-galano text-xl md:text-3xl"}>
           Quetzal, Nombre Desarrollo
         </span>
-        <div className={"flex gap-2 items-center"}>
-          <span className={"text-sm"}>360 resultados encontrados</span>
-          <span>|</span>
+        <div className={"flex md:flex-row flex-col md:gap-2 md:items-center"}>
+          <span className={"text-sm text-nowrap"}>
+            360 resultados encontrados
+          </span>
+          <span className={"hidden md:block"}>|</span>
           <span className={"text-sm flex items-center gap-1.5"}>
             Ver por <span className={"underline"}>Actividad más reciente</span>{" "}
             <ChevronDown className={"ml-0 h-4 w-4"} />
           </span>
         </div>
       </div>
-      <div className="grid grid-cols-4 gap-5 mt-6">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-5 mt-6">
         <PropertyCard2 />
         <PropertyCard2 />
         <PropertyCard2 />

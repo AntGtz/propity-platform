@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function PropertyCard2() {
   return (
     <>
-      <article className="max-w-[264px] w-full flex flex-col min-h-32 font-galano cursor-pointer">
+      <article className="md:max-w-[264px] w-full flex flex-col md:min-h-32 font-galano cursor-pointer">
         <header className="w-full relative h-[320px] rounded-md overflow-hidden">
           <Image src={"/propertyex.jpg"} alt="Property" fill />
         </header>

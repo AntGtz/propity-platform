@@ -3,6 +3,11 @@ export type TenantData = {
   subdomain: string;
   theme: {
     color: ColorScheme;
+    logotype: {
+      main: string;
+      dark: string;
+      light: string;
+    };
   };
 };
 
