@@ -8,7 +8,7 @@ import {
 export interface InitialTenantSliceData {
   details: TenantData | undefined;
   communityList: CommunityListData | undefined;
-  communityDetails: CommunityDetailsData | undefined;
+  communityDetails: CommunityDetailsData[] | undefined;
 }
 const initialState: InitialTenantSliceData = {
   details: undefined,

@@ -48,7 +48,30 @@ export type CommunityDetailsData = {
     instagram: string;
     whatsapp: string;
   } | null;
-  location: string | null;
+  location: {
+    type: {
+      name: string;
+      display: string;
+    };
+    name: string;
+    address: string;
+    extNum: string;
+    intNum: string | null;
+    geo: {
+      lng: string;
+      lat: string;
+    };
+    division: {
+      name: string;
+      zipCode: string;
+      township: string;
+      state: string;
+      country: {
+        shortName: string;
+        longName: string;
+      };
+    };
+  } | null;
   theme: {
     slogan: string;
     color: ColorScheme;
