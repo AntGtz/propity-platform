@@ -75,6 +75,8 @@ const config: Config = {
         jakarta: ["var(--font-plus-jakarta-sans)"],
       },
       screens: {
+        xxs: "320px",
+        xs: "430px",
         "2xl": "1440px",
         "3xl": "1536px",
         "4xl": "1728px",

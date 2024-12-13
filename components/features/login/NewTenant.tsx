@@ -28,24 +28,28 @@ export default function NewTenant() {
   InputComponent.displayName = "InputComponent";
 
   return (
-    <div className="flex flex-col gap-2 mt-6 mb-2">
+    <div className="flex flex-col gap-2 mt-6 mb-2 md:text-base text-sm">
       <label htmlFor={nameFieldId} className="font-galano">
         Nombre de Empresa
       </label>
-      <Input id={nameFieldId} className="[&]:px-3 [&]:py-6" placeholder="" />
+      <Input
+        id={nameFieldId}
+        className="[&]:px-3 [&]:py-6 md:text-base text-sm"
+        placeholder=""
+      />
       <label htmlFor={nameFieldId} className="font-galano">
         Subdominio
       </label>
       <Input
         id={nameFieldId}
-        className="[&]:px-3 [&]:py-6"
+        className="[&]:px-3 [&]:py-6 md:text-base text-sm"
         placeholder="jom.propity.mx"
       />
       <label htmlFor={nameFieldId} className="font-galano">
         Tipo de Empresa
       </label>
       <Select>
-        <SelectTrigger className="w-full [&]:px-3 [&]:py-6 font-galano">
+        <SelectTrigger className="w-full [&]:px-3 [&]:py-6 font-galano md:text-base text-sm">
           <SelectValue placeholder="Tipo" />
         </SelectTrigger>
         <SelectContent className="font-galano">
@@ -57,19 +61,23 @@ export default function NewTenant() {
       <label htmlFor={nameFieldId} className="font-galano">
         Nombre del Desarrollo
       </label>
-      <Input id={nameFieldId} className="[&]:px-3 [&]:py-6" placeholder="" />
+      <Input
+        id={nameFieldId}
+        className="[&]:px-3 [&]:py-6 md:text-base text-sm"
+        placeholder=""
+      />
       <label htmlFor={nameFieldId} className="font-galano">
         Slogan
       </label>
       <Input
         id={nameFieldId}
-        className="[&]:px-3 [&]:py-6"
+        className="[&]:px-3 [&]:py-6 md:text-base text-sm"
         placeholder="El mejor desarrollo en el mundo"
       />
       <div className="h-px w-full bg-foreground/40 mt-4"></div>
-      <div className="flex justify-between items-center gap-2 font-galano text-foreground/50 border-b border-foreground/50 py-3">
+      <div className="flex justify-between items-center gap-2 font-galano text-foreground/50 border-b border-foreground/50 py-3 md:text-base text-sm">
         <span>Principal</span>
-        <div className="flex gap-1 items-center">
+        <div className="flex gap-1 items-center md:text-base text-sm">
           Color
           <input
             type="color"
@@ -119,7 +127,7 @@ export default function NewTenant() {
         Logotipo
         <Input
           type="file"
-          className="[&]:px-3 [&]:py-2 flex items-center w-64"
+          className="[&]:px-3 [&]:py-1.5 md:[&]:py-1.5 flex items-center w-64 md:text-base text-sm"
         />
       </div>
       <span className="text-sm text-foreground/50 flex items-center gap-2 mt-5">
@@ -133,14 +141,14 @@ export default function NewTenant() {
       </div>
       <Button
         size={"lg"}
-        className="w-full bg-green-600 text-white font-galano font-semibold [&]:py-7 text-xl"
+        className="w-full bg-green-600 text-white font-galano font-semibold [&]:py-7 md:text-xl text-lg"
       >
         Crear cuenta
       </Button>
       <Button
         size={"lg"}
         variant={"ghost"}
-        className="w-full font-galano [&]:py-7 text-lg -mt-3 hover:bg-transparent"
+        className="w-full font-galano [&]:py-7 m md:text-lg text-base -mt-3 hover:bg-transparent"
       >
         Ya tienes cuenta? <span className="text-green-600">Inicia sesión</span>
       </Button>

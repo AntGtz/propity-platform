@@ -13,6 +13,8 @@ export default function NavTenant() {
   const tenantData = useAppSelector((state) => state.tenant.tenant);
   useTenantTheme(tenantData?.theme?.color);
 
+  const [open, setOpen] = React.useState(false);
+
   return (
     <>
       <nav className="flex items-center md:justify-between gap-4 px-4 py-3 sm:px-16 sm:py-4 xl:px-36 relative shadow-md">
@@ -50,7 +52,10 @@ export default function NavTenant() {
             alt="Logo"
           />
         </Link>
-        <span className={"ml-auto block md:hidden"}>
+        <span
+          onClick={() => setOpen(true)}
+          className={"ml-auto block md:hidden"}
+        >
           <svg
             width="24"
             height="25"
@@ -65,7 +70,7 @@ export default function NavTenant() {
           </svg>
         </span>
         <div className="md:flex hidden items-center gap-4">
-          <Dialog>
+          <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
               <Button
                 variant={"ghost"}
@@ -74,7 +79,7 @@ export default function NavTenant() {
                 Ingresar
               </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[550px] px-14 my-5">
+            <DialogContent className="sm:max-w-[550px] md:h-auto h-auto w-screen px-4 md:px-14 md:my-5">
               <AuthDialog />
             </DialogContent>
           </Dialog>

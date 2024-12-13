@@ -10,13 +10,13 @@ export default function AuthDialog() {
   return (
     <>
       <DialogTitle className="hidden">Ingresar</DialogTitle>
-      <span className="text-4xl font-bold font-galano block w-full text-center mt-12">
+      <span className="md:text-4xl text-3xl font-bold font-galano block w-full text-center mt-12">
         Bienvenido a Propity
       </span>
-      <div className="mt-12 flex items-center gap-6 font-galano justify-center">
+      <div className="md:mt-12 mt-8 flex items-center gap-6 font-galano justify-center md:text-base text-xs">
         <span
           onClick={() => setTab("login")}
-          className={`pb-1.5 cursor-pointer border-b-[3px] ${
+          className={`pb-1.5 cursor-pointer border-b-[3px] text-nowrap ${
             tab === "login" ? "border-[#00B140]" : "border-transparent"
           } hover:border-[#00B140]`}
         >
@@ -24,7 +24,7 @@ export default function AuthDialog() {
         </span>
         <span
           onClick={() => setTab("newUser")}
-          className={`pb-1.5 cursor-pointer border-b-[3px] ${
+          className={`pb-1.5 cursor-pointer border-b-[3px] text-nowrap ${
             tab === "newUser" ? "border-[#00B140]" : "border-transparent"
           } hover:border-[#00B140]`}
         >
@@ -32,7 +32,7 @@ export default function AuthDialog() {
         </span>
         <span
           onClick={() => setTab("newCompany")}
-          className={`pb-1.5 cursor-pointer border-b-[3px] ${
+          className={`pb-1.5 cursor-pointer border-b-[3px] text-center ${
             tab === "newCompany" ? "border-[#00B140]" : "border-transparent"
           } hover:border-[#00B140]`}
         >

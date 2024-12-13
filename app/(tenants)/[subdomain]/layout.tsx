@@ -3,6 +3,7 @@ import NavTenant from "@/components/layouts/NavTenant";
 import StoreProvider from "@/app/(tenants)/[subdomain]/StoreProvider";
 import { TenantData } from "@/type/tenantData";
 import { ReactNode } from "react";
+import { SessionProvider } from "next-auth/react";
 
 interface LayoutProps {
   children: ReactNode;
@@ -23,11 +24,13 @@ export default async function TenantLayout({ children, params }: LayoutProps) {
 
   return (
     <>
-      <StoreProvider tenantId={getTenant?.id || ""}>
-        <NavTenant />
-        {children}
-        <FooterTenant />
-      </StoreProvider>
+      <SessionProvider>
+        <StoreProvider tenantId={getTenant?.id || ""}>
+          <NavTenant />
+          {children}
+          <FooterTenant />
+        </StoreProvider>
+      </SessionProvider>
     </>
   );
 }
