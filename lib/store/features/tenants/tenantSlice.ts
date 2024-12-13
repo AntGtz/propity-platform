@@ -1,11 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { TenantData } from "@/type/tenantData";
+import {
+  CommunityDetailsData,
+  CommunityListData,
+  TenantData,
+} from "@/type/tenantData";
 
 export interface InitialTenantSliceData {
   details: TenantData | undefined;
+  communityList: CommunityListData | undefined;
+  communityDetails: CommunityDetailsData | undefined;
 }
 const initialState: InitialTenantSliceData = {
   details: undefined,
+  communityList: undefined,
+  communityDetails: undefined,
 };
 
 export const tenantSlice = createSlice({
@@ -15,9 +23,16 @@ export const tenantSlice = createSlice({
     setTenant: (state, action) => {
       state.details = action.payload;
     },
+    setCommunityList: (state, action) => {
+      state.communityList = action.payload;
+    },
+    setCommunityDetails: (state, action) => {
+      state.communityDetails = action.payload;
+    },
   },
 });
 
-export const { setTenant } = tenantSlice.actions;
+export const { setTenant, setCommunityList, setCommunityDetails } =
+  tenantSlice.actions;
 
 export default tenantSlice.reducer;

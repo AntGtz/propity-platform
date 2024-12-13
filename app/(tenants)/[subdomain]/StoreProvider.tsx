@@ -2,7 +2,12 @@
 import { useEffect, useRef } from "react";
 import { Provider } from "react-redux";
 import { AppStore, makeStore } from "@/lib/store/store";
-import { setTenant } from "@/lib/store/features/tenants/tenantSlice";
+import {
+  setCommunityDetails,
+  setCommunityList,
+  setTenant,
+} from "@/lib/store/features/tenants/tenantSlice";
+import { CommunityListData } from "@/type/tenantData";
 
 export default function StoreProvider({
   tenantId,
@@ -26,7 +31,29 @@ export default function StoreProvider({
       const tenantDetails = await tenantData.json();
       storeRef.current.dispatch(setTenant(tenantDetails));
     };
-    fetchTenantDetails();
+    const fetchCommunityDetails = async () => {
+      if (!storeRef.current) return; // Ensure storeRef.current is defined
+      const communityData = await fetch(
+        `https://api.propity.mx/qa/entities/${tenantId}/community`,
+      );
+      const communityList = await communityData.json();
+      storeRef.current.dispatch(setCommunityList(communityList.active));
+
+      const getCommunityDetails = async (communityId: string) => {
+        const communityData = await fetch(
+          `https://api.propity.mx/qa/entities/${communityId}`,
+        );
+        return await communityData.json();
+      };
+
+      const communityDetails = await Promise.all(
+        communityList.active.map((community: CommunityListData) =>
+          getCommunityDetails(community.id),
+        ),
+      );
+      storeRef.current.dispatch(setCommunityDetails(communityDetails));
+    };
+    Promise.all([fetchTenantDetails(), fetchCommunityDetails()]);
   }, [tenantId]);
 
   return <Provider store={storeRef.current}>{children}</Provider>;
