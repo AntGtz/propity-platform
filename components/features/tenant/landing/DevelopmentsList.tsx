@@ -33,6 +33,7 @@ export default function DevelopmentsList() {
                   return (
                     <CarouselItem key={development.id}>
                       <DevelopmentCard
+                        id={development.id}
                         image={null}
                         logo={development.theme.logotype.main}
                         name={development.name}

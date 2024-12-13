@@ -1,7 +1,9 @@
 import Image from "next/image";
 import { Button } from "@/components/common/button";
+import Link from "next/link";
 
 interface DevelopmentCardProps {
+  id: string;
   image: string | null;
   logo: string;
   name: string;
@@ -11,6 +13,7 @@ interface DevelopmentCardProps {
 }
 
 export const DevelopmentCard = ({
+  id,
   image,
   logo,
   name,
@@ -42,9 +45,11 @@ export const DevelopmentCard = ({
               height={60}
             />
             <div className={"flex flex-col"}>
-              <h3 className={"font-bold text-xl"}>
-                {name ?? "Constructora Hogar"}
-              </h3>
+              <Link href={`/perfil/${id}`}>
+                <h3 className={"font-bold text-xl"}>
+                  {name ?? "Constructora Hogar"}
+                </h3>
+              </Link>
               <span>{slogan ?? "Ciudad de México"}</span>
             </div>
           </div>
