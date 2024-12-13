@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useAppSelector } from "@/lib/store/hooks";
 
 export default function FooterTenant() {
-  const tenantData = useAppSelector((state) => state.tenant.tenant);
+  const tenantData = useAppSelector((state) => state.tenant.details);
   return (
     <footer className="flex flex-col gap-2 px-10 md:px-36 pt-24 pb-12 bg-white">
       <Image

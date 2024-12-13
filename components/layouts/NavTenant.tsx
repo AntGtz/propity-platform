@@ -10,7 +10,7 @@ import { useAppSelector } from "@/lib/store/hooks";
 import MobileMenu from "@/components/layouts/MobileMenu";
 
 export default function NavTenant() {
-  const tenantData = useAppSelector((state) => state.tenant.tenant);
+  const tenantData = useAppSelector((state) => state.tenant.details);
   useTenantTheme(tenantData?.theme?.color);
 
   const [open, setOpen] = React.useState(false);

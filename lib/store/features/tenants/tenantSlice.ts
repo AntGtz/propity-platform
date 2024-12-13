@@ -2,10 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 import { TenantData } from "@/type/tenantData";
 
 export interface InitialTenantSliceData {
-  tenant: TenantData | undefined;
+  details: TenantData | undefined;
 }
 const initialState: InitialTenantSliceData = {
-  tenant: undefined,
+  details: undefined,
 };
 
 export const tenantSlice = createSlice({
@@ -13,7 +13,7 @@ export const tenantSlice = createSlice({
   initialState,
   reducers: {
     setTenant: (state, action) => {
-      state.tenant = action.payload;
+      state.details = action.payload;
     },
   },
 });

@@ -6,7 +6,7 @@ import { useAppSelector } from "@/lib/store/hooks";
 export default function MobileMenu() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const tenantData = useAppSelector((state) => state.tenant.tenant);
+  const tenantData = useAppSelector((state) => state.tenant.details);
 
   const handleMobileMenuOpen = () => {
     setMobileMenuOpen(!mobileMenuOpen);
