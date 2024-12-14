@@ -4,8 +4,17 @@ import { PhoneInput } from "@/components/common/phone-input";
 import { Textarea } from "@/components/common/textarea";
 import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
+import { useAppSelector } from "@/lib/store/hooks";
+import { Button } from "@/components/common/button";
 
-export default function ContactForm() {
+export interface ContactFormProps {
+  id: string;
+}
+
+export default function ContactForm({ id }: ContactFormProps) {
+  const community = useAppSelector((state) => state.tenant.communityDetails);
+  const development = community?.filter((community) => community.id === id)[0];
+
   const InputComponent = forwardRef<
     HTMLInputElement,
     React.ComponentProps<"input">
@@ -24,7 +33,9 @@ export default function ContactForm() {
         "font-galano flex flex-col gap-y-4 w-full border border-gray-300 rounded-sm px-4 py-4 text-sm"
       }
     >
-      <span className={"font-bold text-2xl"}>Conecta con Juan</span>
+      <span className={"font-bold text-2xl"}>
+        Conecta con {development?.name}
+      </span>
       <div className={"flex flex-col gap-y-1.5"}>
         <span className={"text-gray-600"}>Nombre y apellido</span>
         <Input
@@ -51,6 +62,7 @@ export default function ContactForm() {
         <PhoneInput
           placeholder="Enter a phone number"
           inputComponent={InputComponent}
+          className={"[&>button]:py-4 md:[&>button]:py-2"}
         />
       </div>
 
@@ -58,6 +70,8 @@ export default function ContactForm() {
         <span className={"text-gray-600"}>Mensaje</span>
         <Textarea rows={8} placeholder="" />
       </div>
+
+      <Button className={"w-full py-6"}>Enviar Email</Button>
     </div>
   );
 }

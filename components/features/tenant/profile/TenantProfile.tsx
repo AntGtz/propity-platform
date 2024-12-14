@@ -1,10 +1,16 @@
+"use client";
 import Image from "next/image";
+import { useAppSelector } from "@/lib/store/hooks";
+import { titleCase } from "@/utils";
 
-export default function TenantProfile() {
+export default function TenantProfile({ id }: { id: string }) {
+  const comunnity = useAppSelector((state) => state.tenant.communityDetails);
+  const development = comunnity?.filter((community) => community.id === id)[0];
+
   return (
-    <div className={"flex gap-x-4"}>
+    <div className={"flex items-center gap-x-4"}>
       <Image
-        src={"/profilePic.jpg"}
+        src={development?.theme.logotype.main ?? "/profilePic.jpg"}
         quality={100}
         alt={"Foto de perfil"}
         width={120}
@@ -12,10 +18,16 @@ export default function TenantProfile() {
         className={"rounded-full object-cover h-[120px] object-center"}
       />
       <div className={"flex flex-col gap-y-1 font-galano"}>
-        <h1 className={"text-2xl font-bold m-0"}>Reylan Lugo</h1>
-        <span className={"font-semibold"}>donjuanjones</span>
-        <span>Status</span>
-        <p className={"text-sm text-gray-500"}>Desarrollador Web</p>
+        <h1 className={"text-2xl font-bold m-0"}>
+          {development?.name ?? "donjuanjones"}
+        </h1>
+        <span className={"font-semibold"}>
+          {development?.contact?.email ?? "donjuanjones@gmail.com"}
+        </span>
+        {/*<span>Status</span>*/}
+        <p className={"text-sm text-gray-500"}>
+          {titleCase(development?.type.display)}
+        </p>
       </div>
     </div>
   );

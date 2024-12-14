@@ -1,4 +1,16 @@
-export default function ContactCard() {
+"use client";
+
+import { useAppSelector } from "@/lib/store/hooks";
+import { formatPhoneNumber } from "@/utils";
+
+interface ContactCardProps {
+  id: string;
+}
+
+export default function ContactCard({ id }: ContactCardProps) {
+  const comunnity = useAppSelector((state) => state.tenant.communityDetails);
+  const development = comunnity?.filter((community) => community.id === id)[0];
+
   return (
     <div
       className={
@@ -26,7 +38,7 @@ export default function ContactCard() {
             strokeLinejoin="round"
           />
         </svg>
-        609.736.3008
+        {formatPhoneNumber(development?.contact?.phone)}
       </span>
 
       <span
@@ -56,7 +68,7 @@ export default function ContactCard() {
             strokeLinejoin="round"
           />
         </svg>
-        juanjones@empresa.com
+        {development?.contact?.email}
       </span>
 
       <span
@@ -69,7 +81,7 @@ export default function ContactCard() {
           height="22"
           viewBox="0 0 18 22"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
+          className={"flex-shrink-0"}
         >
           <path
             fillRule="evenodd"
@@ -78,7 +90,7 @@ export default function ContactCard() {
             fill="#262931"
           />
         </svg>
-        Quetzal 247, Priv. El Encanto, en Pozos
+        {development?.location?.address}
       </span>
 
       <span
