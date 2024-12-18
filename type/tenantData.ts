@@ -84,7 +84,7 @@ export type PropertyData = {
       state: string;
       country: {
         shortName: string;
-        longName: string;
+        name: string;
       };
     };
   } | null;
