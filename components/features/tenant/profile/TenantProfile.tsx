@@ -15,7 +15,7 @@ export default function TenantProfile({ id }: { id: string }) {
         alt={"Foto de perfil"}
         width={120}
         height={120}
-        className={"rounded-full object-cover h-[120px] object-center"}
+        className={"object-contain h-[120px]"}
       />
       <div className={"flex flex-col gap-y-1 font-galano"}>
         <h1 className={"text-2xl font-bold m-0"}>
