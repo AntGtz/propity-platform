@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   CommunityDetailsData,
   CommunityListData,
@@ -8,12 +8,12 @@ import {
 export interface InitialTenantSliceData {
   details: TenantData | undefined;
   communityList: CommunityListData | undefined;
-  communityDetails: CommunityDetailsData[] | undefined;
+  communityDetails: CommunityDetailsData[];
 }
 const initialState: InitialTenantSliceData = {
   details: undefined,
   communityList: undefined,
-  communityDetails: undefined,
+  communityDetails: [],
 };
 
 export const tenantSlice = createSlice({
@@ -26,8 +26,11 @@ export const tenantSlice = createSlice({
     setCommunityList: (state, action) => {
       state.communityList = action.payload;
     },
-    setCommunityDetails: (state, action) => {
-      state.communityDetails = action.payload;
+    setCommunityDetails: (
+      state,
+      action: PayloadAction<CommunityDetailsData>,
+    ) => {
+      state.communityDetails.push(action.payload);
     },
   },
 });

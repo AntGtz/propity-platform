@@ -28,6 +28,86 @@ export type CommunityListData = {
   x: boolean;
 };
 
+export type ImagesOfProperty = {
+  sequence: number;
+  description: string | null;
+  original: string;
+  thumbnail: string;
+};
+
+export type OperationsOfProperty = {
+  name: string;
+  display: string;
+  price: number;
+  commission: number;
+};
+
+export type PropertyData = {
+  id: number;
+  uuid: string;
+  description: string | null;
+  age: number | null;
+  front: number | null;
+  depth: number | null;
+  surface: {
+    total: number;
+    built: number;
+  };
+  images: ImagesOfProperty[];
+  operations: OperationsOfProperty[];
+  floors: number | null;
+  rooms: number | null;
+  bathrooms: number | null;
+  toilets: number | null;
+  parking: number | null;
+  dressingRooms: number | null;
+  slope: number | null;
+  type: {
+    name: string;
+    display: string;
+  };
+  location: {
+    name: string;
+    address: string;
+    number: {
+      ext: string;
+      int: string | null;
+    };
+    geo: {
+      lng: string;
+      lat: string;
+    };
+    division: {
+      name: string;
+      zipCode: string;
+      township: string;
+      state: string;
+      country: {
+        shortName: string;
+        longName: string;
+      };
+    };
+  } | null;
+  owner: {
+    id: string;
+    firtsName: string;
+    lastName: string;
+    phone: string;
+    email: string;
+  };
+  register: string;
+  lastUpdate: string;
+  theme: {
+    background: string;
+    text: string;
+    icon: string;
+  };
+  entity: {
+    id: string;
+    name: string;
+  };
+};
+
 export type CommunityDetailsData = {
   id: string;
   name: string;
@@ -81,4 +161,5 @@ export type CommunityDetailsData = {
       light: string;
     };
   };
+  properties: PropertyData[] | undefined;
 };

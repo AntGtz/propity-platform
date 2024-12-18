@@ -46,12 +46,43 @@ export default function StoreProvider({
         return await communityData.json();
       };
 
-      const communityDetails = await Promise.all(
-        communityList.active.map((community: CommunityListData) =>
-          getCommunityDetails(community.id),
-        ),
-      );
-      storeRef.current.dispatch(setCommunityDetails(communityDetails));
+      const getCommunityProperties = async (communityId: string) => {
+        const communityData = await fetch(
+          `https://api.propity.mx/qa/entities/${communityId}/properties`,
+        );
+        return await communityData.json();
+      };
+
+      const fetchCommunityData = async (community: CommunityListData) => {
+        try {
+          const [details, properties] = await Promise.all([
+            getCommunityDetails(community.id),
+            getCommunityProperties(community.id),
+          ]);
+
+          const communityData = {
+            ...details,
+            properties,
+          };
+
+          if (storeRef.current) {
+            storeRef.current.dispatch(setCommunityDetails(communityData));
+          }
+        } catch (error) {
+          console.error(
+            `Failed to fetch details for community ${community.id}`,
+            error,
+          );
+        }
+      };
+
+      const fetchAllCommunityDetails = async () => {
+        for (const community of communityList.active) {
+          fetchCommunityData(community);
+        }
+      };
+
+      fetchAllCommunityDetails();
     };
     Promise.all([fetchTenantDetails(), fetchCommunityDetails()]);
   }, [tenantId]);
