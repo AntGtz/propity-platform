@@ -117,12 +117,14 @@ export const DevelopmentCard = ({
               </defs>
             </svg>
           </div>
-          <Button
-            size={"lg"}
-            className="w-full mt-6 md:mt-auto bg-primary text-white [&]:py-4"
-          >
-            Ver inventario
-          </Button>
+          <Link className={"block mt-6 md:mt-auto"} href={`/inventario/${id}`}>
+            <Button
+              size={"lg"}
+              className="w-full mt-6 md:mt-auto bg-primary text-white [&]:py-4"
+            >
+              Ver inventario
+            </Button>
+          </Link>
         </div>
       </div>
     </>
