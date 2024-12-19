@@ -53,7 +53,11 @@ export const InventoryCard = ({
             </span>
           </span>
           <span className={"text-base mb-1 w-full"}>{address}</span>
-          <div className={"flex justify-between gap-4 items-center w-full"}>
+          <div
+            className={
+              "md:flex grid grid-cols-2 justify-between gap-2 md:gap-4 items-center w-full"
+            }
+          >
             <span className={"flex gap-1.5 items-center"}>
               <svg
                 width="20"

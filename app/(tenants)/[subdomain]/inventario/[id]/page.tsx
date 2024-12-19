@@ -29,7 +29,7 @@ export default async function InventarioPage({ params }: InventarioPageProps) {
         <div className={"flex items-center gap-3 w-full"}>
           <LocationInput />
         </div>
-        <div className={"w-full flex items-center gap-3 mt-4"}>
+        <div className={"w-full flex flex-wrap items-center gap-3 mt-4"}>
           <PriceLimits />
 
           <PropertyType />
