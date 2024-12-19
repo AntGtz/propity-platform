@@ -7,6 +7,11 @@ import {
 import { InventoryList } from "@/components/features/tenant/inventory/InventoryList";
 import { InventoryProvider } from "@/components/features/tenant/inventory/InventoryContext";
 import { LocationInput } from "@/components/features/tenant/inventory/Filters/LocationInput";
+import { PriceLimits } from "@/components/features/tenant/inventory/Filters/PriceLimits";
+import { PropertyType } from "@/components/features/tenant/inventory/Filters/PropertyType";
+import { SurfaceSize } from "@/components/features/tenant/inventory/Filters/SurfaceSize";
+import { BedRooms } from "@/components/features/tenant/inventory/Filters/BedRooms";
+import { Bathrooms } from "@/components/features/tenant/inventory/Filters/Bathrooms";
 
 interface InventarioPageProps {
   params: Promise<{
@@ -25,94 +30,15 @@ export default async function InventarioPage({ params }: InventarioPageProps) {
           <LocationInput />
         </div>
         <div className={"w-full flex items-center gap-3 mt-4"}>
-          <Select>
-            <SelectTrigger
-              className={
-                "font-galano text-sm font-normal border-[#131E29] rounded px-3 py-2.5 h-full w-fit"
-              }
-            >
-              <span className={"text-sm mr-2"}>Precio</span>
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value={"a"}>Seleccionar</SelectItem>
-              <SelectItem value={"b"}>Seleccionar</SelectItem>
-              <SelectItem value={"c"}>Seleccionar</SelectItem>
-            </SelectContent>
-          </Select>
-          <Select>
-            <SelectTrigger
-              className={
-                "font-galano text-sm font-normal border-[#131E29] rounded px-3 py-2.5 h-full w-fit"
-              }
-            >
-              <span className={"text-sm mr-2"}>Tipo de operación</span>
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value={"a"}>Seleccionar</SelectItem>
-              <SelectItem value={"b"}>Seleccionar</SelectItem>
-              <SelectItem value={"c"}>Seleccionar</SelectItem>
-            </SelectContent>
-          </Select>
+          <PriceLimits />
 
-          <Select>
-            <SelectTrigger
-              className={
-                "font-galano text-sm font-normal border-[#131E29] rounded px-3 py-2.5 h-full w-fit"
-              }
-            >
-              <span className={"text-sm mr-2"}>Tipo de propiedad</span>
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value={"a"}>Seleccionar</SelectItem>
-              <SelectItem value={"b"}>Seleccionar</SelectItem>
-              <SelectItem value={"c"}>Seleccionar</SelectItem>
-            </SelectContent>
-          </Select>
+          <PropertyType />
 
-          <Select>
-            <SelectTrigger
-              className={
-                "font-galano text-sm font-normal border-[#131E29] rounded px-3 py-2.5 h-full w-fit"
-              }
-            >
-              <span className={"text-sm mr-2"}>Superficie</span>
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value={"a"}>Seleccionar</SelectItem>
-              <SelectItem value={"b"}>Seleccionar</SelectItem>
-              <SelectItem value={"c"}>Seleccionar</SelectItem>
-            </SelectContent>
-          </Select>
+          <SurfaceSize />
 
-          <Select>
-            <SelectTrigger
-              className={
-                "font-galano text-sm font-normal border-[#131E29] rounded px-3 py-2.5 h-full w-fit"
-              }
-            >
-              <span className={"text-sm mr-2"}>Habitaciones</span>
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value={"a"}>Seleccionar</SelectItem>
-              <SelectItem value={"b"}>Seleccionar</SelectItem>
-              <SelectItem value={"c"}>Seleccionar</SelectItem>
-            </SelectContent>
-          </Select>
+          <BedRooms />
 
-          <Select>
-            <SelectTrigger
-              className={
-                "font-galano text-sm font-normal border-[#131E29] rounded px-3 py-2.5 h-full w-fit"
-              }
-            >
-              <span className={"text-sm mr-2"}>Baños</span>
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value={"a"}>Seleccionar</SelectItem>
-              <SelectItem value={"b"}>Seleccionar</SelectItem>
-              <SelectItem value={"c"}>Seleccionar</SelectItem>
-            </SelectContent>
-          </Select>
+          <Bathrooms />
 
           <Select>
             <SelectTrigger

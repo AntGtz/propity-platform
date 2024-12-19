@@ -2,72 +2,27 @@
 import { Input } from "@/components/common/input";
 import { Button } from "@/components/common/button";
 import { useInventoryContext } from "@/components/features/tenant/inventory/InventoryContext";
-import { PropertyData } from "@/type/tenantData";
+import { useState } from "react";
 
 export const LocationInput = () => {
-  const {
-    locationSearch,
-    setLocationSearch,
-    originalPropertiesList,
-    setPropertiesList,
-  } = useInventoryContext();
-
-  function filterPropertiesByLocation(
-    properties: PropertyData[] | undefined,
-    searchTerm: string,
-  ): PropertyData[] {
-    if (!properties) return [];
-    if (!searchTerm) return properties;
-
-    const lowercasedSearchTerm = searchTerm.toLowerCase();
-
-    return properties.filter((property) => {
-      if (!property.location) return false;
-
-      const { name, address, number, geo, division } = property.location;
-
-      return (
-        (name?.toLowerCase().includes(lowercasedSearchTerm) ?? false) ||
-        (address?.toLowerCase().includes(lowercasedSearchTerm) ?? false) ||
-        (number.ext?.toLowerCase().includes(lowercasedSearchTerm) ?? false) ||
-        (number.int?.toLowerCase().includes(lowercasedSearchTerm) ?? false) ||
-        (geo.lng?.toLowerCase().includes(lowercasedSearchTerm) ?? false) ||
-        (geo.lat?.toLowerCase().includes(lowercasedSearchTerm) ?? false) ||
-        (division.name?.toLowerCase().includes(lowercasedSearchTerm) ??
-          false) ||
-        (division.zipCode?.toLowerCase().includes(lowercasedSearchTerm) ??
-          false) ||
-        (division.township?.toLowerCase().includes(lowercasedSearchTerm) ??
-          false) ||
-        (division.state?.toLowerCase().includes(lowercasedSearchTerm) ??
-          false) ||
-        (division.country.shortName
-          ?.toLowerCase()
-          .includes(lowercasedSearchTerm) ??
-          false) ||
-        (division.country.name?.toLowerCase().includes(lowercasedSearchTerm) ??
-          false)
-      );
-    });
-  }
+  const [location, setLocation] = useState<string>("");
+  const { setFilters } = useInventoryContext();
 
   const applyFilter = () => {
-    const filteredProperties = filterPropertiesByLocation(
-      originalPropertiesList,
-      locationSearch,
-    );
-    setPropertiesList(filteredProperties);
+    setFilters({
+      location,
+    });
   };
 
   return (
     <>
       <Input
         placeholder={"Ubicacion"}
-        value={locationSearch}
+        value={location}
         className={
           "w-full rounded border-[#131E29] [&]:px-3 [&]:py-2.5 h-full md:w-80 text-xs md:text-sm"
         }
-        onChange={(e) => setLocationSearch(e.target.value)}
+        onChange={(e) => setLocation(e.target.value)}
       />
       <Button
         onClick={applyFilter}
