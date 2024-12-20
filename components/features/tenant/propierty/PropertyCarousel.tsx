@@ -40,11 +40,13 @@ export const PropertyCarousel = ({ entityId, id }: PropertyCarouselProps) => {
   return (
     <>
       <div className={"w-full flex gap-6 mt-8"}>
-        <div className={"w-9/12 max-h-[600px] relative"}>
+        <div
+          className={"md:w-9/12 h-[220px] md:h-auto md:max-h-[600px] relative"}
+        >
           <span
             onClick={handlePrev}
             className={
-              "absolute top-1/2 left-6 -translate-y-1/2 cursor-pointer"
+              "absolute top-1/2 left-2 md:left-6 -translate-y-1/2 cursor-pointer md:scale-100 scale-75"
             }
           >
             <svg
@@ -71,7 +73,9 @@ export const PropertyCarousel = ({ entityId, id }: PropertyCarouselProps) => {
               />
             </svg>
           </span>
-          <div className={"absolute top-4 left-8 flex flex-col gap-2"}>
+          <div
+            className={"absolute top-4 left-8 md:flex hidden flex-col gap-2"}
+          >
             <span
               className={
                 "text-xs text-center bg-blue-400 px-2 py-1 text-white rounded-full"
@@ -94,7 +98,7 @@ export const PropertyCarousel = ({ entityId, id }: PropertyCarouselProps) => {
             width={840}
             height={500}
           />
-          <div className={"absolute bottom-5 left-8 flex gap-2"}>
+          <div className={"absolute bottom-5 left-8 md:flex hidden gap-2"}>
             <span
               className={
                 "text-sm flex gap-1.5 items-center text-white font-galano font-medium bg-black/60 px-3 py-1 rounded-full"
@@ -139,7 +143,7 @@ export const PropertyCarousel = ({ entityId, id }: PropertyCarouselProps) => {
           <span
             onClick={handleNext}
             className={
-              "absolute top-1/2 right-6 -translate-y-1/2 cursor-pointer"
+              "absolute top-1/2 right-2 md:right-6 -translate-y-1/2 cursor-pointer md:scale-100 scale-75"
             }
           >
             <svg
@@ -174,7 +178,9 @@ export const PropertyCarousel = ({ entityId, id }: PropertyCarouselProps) => {
             </svg>
           </span>
         </div>
-        <div className={"w-3/12 max-h-[600px] grid grid-rows-3 gap-4"}>
+        <div
+          className={"md:w-3/12 md:grid hidden max-h-[600px] grid-rows-3 gap-4"}
+        >
           <div className={"w-full h-full relative"}>
             <Image
               src={propertyImages[1]}

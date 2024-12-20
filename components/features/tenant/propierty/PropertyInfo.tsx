@@ -28,13 +28,14 @@ export const PropertyInfo = ({
     {
       title: (
         <>
-          <span className={"flex gap-4 items-center"}>
+          <span className={"flex gap-4 items-center text-lg md:text-2xl"}>
             <svg
               width="24"
               height="24"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              className={"md:block hidden"}
             >
               <path
                 d="M15 11.0007L11 15.0007L9 13.0007M4 16.8007V11.4527C4 10.9187 4 10.6517 4.065 10.4027C4.12256 10.1826 4.21725 9.97395 4.345 9.7857C4.49 9.5727 4.691 9.3957 5.093 9.0447L9.894 4.8427C10.64 4.1907 11.013 3.8647 11.432 3.7407C11.802 3.6307 12.197 3.6307 12.567 3.7407C12.987 3.8647 13.361 4.1907 14.107 4.8447L18.907 9.0447C19.31 9.3967 19.51 9.5727 19.655 9.7847C19.783 9.97604 19.8763 10.182 19.935 10.4027C20 10.6517 20 10.9187 20 11.4527V16.8047C20 17.9227 20 18.4817 19.782 18.9097C19.5898 19.2858 19.2835 19.5914 18.907 19.7827C18.48 20.0007 17.921 20.0007 16.803 20.0007H7.197C6.079 20.0007 5.519 20.0007 5.092 19.7827C4.71584 19.5912 4.40991 19.2856 4.218 18.9097C4 18.4807 4 17.9207 4 16.8007Z"
@@ -50,10 +51,8 @@ export const PropertyInfo = ({
       ),
       defaultOpen: true,
       content: (
-        <div className={"flex flex-col gap-2"}>
-          <p className={"text-base font-galano mt-4"}>
-            {property?.description}
-          </p>
+        <div className={"flex md:text-base text-sm flex-col gap-2"}>
+          <p className={"font-galano mt-4"}>{property?.description}</p>
           <div
             className={
               "px-4 py-3 flex items-center gap-2 font-bold text-lg bg-gray-200 rounded-md mt-3"
@@ -176,7 +175,7 @@ export const PropertyInfo = ({
           </div>
           <div
             className={
-              "mt-4 flex gap-4 items-center justify-center text-sm font-bold"
+              "mt-4 flex md:flex-row flex-col gap-4 items-center justify-center text-sm font-bold"
             }
           >
             Solicitar apoyo de un asesor
@@ -252,7 +251,7 @@ export const PropertyInfo = ({
   return (
     <>
       <section className={"w-full flex gap-6 mt-8 font-galano"}>
-        <div className={"w-7/12 flex flex-col"}>
+        <div className={"md:w-7/12 flex flex-col"}>
           <h1 className={"font-bold text-xl"}>{property?.entity.name}</h1>
           <h2 className={"font-bold text-4xl mt-2"}>
             $ {property?.operations[0]!.price.toLocaleString("es-MX")}
@@ -270,7 +269,11 @@ export const PropertyInfo = ({
           </div>
           <span className={"mt-2"}>{property?.location?.address}</span>
 
-          <div className={"grid grid-cols-3 grid-rows-2 gap-2 gap-y-6 mt-2"}>
+          <div
+            className={
+              "grid grid-cols-2 md:grid-cols-3 md:grid-rows-2 gap-2 md:gap-y-6 mt-2 w-full"
+            }
+          >
             <span className={"flex gap-1.5 items-center"}>
               <svg
                 width="24"
@@ -321,7 +324,7 @@ export const PropertyInfo = ({
 
               <div className={"flex text-sm flex-col"}>
                 <span className={"font-bold"}>{property?.age ?? "0"}</span>
-                <span>Años de construcción</span>
+                <span className={"w-full text-wrap"}>Años de construcción</span>
               </div>
             </span>
 
@@ -415,13 +418,16 @@ export const PropertyInfo = ({
 
           <div
             className={
-              "mt-8 flex gap-4 items-center pb-8 border-b border-gray-400"
+              "mt-8 flex md:flex-row flex-col gap-4 items-center pb-8 border-b border-gray-400"
             }
           >
-            <Button className={"[&]:py-6 [&]:px-6"}>
+            <Button className={"[&]:py-6 [&]:px-6 w-full md:w-auto"}>
               Contactar propietario
             </Button>
-            <Button variant={"outline"} className={"[&]:py-6 [&]:px-6"}>
+            <Button
+              variant={"outline"}
+              className={"[&]:py-6 [&]:px-6 w-full md:w-auto"}
+            >
               Compartir esta {property?.operations[0].display}
             </Button>
           </div>
@@ -443,7 +449,7 @@ export const PropertyInfo = ({
             <span className={"text-green-500 ml-1.5 cursor-pointer"}>Aquí</span>
           </div>
         </div>
-        <div className={"w-5/12 flex flex-col gap-12"}>
+        <div className={"md:w-5/12 hidden md:flex flex-col gap-12"}>
           <iframe
             src={`https://maps.google.com/maps?q=${property?.location?.geo.lat},${property?.location?.geo.lng}&hl=es;z=14&amp&output=embed`}
             style={{ border: 0 }}

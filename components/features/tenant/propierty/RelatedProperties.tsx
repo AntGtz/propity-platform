@@ -21,10 +21,14 @@ export const RelatedProperties = ({ entityId }: RelatedPropertiesProps) => {
   return (
     <section
       className={
-        "flex flex-col w-full h-full max-w-7xl mx-auto py-12 font-galano"
+        "flex flex-col w-full h-full max-w-7xl mx-auto py-12 font-galano md:px-0 px-4"
       }
     >
-      <span className={"flex items-center gap-3 text-black font-bold text-2xl"}>
+      <span
+        className={
+          "flex items-center gap-3 text-black font-bold md:text-2xl text-lg"
+        }
+      >
         <svg
           width="24"
           height="24"
@@ -53,7 +57,10 @@ export const RelatedProperties = ({ entityId }: RelatedPropertiesProps) => {
             {entity?.properties?.map((property) => {
               const location = property.location;
               return (
-                <CarouselItem className={"basis-1/4"} key={property.id}>
+                <CarouselItem
+                  className={"md:basis-1/4 w-full"}
+                  key={property.id}
+                >
                   <PropertyCard2
                     key={property.id.toString()}
                     id={property.id.toString()}

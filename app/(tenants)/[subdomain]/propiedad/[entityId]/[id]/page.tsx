@@ -18,8 +18,8 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <>
-      <section className="flex flex-col w-full h-full max-w-7xl mx-auto py-12 font-galano">
-        <div className={"w-full flex justify-between items-center"}>
+      <section className="flex flex-col w-full h-full max-w-7xl mx-auto py-4 md:py-12 md:px-0 px-4 font-galano">
+        <div className={"w-full hidden md:flex justify-between items-center"}>
           <div className={"flex items-center gap-1 text-sm"}>
             <span className={"flex items-center underline"}>
               <svg

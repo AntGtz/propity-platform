@@ -7,7 +7,7 @@ export const CTAProperty = () => {
   return (
     <section
       className={
-        "w-full flex justify-center items-center bg-gray-300 py-12 font-galano"
+        "w-full hidden md:flex justify-center items-center bg-gray-300 py-12 font-galano"
       }
     >
       <div className={"flex flex-col items-center"}>

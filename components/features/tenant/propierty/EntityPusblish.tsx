@@ -17,6 +17,7 @@ export const EntityPusblish = ({ entityId }: EntityPusblishProps) => {
           src={entity?.theme.logotype.main ?? "/logotype.svg"}
           width={60}
           height={60}
+          className={"md:block hidden"}
           alt="coin"
         />
         <span className={"font-galano text-sm"}>
