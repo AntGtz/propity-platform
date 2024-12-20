@@ -7,7 +7,7 @@ import {
 import { ReactNode, useState } from "react";
 
 interface CollapsibleWrapProps {
-  title: string;
+  title: string | ReactNode;
   defaultOpen?: boolean;
   openFixed?: boolean;
   children: ReactNode;

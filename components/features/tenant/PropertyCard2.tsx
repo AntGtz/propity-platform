@@ -1,25 +1,52 @@
 import Image from "next/image";
 
-export default function PropertyCard2() {
+interface PropertyCardProps {
+  id?: string;
+  image?: string | undefined;
+  logo?: string | undefined;
+  name?: string;
+  price?: number | undefined;
+  location?: string | null;
+  description?: string | null;
+}
+
+export default function PropertyCard2({
+  id,
+  image,
+  logo,
+  name,
+  price,
+  location,
+  description,
+}: PropertyCardProps) {
   return (
     <>
       <article className="md:max-w-[264px] w-full flex flex-col md:min-h-32 font-galano cursor-pointer">
         <header className="w-full relative h-[320px] rounded-md overflow-hidden">
-          <Image src={"/propertyex.jpg"} alt="Property" fill />
+          <Image src={image ?? "/propertyex.jpg"} alt="Property" fill />
         </header>
         <div className={"flex items-center gap-1.5 mt-2.5"}>
-          <Image src={"/jomLogo.png"} alt="JomLogo" width={45} height={45} />
+          <Image
+            src={logo ?? "/jomLogo.png"}
+            alt="JomLogo"
+            width={45}
+            height={45}
+          />
           <div className="flex flex-col">
             <span className="font-bold text-base text-whiteGray leading-5">
-              Constructora Hogar
+              {name ?? "Constructora Hogar"}
             </span>
-            <span className="text-xs">Quetzal 247, Priv. El Encanto</span>
+            <span className="text-xs">
+              {location ?? "Quetzal 247, Priv. El Encanto"}
+            </span>
           </div>
         </div>
-        <span className=" text-base font-bold my-1.5">Desde $3,500.000</span>
-        <p className={"text-sm"}>
-          Pizza ipsum dolor meat lovers buffalo. Ricotta tomatoes marinara NY
-          green mayo buffalo tossed olives.
+        <span className=" text-base font-bold my-1.5">
+          Desde {price ? price.toLocaleString("es-MX") : "3,500.000"}
+        </span>
+        <p className={"text-sm max-h-16 texte-ellipsis overflow-hidden"}>
+          {description ??
+            "Pizza ipsum dolor meat lovers buffalo. Ricotta tomatoes marinara NY green mayo buffalo tossed olives."}
         </p>
         <div className={"flex gap-3 items-center my-1.5"}>
           <svg
