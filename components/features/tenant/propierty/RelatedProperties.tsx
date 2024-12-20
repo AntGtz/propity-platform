@@ -42,10 +42,10 @@ export const RelatedProperties = ({ entityId }: RelatedPropertiesProps) => {
         </svg>
         Propiedades relacionadas
       </span>
-      <div className="w-full mt-12 relative">
+      <div className="w-full mt-12 relative px-10">
         <div
           className={
-            "h-full hidden md:block md:absolute top-0 left-0 w-[40px] bg-white-gradient-carrousel z-20"
+            "h-full hidden md:block md:absolute top-0 left-5 w-[40px] bg-white-gradient-carrousel z-20"
           }
         ></div>
         <Carousel className="relative w-full">
