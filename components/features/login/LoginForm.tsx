@@ -1,39 +1,83 @@
-"use client";
 import { Button } from "@/components/common/button";
 import { Input } from "@/components/common/input";
 import { useId, useState } from "react";
+import { SignIn } from "@/actions/auth";
+import { toast } from "react-toastify";
 
-export default function LoginForm() {
+interface Props {
+  setOpen: (open: boolean) => void;
+  setTab: (tab: string) => void;
+}
+
+export default function LoginForm({ setOpen, setTab }: Props) {
   const usernameFieldId = useId();
   const passwordFieldId = useId();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const [error, setError] = useState({
+    email: {
+      message: "",
+    },
+    password: {
+      message: "",
+    },
+    general: {
+      message: "",
+    },
+  });
+
   const handleLogin = async () => {
-    const response = await fetch("/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password }),
+    setError({
+      email: { message: "" },
+      password: { message: "" },
+      general: { message: "" },
     });
 
-    if (response.ok) {
-      const data = await response.json();
-      console.log("Token:", data.token);
-      // Puedes almacenar el token en cookies o localStorage según sea necesario
-      alert("Inicio de sesión exitoso");
-    } else {
-      alert("Error al iniciar sesión");
+    if (!username) {
+      setError((prev) => ({ ...prev, email: { message: "Campo requerido" } }));
+      return;
+    }
+    if (!password) {
+      setError((prev) => ({
+        ...prev,
+        password: { message: "Campo requerido" },
+      }));
+      return;
+    }
+
+    const result = await SignIn({
+      username,
+      password,
+    });
+
+    if (result?.error) {
+      if (result.error === "Cuenta no confirmada") {
+        setTab("confirm");
+        return;
+      }
+      setError((prev) => ({
+        ...prev,
+        general: { message: result.error ?? "" },
+      }));
+    } else if (result) {
+      setOpen(false);
+      toast("Bienvenido de nuevo");
     }
   };
 
   return (
     <>
       <div className="flex flex-col gap-2 mt-6 mb-2 md:text-base text-sm md:mx-0 mx-4">
+        {error.general.message ? (
+          <span className="text-red-500 -mt-4 font-galano text-center">
+            {error.general.message}
+          </span>
+        ) : null}
         <label htmlFor={usernameFieldId} className="font-galano">
-          Email / Username
+          Email / Username{" "}
+          {error.email.message ? <span className="text-red-500">*</span> : null}
         </label>
         <Input
           id={usernameFieldId}
@@ -42,7 +86,10 @@ export default function LoginForm() {
           placeholder=""
         />
         <label htmlFor={passwordFieldId} className="font-galano">
-          Contraseña
+          Contraseña{" "}
+          {error.password.message ? (
+            <span className="text-red-500">*</span>
+          ) : null}
         </label>
         <Input
           onChange={(e) => setPassword(e.target.value)}

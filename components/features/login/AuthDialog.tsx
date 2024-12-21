@@ -4,8 +4,13 @@ import { useState } from "react";
 import LoginForm from "./LoginForm";
 import NewAccount from "./NewAccount";
 import NewTenant from "./NewTenant";
+import { UserConfirmation } from "@/components/features/login/UserConfirmation";
 
-export default function AuthDialog() {
+interface Props {
+  setOpen: (open: boolean) => void;
+}
+
+export default function AuthDialog({ setOpen }: Props) {
   const [tab, setTab] = useState("login");
   return (
     <>
@@ -42,17 +47,19 @@ export default function AuthDialog() {
       <>
         {tab === "login" ? (
           <>
-            <LoginForm />
+            <LoginForm setOpen={setOpen} setTab={setTab} />
           </>
         ) : tab === "newUser" ? (
           <>
-            <NewAccount />
+            <NewAccount setTab={setTab} />
           </>
         ) : tab === "newCompany" ? (
           <>
             <NewTenant />
           </>
-        ) : null}
+        ) : (
+          <UserConfirmation setTab={setTab} />
+        )}
       </>
     </>
   );
