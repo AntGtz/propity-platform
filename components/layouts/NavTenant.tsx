@@ -6,16 +6,25 @@ import { Button } from "../common/button";
 import { Dialog, DialogContent, DialogTrigger } from "../common/dialog";
 import AuthDialog from "../features/login/AuthDialog";
 import { useTenantTheme } from "@/hooks/useTenantTheme";
-import { useAppSelector } from "@/lib/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import MobileMenu from "@/components/layouts/MobileMenu";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
+import {
+  setAuthDialogOpen,
+  setAuthDialogType,
+} from "@/lib/store/features/app/appSlice";
 
 export default function NavTenant() {
   const tenantData = useAppSelector((state) => state.tenant.details);
   useTenantTheme(tenantData?.theme?.color);
+  const appState = useAppSelector((state) => state.app);
+  const dispatch = useAppDispatch();
 
-  const [open, setOpen] = React.useState(false);
   const { data: session } = useSession();
+
+  function handleOpenAuthDialog(bool: boolean) {
+    dispatch(setAuthDialogOpen(bool));
+  }
 
   return (
     <>
@@ -55,7 +64,7 @@ export default function NavTenant() {
           />
         </Link>
         <span
-          onClick={() => setOpen(true)}
+          onClick={() => handleOpenAuthDialog(true)}
           className={"ml-auto block md:hidden"}
         >
           <svg
@@ -74,7 +83,10 @@ export default function NavTenant() {
         <div className="md:flex hidden items-center gap-4">
           {!session ? (
             <>
-              <Dialog open={open} onOpenChange={setOpen}>
+              <Dialog
+                open={appState.AuthDialogOpen}
+                onOpenChange={handleOpenAuthDialog}
+              >
                 <DialogTrigger asChild>
                   <Button
                     variant={"ghost"}
@@ -84,18 +96,30 @@ export default function NavTenant() {
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[550px] md:h-auto h-auto w-screen px-4 md:px-14 md:my-5">
-                  <AuthDialog setOpen={setOpen} />
+                  <AuthDialog setOpen={handleOpenAuthDialog} />
                 </DialogContent>
               </Dialog>
               {
                 // TODO: add button variant
               }
-              <Button size={"lg"} className={`font-medium font-jakarta`}>
+              <Button
+                onClick={() => {
+                  handleOpenAuthDialog(true);
+                  dispatch(setAuthDialogType("newUser"));
+                }}
+                size={"lg"}
+                className={`font-medium font-jakarta`}
+              >
                 Registrarse
               </Button>
             </>
           ) : (
-            <span className={"flex items-center gap-1 font-galano text-sm"}>
+            <span
+              onClick={() => signOut()}
+              className={
+                "flex items-center gap-1 font-galano text-sm cursor-pointer"
+              }
+            >
               <svg
                 width="24"
                 height="25"

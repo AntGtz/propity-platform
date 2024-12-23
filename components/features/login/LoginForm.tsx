@@ -6,7 +6,9 @@ import { toast } from "react-toastify";
 
 interface Props {
   setOpen: (open: boolean) => void;
-  setTab: (tab: string) => void;
+  setTab: (
+    tab: "login" | "newUser" | "newCompany" | "userConfirmation",
+  ) => void;
 }
 
 export default function LoginForm({ setOpen, setTab }: Props) {
@@ -54,7 +56,7 @@ export default function LoginForm({ setOpen, setTab }: Props) {
 
     if (result?.error) {
       if (result.error === "Cuenta no confirmada") {
-        setTab("confirm");
+        setTab("userConfirmation");
         return;
       }
       setError((prev) => ({

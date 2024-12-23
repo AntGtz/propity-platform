@@ -6,7 +6,7 @@ import { CodeMismatchException } from "@aws-sdk/client-cognito-identity-provider
 import { toast } from "react-toastify";
 
 interface Props {
-  setTab: (tab: string) => void;
+  setTab: (tab: "login" | "newUser" | "newCompany") => void;
 }
 
 export const UserConfirmation = ({ setTab }: Props) => {

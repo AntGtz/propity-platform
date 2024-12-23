@@ -7,7 +7,9 @@ import { EyeIcon } from "lucide-react";
 import { forwardRef, useId, useState } from "react";
 
 interface Props {
-  setTab: (tab: string) => void;
+  setTab: (
+    tab: "login" | "newUser" | "newCompany" | "userConfirmation",
+  ) => void;
 }
 
 export default function NewAccount({ setTab }: Props) {
@@ -72,7 +74,7 @@ export default function NewAccount({ setTab }: Props) {
     });
 
     if (response.ok) {
-      setTab("confirm");
+      setTab("userConfirmation");
     } else {
       const responseT = await response.json();
       setError((prev) => ({ ...prev, general: responseT.message }));

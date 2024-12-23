@@ -10,8 +10,5 @@ export function titleCase(str: string | undefined) {
 
 export function formatPhoneNumber(phoneNumber: string | undefined): string {
   if (!phoneNumber) return "";
-  if (phoneNumber.length !== 10) {
-    throw new Error("Phone number must be 10 digits long");
-  }
   return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6)}`;
 }

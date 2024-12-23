@@ -1,17 +1,26 @@
 "use client";
 import { DialogTitle } from "@radix-ui/react-dialog";
-import { useState } from "react";
 import LoginForm from "./LoginForm";
 import NewAccount from "./NewAccount";
 import NewTenant from "./NewTenant";
 import { UserConfirmation } from "@/components/features/login/UserConfirmation";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
+import { setAuthDialogType } from "@/lib/store/features/app/appSlice";
 
 interface Props {
   setOpen: (open: boolean) => void;
 }
 
 export default function AuthDialog({ setOpen }: Props) {
-  const [tab, setTab] = useState("login");
+  const authType = useAppSelector((state) => state.app.AuthDialogType);
+  const dispatch = useAppDispatch();
+
+  function setTab(
+    tab: "login" | "newUser" | "newCompany" | "userConfirmation",
+  ) {
+    dispatch(setAuthDialogType(tab));
+  }
+
   return (
     <>
       <DialogTitle className="hidden">Ingresar</DialogTitle>
@@ -22,7 +31,7 @@ export default function AuthDialog({ setOpen }: Props) {
         <span
           onClick={() => setTab("login")}
           className={`pb-1.5 cursor-pointer border-b-[3px] text-nowrap ${
-            tab === "login" ? "border-[#00B140]" : "border-transparent"
+            authType === "login" ? "border-[#00B140]" : "border-transparent"
           } hover:border-[#00B140]`}
         >
           Inicia sesión
@@ -30,7 +39,7 @@ export default function AuthDialog({ setOpen }: Props) {
         <span
           onClick={() => setTab("newUser")}
           className={`pb-1.5 cursor-pointer border-b-[3px] text-nowrap ${
-            tab === "newUser" ? "border-[#00B140]" : "border-transparent"
+            authType === "newUser" ? "border-[#00B140]" : "border-transparent"
           } hover:border-[#00B140]`}
         >
           Registrar Usuario
@@ -38,22 +47,24 @@ export default function AuthDialog({ setOpen }: Props) {
         <span
           onClick={() => setTab("newCompany")}
           className={`pb-1.5 cursor-pointer border-b-[3px] text-center ${
-            tab === "newCompany" ? "border-[#00B140]" : "border-transparent"
+            authType === "newCompany"
+              ? "border-[#00B140]"
+              : "border-transparent"
           } hover:border-[#00B140]`}
         >
           Registrar Empresa
         </span>
       </div>
       <>
-        {tab === "login" ? (
+        {authType === "login" ? (
           <>
             <LoginForm setOpen={setOpen} setTab={setTab} />
           </>
-        ) : tab === "newUser" ? (
+        ) : authType === "newUser" ? (
           <>
             <NewAccount setTab={setTab} />
           </>
-        ) : tab === "newCompany" ? (
+        ) : authType === "newCompany" ? (
           <>
             <NewTenant />
           </>
