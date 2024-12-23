@@ -68,7 +68,7 @@ export const RelatedProperties = ({ entityId }: RelatedPropertiesProps) => {
                     logo={property.theme.icon}
                     name={property.entity.name}
                     price={property.operations[0]!.price}
-                    location={
+                    address={
                       location
                         ? `${location.division?.name}, ${
                             location.division?.state

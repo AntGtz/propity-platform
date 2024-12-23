@@ -2,11 +2,24 @@
 import { Input } from "@/components/common/input";
 import { Button } from "@/components/common/button";
 import { useInventoryContext } from "@/components/features/tenant/inventory/InventoryContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export const LocationInput = () => {
+interface LocationInputProps {
+  locationSearch?: string | null;
+}
+
+export const LocationInput = ({ locationSearch }: LocationInputProps) => {
   const [location, setLocation] = useState<string>("");
   const { setFilters } = useInventoryContext();
+
+  useEffect(() => {
+    if (locationSearch && locationSearch !== "" && locationSearch !== null) {
+      setLocation(locationSearch);
+      setFilters({
+        location: locationSearch,
+      });
+    }
+  }, [locationSearch]);
 
   const applyFilter = () => {
     setFilters({

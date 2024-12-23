@@ -23,17 +23,19 @@ export interface InventoryContextProps {
   originalPropertiesList: PropertyData[] | undefined;
 }
 
+export const defaultFilters: Filters = {
+  location: "",
+  priceRange: [0, Infinity],
+  propertyType: "all",
+  minSurface: 0,
+  bedrooms: 0,
+  bathrooms: 0,
+};
+
 export const InventoryContext = createContext<InventoryContextProps>({
   propertiesList: [],
   setPropertiesList: () => {},
-  filters: {
-    location: "",
-    priceRange: [0, Infinity],
-    propertyType: "all",
-    minSurface: 0,
-    bedrooms: 0,
-    bathrooms: 0,
-  },
+  filters: defaultFilters,
   setFilters: () => {},
   entity: undefined,
   originalPropertiesList: undefined,
@@ -47,7 +49,7 @@ export function InventoryProvider({
   id,
   children,
 }: {
-  id: string;
+  id?: string;
   children: React.ReactNode;
 }) {
   const [propertiesList, setPropertiesList] = useState<PropertyData[]>([]);
@@ -60,12 +62,29 @@ export function InventoryProvider({
   });
 
   const community = useAppSelector((state) => state.tenant.communityDetails);
-  const entity = community?.find((community) => community.id === id);
-  const originalPropertiesList = entity?.properties ?? [];
+
+  const entity = id
+    ? community?.find((community) => community.id === id)
+    : undefined;
+
+  const originalPropertiesList = useMemo(() => {
+    const allProperties = entity
+      ? entity.properties
+      : community
+          ?.flatMap((comm) => comm.properties)
+          .filter((p): p is PropertyData => !!p) || [];
+
+    const uniquePropertiesMap = new Map();
+    allProperties?.forEach((property) => {
+      uniquePropertiesMap.set(property.uuid, property);
+    });
+
+    return Array.from(uniquePropertiesMap.values());
+  }, [community, entity]);
 
   useEffect(() => {
-    setPropertiesList(originalPropertiesList);
-  }, [entity]);
+    setPropertiesList(originalPropertiesList ?? []);
+  }, [originalPropertiesList, entity]);
 
   const setFilters = (newFilters: Partial<Filters>) => {
     setFiltersState((prevFilters) => ({
@@ -93,19 +112,19 @@ export function InventoryProvider({
               false) ||
             (geo.lng?.toLowerCase().includes(lowercasedSearchTerm) ?? false) ||
             (geo.lat?.toLowerCase().includes(lowercasedSearchTerm) ?? false) ||
-            (division.name?.toLowerCase().includes(lowercasedSearchTerm) ??
+            (division?.name?.toLowerCase().includes(lowercasedSearchTerm) ??
               false) ||
-            (division.zipCode?.toLowerCase().includes(lowercasedSearchTerm) ??
+            (division?.zipCode?.toLowerCase().includes(lowercasedSearchTerm) ??
               false) ||
-            (division.township?.toLowerCase().includes(lowercasedSearchTerm) ??
+            (division?.township?.toLowerCase().includes(lowercasedSearchTerm) ??
               false) ||
-            (division.state?.toLowerCase().includes(lowercasedSearchTerm) ??
+            (division?.state?.toLowerCase().includes(lowercasedSearchTerm) ??
               false) ||
-            (division.country.shortName
+            (division?.country.shortName
               ?.toLowerCase()
               .includes(lowercasedSearchTerm) ??
               false) ||
-            (division.country.name
+            (division?.country.name
               ?.toLowerCase()
               .includes(lowercasedSearchTerm) ??
               false)

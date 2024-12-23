@@ -1,4 +1,6 @@
+"use client";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface PropertyCardProps {
   id?: string;
@@ -6,7 +8,7 @@ interface PropertyCardProps {
   logo?: string | undefined;
   name?: string;
   price?: number | undefined;
-  location?: string | null;
+  address?: string | null;
   description?: string | null;
 }
 
@@ -16,12 +18,22 @@ export default function PropertyCard2({
   logo,
   name,
   price,
-  location,
+  address,
   description,
 }: PropertyCardProps) {
+  const router = useRouter();
+
+  function handleClick() {
+    if (!id) return;
+    router.push(`/perfil/${id}`);
+  }
+
   return (
     <>
-      <article className="md:max-w-[264px] w-full flex flex-col md:min-h-32 font-galano cursor-pointer">
+      <article
+        onClick={handleClick}
+        className="md:max-w-[264px] w-full flex flex-col min-h-32 font-galano cursor-pointer"
+      >
         <header className="w-full relative h-[320px] rounded-md overflow-hidden">
           <Image src={image ?? "/propertyex.jpg"} alt="Property" fill />
         </header>
@@ -31,13 +43,14 @@ export default function PropertyCard2({
             alt="JomLogo"
             width={45}
             height={45}
+            className={"h-[45px] w-[45px] object-contain"}
           />
           <div className="flex flex-col">
             <span className="font-bold text-base text-whiteGray leading-5">
               {name ?? "Constructora Hogar"}
             </span>
             <span className="text-xs">
-              {location ?? "Quetzal 247, Priv. El Encanto"}
+              {address ?? "Quetzal 247, Priv. El Encanto"}
             </span>
           </div>
         </div>
