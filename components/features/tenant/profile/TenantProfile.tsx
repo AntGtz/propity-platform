@@ -5,12 +5,12 @@ import { titleCase } from "@/utils";
 
 export default function TenantProfile({ id }: { id: string }) {
   const comunnity = useAppSelector((state) => state.tenant.communityDetails);
-  const development = comunnity?.filter((community) => community.id === id)[0];
+  const entity = comunnity?.filter((community) => community.id === id)[0];
 
   return (
     <div className={"flex items-center gap-x-4"}>
       <Image
-        src={development?.theme.logotype.main ?? "/profilePic.jpg"}
+        src={entity?.theme.logotype.main ?? "/profilePic.jpg"}
         quality={100}
         alt={"Foto de perfil"}
         width={120}
@@ -19,14 +19,14 @@ export default function TenantProfile({ id }: { id: string }) {
       />
       <div className={"flex flex-col gap-y-1 font-galano"}>
         <h1 className={"text-2xl font-bold m-0"}>
-          {development?.name ?? "donjuanjones"}
+          {entity?.name ?? "donjuanjones"}
         </h1>
         <span className={"font-semibold"}>
-          {development?.contact?.email ?? "donjuanjones@gmail.com"}
+          {entity?.contact?.email ?? "donjuanjones@gmail.com"}
         </span>
         {/*<span>Status</span>*/}
         <p className={"text-sm text-gray-500"}>
-          {titleCase(development?.type.display)}
+          {titleCase(entity?.type.display)}
         </p>
       </div>
     </div>
