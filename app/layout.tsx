@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import { ToastContainer } from "react-toastify";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -15,15 +16,27 @@ const geistMono = localFont({
 });
 
 const galanoGrotesque = localFont({
-  src: "./fonts/GalanoGrotesqueAltRegular.otf",
+  src: [
+    {
+      path: "./fonts/GalanoGrotesqueAltRegular.otf",
+      weight: "400",
+    },
+    {
+      path: "./fonts/GalanoGrotesqueMedium.otf",
+      weight: "500",
+    },
+    {
+      path: "./fonts/GalanoGrotesqueBold.otf",
+      weight: "700",
+    },
+  ],
   variable: "--font-galano-grotesque",
-  weight: "100 900",
 });
 
 const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-  variable: '--font-plus-jakarta-sans',
-  display: 'swap',
+  subsets: ["latin"],
+  variable: "--font-plus-jakarta-sans",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -42,6 +55,18 @@ export default function RootLayout({
         className={`${geistSans.variable} ${galanoGrotesque.variable} ${geistMono.variable} ${plusJakartaSans.variable} antialiased`}
       >
         {children}
+        <ToastContainer
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar
+          newestOnTop={false}
+          closeOnClick={false}
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
       </body>
     </html>
   );

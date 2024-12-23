@@ -1,50 +1,58 @@
 // app/api/auth/register/route.ts
 
 import { NextResponse } from "next/server";
-import prisma from "@/lib/prisma/db";
-import bcrypt from "bcryptjs";
+import {
+  CognitoIdentityProviderClient,
+  SignUpCommand,
+  UsernameExistsException,
+} from "@aws-sdk/client-cognito-identity-provider";
 
 export async function POST(request: Request) {
   try {
-    const { name, email, password } = await request.json();
+    const { username, password, name, phone, email } = await request.json();
 
-    if (!name || !email || !password) {
-      return NextResponse.json(
-        { error: "Todos los campos son obligatorios." },
-        { status: 400 }
-      );
-    }
-
-    const existingUser = await prisma.user.findUnique({
-      where: { email },
-    });
-
-    if (existingUser) {
-      return NextResponse.json(
-        { error: "El usuario ya existe." },
-        { status: 400 }
-      );
-    }
-
-    // Hashing the password with bcrypt
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    const newUser = await prisma.user.create({
-      data: {
-        name,
-        email,
-        password: hashedPassword,
+    const cognitoClient = new CognitoIdentityProviderClient({
+      region: process.env.COGNITO_REGION,
+      credentials: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
       },
     });
 
+    const params = {
+      ClientId: process.env.COGNITO_CLIENT_ID!,
+      Username: username,
+      Password: password,
+      UserAttributes: [
+        {
+          Name: "email",
+          Value: `${email}`,
+        },
+        {
+          Name: "name",
+          Value: `${name}`,
+        },
+      ],
+    };
+
+    const command = new SignUpCommand(params);
+    await cognitoClient.send(command);
     return NextResponse.json(
-      { message: "Usuario registrado exitosamente.", user: newUser },
-      { status: 201 }
+      { message: "Usuario registrado con éxito" },
+      { status: 201 },
     );
   } catch (error) {
+    if (error instanceof UsernameExistsException) {
+      return NextResponse.json(
+        { message: "El usuario ya existe" },
+        { status: 400 },
+      );
+    }
+
+    console.error("Error during user registration:", error);
     return NextResponse.json(
-      { error: `Error al registrar el usuario. ${error}` },
-      { status: 500 }
+      { message: "Error al registrar usuario" },
+      { status: 500 },
     );
   }
 }
