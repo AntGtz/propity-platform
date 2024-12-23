@@ -1,12 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "./lib/auth/auth";
 
-const subdomains = [
-  { subdomain: "client1" },
-  { subdomain: "client2" },
-  { subdomain: "jom" },
-];
-
 export default auth((request: NextRequest) => {
   const url = request.nextUrl;
   const hostname = request.headers.get("host");
@@ -25,14 +19,17 @@ export default auth((request: NextRequest) => {
   // Extract the possible subdomain in the URL
   const subdomain = hostname ? hostname.split(".")[0] : "";
 
-  // If we stay in a allowed domain and its not a subdomain, allow the request.
-  if (isAllowedDomain && !subdomains.some((d) => d.subdomain === subdomain)) {
-    return NextResponse.next();
+  const isLocalhost = hostname?.includes("localhost");
+
+  if (isAllowedDomain) {
+    const parts = hostname.split(".").length;
+
+    if ((isLocalhost && parts <= 1) || (!isLocalhost && parts <= 2)) {
+      return NextResponse.next();
+    }
   }
 
-  const subdomainData = subdomains.find((d) => d.subdomain === subdomain);
-
-  if (subdomainData) {
+  if (subdomain) {
     // Rewrite the URL in the dynamic route based in the subdomain
     return NextResponse.rewrite(
       new URL(`/${subdomain}${url.pathname}`, request.url),
