@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import tenantReducer from "./features/tenants/tenantSlice";
+import appReducer from "@/lib/store/features/app/appSlice";
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       tenant: tenantReducer,
+      app: appReducer,
     },
     devTools: process.env.NODE_ENV !== "production",
   });
