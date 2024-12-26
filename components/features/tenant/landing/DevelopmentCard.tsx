@@ -33,7 +33,7 @@ export const DevelopmentCard = ({
           alt="Apartment"
           width={700}
           height={320}
-          className="rounded-md w-[50rem] h-[360px]"
+          className="rounded-md w-[50rem] h-[360px] object-cover"
         />
         <div className="md:w-4/12 w-full md:h-[360px] flex flex-col font-galano">
           <div className={"flex items-center gap-3"}>

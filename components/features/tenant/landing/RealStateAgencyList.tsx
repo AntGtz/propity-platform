@@ -16,14 +16,19 @@ export default function RealStateAgencyList() {
     ),
   );
   return (
-    <section className="flex flex-col gap-2 3xl:px-64 xl:px-24 2xl:px-32 py-16 px-6 bg-white">
+    <section className="flex flex-col gap-2 py-16 bg-white max-w-7xl mx-auto px-4 md:px-0">
       <h1 className="text-4xl font-galano font-bold">Inmobiliarias</h1>
-      <div className="relative px-3">
+      <div className="relative px-3 w-full">
+        <div
+          className={
+            "h-full hidden md:block md:absolute top-0 left-0 w-[90px] bg-white-gradient-carrousel z-20"
+          }
+        ></div>
         <Carousel className="relative w-full h-[34rem] md:h-auto">
           <CarouselContent>
             {agencyList.map((community) => (
               <CarouselItem
-                className="md:basis-1/4 h-fit flex justify-center"
+                className="md:basis-1/4 h-fit flex justify-center w-full"
                 key={community.id}
               >
                 <PropertyCard

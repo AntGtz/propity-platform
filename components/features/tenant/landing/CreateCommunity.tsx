@@ -19,7 +19,7 @@ export default function CreateCommunity() {
   }
 
   return (
-    <section className="md:grid md:grid-cols-2 flex flex-col-reverse px-10 3xl:px-64 xl:px-24 py-16 md:py-24 md:gap-16 gap-6 bg-white">
+    <section className="md:grid md:grid-cols-2 flex flex-col-reverse py-16 md:py-24 md:gap-16 gap-6 bg-white max-w-7xl mx-auto px-4 md:px-0">
       <div className="flex flex-col gap-1 md:gap-2 font-galano justify-center md:w-10/12">
         <span className={"text-primary"}>Pizza ipsum dolor</span>
         <h1 className="md:text-5xl text-2xl font-bold leading-tight">

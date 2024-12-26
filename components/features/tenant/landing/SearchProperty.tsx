@@ -15,7 +15,7 @@ import { ResultsInfo } from "@/components/features/tenant/inventory/Filters/Resu
 export default function SearchProperty() {
   return (
     <InventoryProvider>
-      <section className="flex flex-col gap-2 3xl:px-64 xl:px-24 2xl:px-32 md:py-16 bg-white font-galano px-10">
+      <section className="flex flex-col gap-2 md:py-16 bg-white font-galano max-w-7xl mx-auto px-4 md:px-0">
         <div className={"flex items-center gap-3 w-full text-sm"}>
           <span
             className={

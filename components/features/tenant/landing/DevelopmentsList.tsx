@@ -13,7 +13,7 @@ export default function DevelopmentsList() {
   const community = useAppSelector((state) => state.tenant.communityDetails);
 
   return (
-    <section className="flex flex-col gap-2 3xl:px-64 xl:px-24 2xl:px-32 md:py-16 px-6 bg-white">
+    <section className="flex flex-col gap-2 md:py-16 bg-white max-w-7xl mx-auto px-4 md:px-0">
       <h1 className="md:text-4xl text-2xl font-galano font-bold">
         Desarrollos Principales
       </h1>
@@ -51,8 +51,8 @@ export default function DevelopmentsList() {
                   );
                 })}
             </CarouselContent>
-            <CarouselPrevious className="bg-primary text-primary-foreground z-30 absolute top-1/2 -left-5 md:left-5 -translate-y-1/2 border-0" />
-            <CarouselNext className="bg-primary text-primary-foreground z-30 absolute top-1/2 -right-5 md:right-5 -translate-y-1/2 border-0" />
+            <CarouselPrevious className="bg-primary text-primary-foreground z-30 absolute top-1/2 left-1 md:left-5 -translate-y-1/2 border-0" />
+            <CarouselNext className="bg-primary text-primary-foreground z-30 absolute top-1/2 right-1 md:right-5 -translate-y-1/2 border-0" />
           </Carousel>
           <div
             className={

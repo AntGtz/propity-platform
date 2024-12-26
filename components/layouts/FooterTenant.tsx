@@ -6,7 +6,7 @@ import { useAppSelector } from "@/lib/store/hooks";
 export default function FooterTenant() {
   const tenantData = useAppSelector((state) => state.tenant.details);
   return (
-    <footer className="flex flex-col gap-2 px-10 md:px-36 pt-24 pb-12 bg-white">
+    <footer className="flex flex-col gap-2 pt-24 pb-12 bg-white max-w-7xl mx-auto px-4 md:px-0">
       <Image
         src={tenantData?.theme?.logotype.main || "/propitylogo.png"}
         height={60}
