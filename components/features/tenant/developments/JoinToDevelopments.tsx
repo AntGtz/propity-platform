@@ -1,7 +1,28 @@
+"use client";
 import { Button } from "@/components/common/button";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
+import { useAppDispatch } from "@/lib/store/hooks";
+import {
+  setAuthDialogOpen,
+  setAuthDialogType,
+} from "@/lib/store/features/app/appSlice";
 
 export default function JoinToDevelopments() {
+  const session = useSession();
+
+  const dispatch = useAppDispatch();
+
+  function OpenRegisterDialog() {
+    dispatch(setAuthDialogOpen(true));
+    dispatch(setAuthDialogType("newCompany"));
+  }
+
+  function OpenLoginDialog() {
+    dispatch(setAuthDialogOpen(true));
+    dispatch(setAuthDialogType("login"));
+  }
+
   return (
     <>
       <div className="md:grid md:grid-cols-2 flex flex-col-reverse gap-5">
@@ -17,17 +38,23 @@ export default function JoinToDevelopments() {
               <p className={"text-sm"}>
                 Registráte para una experiencia más personalizada.
               </p>
-              <Button
-                size={"lg"}
-                className="md:w-56 w-fit bg-primary text-white font-galano font-semibold [&]:py-6 md:mt-0 mt-4"
-              >
-                Regístrate
-              </Button>
+              {session.status !== "authenticated" && (
+                <Button
+                  onClick={OpenRegisterDialog}
+                  size={"lg"}
+                  className="md:w-56 w-fit bg-primary text-white font-galano font-semibold [&]:py-6 md:mt-0 mt-4"
+                >
+                  Regístrate
+                </Button>
+              )}
             </div>
           </div>
           <span className="cursor-pointer md:block hidden">
             Ya te uniste a nosotros? {""}
-            <span className="text-primary underline font-semibold">
+            <span
+              onClick={OpenLoginDialog}
+              className="text-primary underline font-semibold"
+            >
               Accede a tu cuenta{" "}
             </span>
           </span>
