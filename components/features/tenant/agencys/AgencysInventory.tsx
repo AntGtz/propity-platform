@@ -18,7 +18,8 @@ export default function AgencysInventory() {
         {agencysList.slice(startIndex, endIndex).map((agency) => (
           <PropertyCard2
             key={agency.id}
-            id={agency.id}
+            entityId={agency.id}
+            withPropertyRedirect={false}
             logo={agency.theme.logotype.main}
             name={agency.name}
             price={agency.properties?.reduce((acc, property) => {
@@ -33,6 +34,8 @@ export default function AgencysInventory() {
               agency.properties?.[agency.properties.length - 1]?.images[0]
                 .thumbnail
             }
+            facebook={agency.contact?.facebook}
+            instagram={agency.contact?.instagram}
           />
         ))}
       </div>

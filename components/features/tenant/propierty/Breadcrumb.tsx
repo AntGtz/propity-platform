@@ -5,7 +5,7 @@ interface BreadcrumbProps {
   id: string;
 }
 
-export const Breadcrumb = ({ entityId, id }: BreadcrumbProps) => {
+export const Breadcrumb = ({ entityId }: BreadcrumbProps) => {
   return (
     <div className={"flex items-center gap-1 text-sm"}>
       <Link href={`/desarrollos`}>

@@ -20,7 +20,8 @@ export default function DevelopmentsInventory() {
         {developmentsList.slice(startIndex, endIndex).map((development) => (
           <PropertyCard2
             key={development.id}
-            id={development.id}
+            entityId={development.id}
+            withPropertyRedirect={false}
             logo={development.theme.logotype.main}
             name={development.name}
             price={development.properties?.reduce((acc, property) => {

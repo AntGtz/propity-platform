@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -7,9 +8,11 @@ import {
 } from "@/components/common/dialog";
 import { Button } from "@/components/common/button";
 import AuthDialog from "@/components/features/login/AuthDialog";
-import React from "react";
+import React, { useState } from "react";
 
 export default function NavPlatform() {
+  const [openAuthDialog, setOpenAuthDialog] = useState(false);
+
   return (
     <>
       <div
@@ -90,14 +93,14 @@ export default function NavPlatform() {
               </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[550px] px-14 my-5">
-              <AuthDialog />
+              <AuthDialog setOpen={setOpenAuthDialog} />
             </DialogContent>
           </Dialog>
           {
             // TODO: add button variant
           }
           <Button size={"lg"} className={`font-medium font-jakarta`}>
-            Crear cuenta
+            Crear cuenta {openAuthDialog}
           </Button>
         </div>
       </nav>

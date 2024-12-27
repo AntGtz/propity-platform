@@ -9,7 +9,7 @@ import {
 
 export async function POST(request: Request) {
   try {
-    const { username, password, name, phone, email } = await request.json();
+    const { username, password, name, email } = await request.json();
 
     const cognitoClient = new CognitoIdentityProviderClient({
       region: process.env.COGNITO_REGION,

@@ -32,7 +32,8 @@ export default function RealStateAgencyList() {
                 key={community.id}
               >
                 <PropertyCard
-                  id={community.id}
+                  entityId={community.id}
+                  withPropertyRedirect={false}
                   image={
                     community.properties?.[community.properties.length - 1]
                       .images[0].thumbnail
@@ -47,33 +48,35 @@ export default function RealStateAgencyList() {
                   address={community.location?.address}
                   logo={community.theme?.logotype.main}
                   description={community.description}
+                  facebook={community.contact?.facebook}
+                  instagram={community.contact?.instagram}
                 />
               </CarouselItem>
             ))}
-            <CarouselItem className="md:basis-1/4 h-fit flex justify-center">
-              <PropertyCard />
-            </CarouselItem>
-            <CarouselItem className="basis-1/4">
-              <PropertyCard />
-            </CarouselItem>
-            <CarouselItem className="basis-1/4">
-              <PropertyCard />
-            </CarouselItem>
-            <CarouselItem className="basis-1/4">
-              <PropertyCard />
-            </CarouselItem>
-            <CarouselItem className="basis-1/4">
-              <PropertyCard />
-            </CarouselItem>
-            <CarouselItem className="basis-1/4">
-              <PropertyCard />
-            </CarouselItem>
-            <CarouselItem className="basis-1/4">
-              <PropertyCard />
-            </CarouselItem>
-            <CarouselItem className="basis-1/4">
-              <PropertyCard />
-            </CarouselItem>
+            {/*<CarouselItem className="md:basis-1/4 h-fit flex justify-center">*/}
+            {/*  <PropertyCard />*/}
+            {/*</CarouselItem>*/}
+            {/*<CarouselItem className="basis-1/4">*/}
+            {/*  <PropertyCard />*/}
+            {/*</CarouselItem>*/}
+            {/*<CarouselItem className="basis-1/4">*/}
+            {/*  <PropertyCard />*/}
+            {/*</CarouselItem>*/}
+            {/*<CarouselItem className="basis-1/4">*/}
+            {/*  <PropertyCard />*/}
+            {/*</CarouselItem>*/}
+            {/*<CarouselItem className="basis-1/4">*/}
+            {/*  <PropertyCard />*/}
+            {/*</CarouselItem>*/}
+            {/*<CarouselItem className="basis-1/4">*/}
+            {/*  <PropertyCard />*/}
+            {/*</CarouselItem>*/}
+            {/*<CarouselItem className="basis-1/4">*/}
+            {/*  <PropertyCard />*/}
+            {/*</CarouselItem>*/}
+            {/*<CarouselItem className="basis-1/4">*/}
+            {/*  <PropertyCard />*/}
+            {/*</CarouselItem>*/}
           </CarouselContent>
           <CarouselPrevious className="bg-primary text-primary-foreground z-30 absolute top-1/2 -left-5 -translate-y-1/2 border-0" />
           <CarouselNext className="bg-primary text-primary-foreground z-30 absolute top-1/2 -right-5 -translate-y-1/2 border-0" />

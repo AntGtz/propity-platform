@@ -63,7 +63,8 @@ export const RelatedProperties = ({ entityId }: RelatedPropertiesProps) => {
                 >
                   <PropertyCard2
                     key={property.id.toString()}
-                    id={property.id.toString()}
+                    entityId={property.entity.id}
+                    propertyId={property.id.toString() as string}
                     image={property.images[0].thumbnail}
                     logo={property.theme.icon}
                     name={property.entity.name}

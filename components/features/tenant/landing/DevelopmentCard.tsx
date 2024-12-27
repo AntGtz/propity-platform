@@ -29,7 +29,7 @@ export const DevelopmentCard = ({
         }
       >
         <Image
-          src={"/apartment1.jpg"}
+          src={image ?? "/apartment1.jpg"}
           alt="Apartment"
           width={700}
           height={320}
