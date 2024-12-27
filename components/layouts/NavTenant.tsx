@@ -13,6 +13,7 @@ import {
   setAuthDialogOpen,
   setAuthDialogType,
 } from "@/lib/store/features/app/appSlice";
+import { usePathname } from "next/navigation";
 
 export default function NavTenant() {
   const tenantData = useAppSelector((state) => state.tenant.details);
@@ -21,6 +22,8 @@ export default function NavTenant() {
   const dispatch = useAppDispatch();
 
   const { data: session } = useSession();
+
+  const pathname = usePathname();
 
   function handleOpenAuthDialog(bool: boolean) {
     dispatch(setAuthDialogOpen(bool));
@@ -36,24 +39,24 @@ export default function NavTenant() {
         >
           <MobileMenu />
           <li className="md:flex hidden items-center gap-4 font-galano">
-            <a href="#" className="text-sm font-medium">
+            <Link
+              href="/desarrollos"
+              className={`text-sm ${pathname.includes("/desarrollos") ? "font-extrabold" : "font-medium"}`}
+            >
               Desarrollos
-            </a>
-            <a href="#" className="text-sm font-medium">
+            </Link>
+            <Link
+              href="/inmobiliarias"
+              className={`text-sm ${pathname.includes("/inmobiliarias") ? "font-extrabold" : "font-medium"}`}
+            >
               Inmobiliarias
-            </a>
-            <a href="#" className="text-sm font-medium">
-              Precios
-            </a>
-            <a href="#" className="text-sm font-medium">
+            </Link>
+            <Link
+              href="/inventario"
+              className={`text-sm ${pathname.includes("/inventario") ? "font-extrabold" : "font-medium"}`}
+            >
               Inventario
-            </a>
-            <a href="#" className="text-sm font-medium">
-              Nosotros
-            </a>
-            <a href="#" className="text-sm font-medium">
-              Contacto
-            </a>
+            </Link>
           </li>
           <Link
             href={`/`}

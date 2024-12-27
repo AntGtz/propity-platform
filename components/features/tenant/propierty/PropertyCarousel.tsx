@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useAppSelector } from "@/lib/store/hooks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface PropertyCarouselProps {
   entityId: string;
@@ -14,7 +14,10 @@ export const PropertyCarousel = ({ entityId, id }: PropertyCarouselProps) => {
   );
   const property = entity?.properties?.find((p) => p.id === Number(id));
 
+  const [photoIndex, setPhotoIndex] = useState(1);
+
   const [propertyImages, setPropertyImages] = useState<string[]>([
+    ...(property?.images?.map((image) => image.thumbnail) || []),
     "/apartment1.jpg",
     "/demoImg.png",
     "/agent.jpg",
@@ -22,11 +25,25 @@ export const PropertyCarousel = ({ entityId, id }: PropertyCarouselProps) => {
     "/propertyex.jpg",
   ]);
 
+  useEffect(() => {
+    setPropertyImages([
+      ...(property?.images?.map((image) => image.thumbnail) || []),
+      "/apartment1.jpg",
+      "/demoImg.png",
+      "/agent.jpg",
+      "/develop.jpg",
+      "/propertyex.jpg",
+    ]);
+  }, [property]);
+
   const handleNext = () => {
     setPropertyImages((prevImages) => {
       const [first, ...rest] = prevImages;
       return [...rest, first];
     });
+    setPhotoIndex((prevIndex) =>
+      prevIndex === propertyImages.length ? 1 : prevIndex + 1,
+    );
   };
 
   const handlePrev = () => {
@@ -35,6 +52,9 @@ export const PropertyCarousel = ({ entityId, id }: PropertyCarouselProps) => {
       const rest = prevImages.slice(0, -1);
       return [last, ...rest];
     });
+    setPhotoIndex((prevIndex) =>
+      prevIndex === 1 ? propertyImages.length : prevIndex - 1,
+    );
   };
 
   return (
@@ -116,7 +136,7 @@ export const PropertyCarousel = ({ entityId, id }: PropertyCarouselProps) => {
                   fill="white"
                 />
               </svg>
-              1/{propertyImages.length}
+              {photoIndex}/{propertyImages.length}
             </span>
             <span
               className={
