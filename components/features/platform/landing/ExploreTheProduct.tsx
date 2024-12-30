@@ -5,13 +5,9 @@ export default function ExploreTheProduct() {
   return (
     <section
       className={
-        "py-24 px-16 flex flex-col items-center justify-center font-galano text-[#041E42]"
+        "pb-16 max-w-7xl mx-auto px-4 md:px-0 flex flex-col items-center justify-center font-galano text-[#041E42]"
       }
     >
-      <span className={"text-4xl font-bold mb-6"}>
-        Pizza ipsum dolor meat lovers buffalo.
-      </span>
-      <span>Pizza ipsum dolor meat lovers buffalo.</span>
       <div className={"grid grid-cols-2 gap-24 mt-16"}>
         <div className={"flex flex-col gap-3 justify-center"}>
           <span className={"text-[#00B140] text-base"}>
@@ -19,21 +15,20 @@ export default function ExploreTheProduct() {
           </span>
           <h1
             className={
-              "text-4xl font-galano font-bold text-[#041E42] leading-snug mr-20"
+              "text-4xl font-galano font-bold text-[#041E42] leading-snug mr-24"
             }
           >
-            Pizza ipsum dolor meat lovers buffalo tomato tossed tomato.
+            Mucho más que una plataforma, <br /> UNA COMUNIDAD
           </h1>
-          <p className={"text-base text-foreground font-galano"}>
-            Pizza ipsum dolor meat lovers buffalo. Fresh pie steak pepperoni
-            pepperoni buffalo black fresh banana cheese. Aussie cheese Aussie
-            platter party broccoli beef beef dolor.
+          <p className={"text-base text-foreground font-galano mr-28"}>
+            Creemos en la profunda necesidad humana de SERVIR; utilizamos la
+            digitalización para potenciar el toque humano en cada interacción.
           </p>
           <div className={"flex gap-4 items-center font-galano mt-4"}>
             <Button
               size={"lg"}
               variant={"default"}
-              className={"bg-[#041E42] [&]:py-5"}
+              className={"bg-[#00B140] [&]:py-6"}
             >
               Solicitar una demostración
             </Button>
@@ -41,7 +36,7 @@ export default function ExploreTheProduct() {
               size={"lg"}
               variant={"outline"}
               className={
-                "border-[#041E42] border-2 font-bold text-[#041E42] [&]:py-5"
+                "border-[#00B140] bg-transparent border-2 font-bold text-[#00B140] [&]:py-6"
               }
             >
               Comenzar gratis
