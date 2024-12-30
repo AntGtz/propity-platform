@@ -1,18 +1,24 @@
 export default function GoalsSection() {
   return (
-    <section className={"px-4 md:px-0 font-galano py-24 bg-propity"}>
+    <section
+      className={"px-4 md:px-0 font-galano py-24 bg-propity md:mx-0 mx-4"}
+    >
       <div className={"flex flex-col items-center max-w-7xl mx-auto "}>
-        <span className={"text-sm text-[#041E42]"}>
+        <span className={"text-sm text-[#041E42] text-center"}>
           Ventajas de Propity para Desarrolladores Inmobiliarios
         </span>
         <h1
           className={
-            "text-5xl text-[#041E42] font-bold text-center w-10/12 leading-tight"
+            "md:text-5xl text-3xl text-[#041E42] font-bold text-center md:w-10/12 leading-tight md:mt-0 mt-4"
           }
         >
           Alcanza tus objetivos de venta abriendo y optimizando un nuevo canal
         </h1>
-        <div className={"mt-8 grid grid-cols-3 gap-20 w-10/12 mx-auto"}>
+        <div
+          className={
+            "mt-8 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-20 w-10/12 mx-auto"
+          }
+        >
           <div
             className={
               "bg-white rounded-lg px-8 py-7 flex flex-col font-galano gap-5 h-fit"

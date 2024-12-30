@@ -4,12 +4,12 @@ export default function PricingSection() {
   return (
     <section
       className={
-        "py-24 px-16 flex flex-col items-center justify-center font-galano text-[#262931] max-w-7xl mx-auto"
+        "py-24 px-4 md:px-16 flex flex-col items-center justify-center font-galano text-[#262931] max-w-7xl mx-auto"
       }
     >
       <span
         className={
-          "text-5xl text-[#041E42] font-bold mb-6 text-center w-10/12 leading-tight"
+          "md:text-5xl text-4xl text-[#041E42] font-bold mb-6 text-center md:w-10/12 leading-tight"
         }
       >
         Asesores Inmobilarios e Inmobiliarias Tenemos un plan para tí
@@ -19,7 +19,11 @@ export default function PricingSection() {
         tu cliente lo que realmente necesita.
       </p>
 
-      <div className={"grid grid-cols-3 gap-20 mt-16 w-full items-center"}>
+      <div
+        className={
+          "grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-20 mt-16 w-full items-center"
+        }
+      >
         <PriceCard
           title={"Starter"}
           features={[

@@ -27,7 +27,7 @@ export const CollapsibleWrap = ({
         <CollapsibleTrigger
           className={`w-full ${!open && !openFixed && "border-b border-gray-500"} transition  py-4 text-sm cursor-pointer flex justify-between items-center`}
         >
-          <span className={"font-bold text-2xl"}>{title}</span>
+          <span className={"font-bold text-2xl text-left"}>{title}</span>
           {!openFixed && (
             <svg
               className={`${open && "rotate-180"} transition`}

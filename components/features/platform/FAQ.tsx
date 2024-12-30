@@ -5,7 +5,7 @@ export default function FAQ() {
     <>
       <section
         className={
-          "py-32 px-16 flex flex-col font-galano max-w-7xl mx-auto w-full"
+          "py-32 px-4 md:px-16 flex flex-col font-galano max-w-7xl mx-auto w-full"
         }
       >
         <h1 className={"text-4xl font-bold text-[#041E42]"}>

@@ -5,7 +5,7 @@ export default function PartnersCarousel() {
     <>
       <div
         className={
-          "w-full max-w-7xl mx-auto px-4 md:px-0 flex items-center gap-12 justify-center pt-4 pb-12"
+          "w-full max-w-7xl mx-auto px-4 md:px-0 flex items-center gap-4 md:gap-12 justify-center pt-4 md:pb-12 overflow-hidden"
         }
       >
         <Image

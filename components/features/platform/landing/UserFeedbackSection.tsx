@@ -10,10 +10,18 @@ export default function UserFeedbackSection() {
       <span className={"text-[#041E42] text-sm text-center"}>
         Inmobiliarios y asesores ya están haciendo comunidad en Propity.
       </span>
-      <h1 className={"font-bold text-[#041E42] text-5xl my-4"}>
+      <h1
+        className={
+          "font-bold text-[#041E42] text-4xl md:text-5xl my-4 text-center"
+        }
+      >
         Valioso feedback
       </h1>
-      <div className={"grid grid-cols-3 gap-20 w-10/12 mx-auto mt-8"}>
+      <div
+        className={
+          "grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-20 md:w-10/12 mx-auto mt-8"
+        }
+      >
         <FeedbackCard
           title={"Alejandro Pérez"}
           subtitle={"Desarrollador inmobiliario"}

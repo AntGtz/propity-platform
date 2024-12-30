@@ -10,13 +10,17 @@ export default function BenefitsSection() {
       </span>
       <h1
         className={
-          "text-5xl text-[#041E42] font-bold text-center w-10/12 leading-tight"
+          "md:text-5xl text-3xl text-[#041E42] font-bold text-center md:w-10/12 md:leading-tight"
         }
       >
         Multiplica tu inventario, gana conexiones, y destaca en el mundo
         inmobiliario
       </h1>
-      <div className={"mt-8 grid grid-cols-3 gap-20 w-10/12 mx-auto"}>
+      <div
+        className={
+          "mt-8 grid grid-cols-1 md:grid-cols-3 gap-20 w-10/12 mx-auto"
+        }
+      >
         <div
           className={
             "bg-[#131E29] rounded-lg px-8 py-7 flex flex-col font-galano gap-5 h-fit"
