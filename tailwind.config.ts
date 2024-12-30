@@ -60,7 +60,7 @@ const config: Config = {
         "green-gradient":
           "linear-gradient(180deg, rgba(0, 177, 64, 0.1) 0%, rgba(0, 177, 64, 0.44) 100%)",
         "white-to-green-gradient":
-          "linear-gradient(162.5deg, rgba(255, 255, 255, 0.5) 24.5%, #00B140 164.59%);",
+          "linear-gradient(167.25deg, #FFFFFF 59.9%, #6BA982 124.08%);",
         "white-to-green-gradient-bottom":
           "linear-gradient(180deg, rgba(0, 177, 64, 0) 0%, rgba(0, 177, 64, 0.44) 100%)",
         "gray-gradient":

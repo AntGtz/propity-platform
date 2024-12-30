@@ -7,6 +7,7 @@ import LastCTA from "@/components/features/platform/landing/LastCTA";
 import FAQ from "@/components/features/platform/FAQ";
 import PartnersCarousel from "@/components/features/platform/landing/PartnersCarousel";
 import BenefitsSection from "@/components/features/platform/landing/BenefitsSection";
+import GoalsSection from "@/components/features/platform/landing/GoalsSection";
 
 export default async function Home() {
   return (
@@ -14,9 +15,13 @@ export default async function Home() {
       <Hero />
       <PartnersCarousel />
       <BenefitsSection />
+      <GoalsSection />
+      <div className={"flex flex-col bg-propity"}>
+        <PricingSection />
+      </div>
       <CTA />
       <ExploreTheProduct />
-      <PricingSection />
+
       <Features />
       <LastCTA />
       <FAQ />
