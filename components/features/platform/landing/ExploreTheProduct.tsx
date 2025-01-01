@@ -57,7 +57,7 @@ export default function ExploreTheProduct() {
         </div>
         <div
           className={
-            "bg-propity relative pl-16 pt-16 md:h-[470px] h-80 w-[calc(100vw-32px)] overflow-hidden"
+            "bg-propity relative pl-16 pt-16 md:h-[470px] h-80 w-[calc(100vw-32px)] md:w-auto overflow-hidden"
           }
         >
           <Image
