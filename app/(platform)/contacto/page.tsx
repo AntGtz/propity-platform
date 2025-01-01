@@ -8,14 +8,18 @@ export default function Contact() {
     <div className={"bg-[#041E42] text-white"}>
       <section
         className={
-          "md:pt-32 md:pb-40 py-20 px-4 md:px-16 flex flex-col items-center justify-center font-galano text-white max-w-7xl mx-auto"
+          "md:pt-32 md:pb-12 py-20 px-4 md:px-16 flex flex-col items-center justify-center font-galano text-white max-w-7xl mx-auto"
         }
       >
         <span className={"text-white"}>Contáctanos</span>
-        <h1 className={"text-5xl font-extrabold my-4"}>
+        <h1 className={"md:text-5xl text-3xl font-extrabold my-4 text-center"}>
           ¿Cómo podemos ayudarte?
         </h1>
-        <div className={"w-full grid grid-cols-2 gap-6 mt-12"}>
+        <div
+          className={
+            "w-full md:grid flex flex-col-reverse md:grid-cols-2 gap-6 mt-12"
+          }
+        >
           <div className={"flex flex-col items-center gap-4"}>
             <div
               className={
@@ -242,7 +246,7 @@ export default function Contact() {
           </div>
         </div>
       </section>
-      <FAQ />
+      <FAQ titleColor={"text-white"} />
     </div>
   );
 }

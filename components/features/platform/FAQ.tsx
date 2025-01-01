@@ -1,6 +1,10 @@
 import { CollapsibleWrap } from "@/components/features/tenant/profile/CollapsibleWrap";
 
-export default function FAQ() {
+interface Props {
+  titleColor?: string;
+}
+
+export default function FAQ({ titleColor = "text-[#041E42]" }: Props) {
   return (
     <>
       <section
@@ -8,7 +12,7 @@ export default function FAQ() {
           "py-32 px-4 md:px-16 flex flex-col font-galano max-w-7xl mx-auto w-full"
         }
       >
-        <h1 className={"text-4xl font-bold text-[#041E42]"}>
+        <h1 className={`text-4xl font-bold ${titleColor}`}>
           Preguntas frecuentes
         </h1>
         <CollapsibleWrap title={"¿Qué es Propity?"}>
