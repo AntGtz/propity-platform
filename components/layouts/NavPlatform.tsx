@@ -1,13 +1,12 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import React, { useState } from "react";
+import React from "react";
 import MobileMenuPlatform from "@/components/layouts/MobileMenuPlatform";
-import { Dialog, DialogTrigger } from "@/components/common/dialog";
-import { Button } from "@/components/common/button";
+import { usePathname } from "next/navigation";
 
 export default function NavPlatform() {
-  const [openAuthDialog, setOpenAuthDialog] = useState(false);
+  const pathname = usePathname();
 
   return (
     <>
@@ -72,15 +71,24 @@ export default function NavPlatform() {
               alt="Logo"
             />
           </Link>
-          <li className="md:flex hidden items-center gap-4 font-galano">
-            <Link href="/desarrollos" className={`text-sm font-medium`}>
-              Desarrollos
+          <li className="md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-4 font-galano">
+            <Link
+              href={pathname === "/" ? "#paquetes" : `/#paquetes`}
+              className={`text-sm ${pathname === "/paquetes" ? "font-extrabold" : "font-medium"}`}
+            >
+              Paquetes
             </Link>
-            <Link href="/inmobiliarias" className={`text-sm font-medium`}>
-              Inmobiliarias
+            <Link
+              href={pathname === "/contacto" ? "#" : `/contacto`}
+              className={`text-sm ${pathname === "/contacto" ? "font-extrabold" : "font-medium"}`}
+            >
+              Contactanos
             </Link>
-            <Link href="/inventario" className={`text-sm font-medium`}>
-              Inventario
+            <Link
+              href={pathname === "/planes" ? "#" : `/planes`}
+              className={`text-sm ${pathname === "/planes" ? "font-extrabold" : "font-medium"}`}
+            >
+              Precios
             </Link>
           </li>
 
@@ -98,24 +106,7 @@ export default function NavPlatform() {
               />
             </svg>
           </span>
-          <div className="md:flex hidden items-center gap-4">
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button
-                  variant={"ghost"}
-                  className="hover:bg-gray-200 font-medium font-jakarta"
-                >
-                  Ingresar
-                </Button>
-              </DialogTrigger>
-            </Dialog>
-            <Button
-              size={"lg"}
-              className={`font-medium font-jakarta bg-[#00B140]`}
-            >
-              Registrarse
-            </Button>
-          </div>
+          <div className="md:flex hidden items-center gap-4"></div>
         </div>
       </nav>
     </>
