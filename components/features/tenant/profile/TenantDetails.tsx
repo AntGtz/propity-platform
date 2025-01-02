@@ -218,6 +218,7 @@ export default function TenantDetails({ id }: TenantDetails) {
             title={item.title}
             defaultOpen={item.defaultOpen}
             openFixed={item.openFixed}
+            arrowColor={"black"}
           >
             {item.content}
           </CollapsibleWrap>

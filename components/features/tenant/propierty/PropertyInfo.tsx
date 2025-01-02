@@ -437,6 +437,7 @@ export const PropertyInfo = ({
               title={item.title}
               defaultOpen={item.defaultOpen}
               openFixed={item.openFixed}
+              arrowColor={"black"}
             >
               {item.content}
             </CollapsibleWrap>
