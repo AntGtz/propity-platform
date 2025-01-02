@@ -1,5 +1,7 @@
 export type TenantData = {
   id: string;
+  name: string;
+  description: string | null;
   subdomain: string;
   contact: {
     type: {
@@ -13,8 +15,14 @@ export type TenantData = {
     whatsapp: string;
   } | null;
   theme: {
+    slogan: string;
     color: ColorScheme;
     logotype: {
+      main: string;
+      dark: string;
+      light: string;
+    };
+    imagetype: {
       main: string;
       dark: string;
       light: string;
