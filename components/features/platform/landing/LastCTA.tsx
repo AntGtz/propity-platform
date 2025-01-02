@@ -19,17 +19,15 @@ export default function LastCTA() {
           <div className={"flex md:flex-row flex-col gap-6 items-center mt-6"}>
             <Button
               size={"lg"}
-              variant={"default"}
-              className={"bg-[#00B140] [&]:py-6 md:w-fit w-full"}
+              variant={"propity"}
+              className={"md:w-fit w-full"}
             >
               Solicitar una demostración
             </Button>
             <Button
               size={"lg"}
-              variant={"outline"}
-              className={
-                "border-[#00B140] bg-transparent border-2 font-medium text-[#00B140] [&]:py-6 md:w-fit w-full"
-              }
+              variant={"propity-outline"}
+              className={"font-medium md:w-fit w-full"}
             >
               Comenzar gratis
             </Button>

@@ -59,7 +59,8 @@ export default function PriceCard({
         </div>
         <Button
           size={"lg"}
-          className={`${!promoted ? "bg-[#00B14033] text-[#041E42]" : "bg-[#00B140] text-white"}  mt-6 py-6 text-xl font-galano font-medium`}
+          variant={promoted ? "propity" : "propity-light"}
+          className={`mt-6 py-6 text-xl font-galano font-medium`}
         >
           Suscribir
         </Button>

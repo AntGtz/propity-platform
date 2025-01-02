@@ -123,7 +123,7 @@ export default function Contact() {
                       height="18"
                       rx="4"
                       fill="#041E42"
-                      fill-opacity="0.2"
+                      fillOpacity="0.2"
                     />
                     <path
                       d="M13.668 6.58331L7.83464 12.4166L4.91797 9.49998"
@@ -237,7 +237,8 @@ export default function Contact() {
                 </div>
                 <Button
                   size={"lg"}
-                  className={`bg-[#00B140] text-white mt-6 py-6 text-xl font-galano font-medium`}
+                  variant={"propity"}
+                  className={`mt-6 py-6 text-xl font-galano font-medium`}
                 >
                   Enviar
                 </Button>

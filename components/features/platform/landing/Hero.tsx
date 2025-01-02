@@ -61,17 +61,15 @@ export default function Hero() {
         >
           <Button
             size={"lg"}
-            variant={"default"}
-            className={"bg-[#00B140] [&]:py-6 text-lg md:w-fit w-full"}
+            variant={"propity"}
+            className={"text-lg md:w-fit w-full"}
           >
             Solicitar una demostración
           </Button>
           <Button
             size={"lg"}
-            variant={"outline"}
-            className={
-              "border-[#00B140] border-2 font-bold text-lg text-[#00B140] [&]:py-6 md:w-fit w-full"
-            }
+            variant={"propity-outline"}
+            className={"font-bold text-lg md:w-fit w-full"}
           >
             Comenzar gratis
           </Button>

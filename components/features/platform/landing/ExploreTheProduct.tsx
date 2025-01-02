@@ -39,14 +39,14 @@ export default function ExploreTheProduct() {
           >
             <Button
               size={"lg"}
-              variant={"default"}
-              className={"bg-[#00B140] [&]:py-6 md:w-fit w-full"}
+              variant={"propity"}
+              className={"md:w-fit w-full"}
             >
               Solicitar una demostración
             </Button>
             <Button
               size={"lg"}
-              variant={"outline"}
+              variant={"propity-outline"}
               className={
                 "border-[#00B140] bg-transparent border-2 font-bold text-[#00B140] [&]:py-6 md:w-fit w-full"
               }
