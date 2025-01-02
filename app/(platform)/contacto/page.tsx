@@ -71,7 +71,7 @@ export default function Contact() {
                       height="18"
                       rx="4"
                       fill="#041E42"
-                      fill-opacity="0.2"
+                      fillOpacity="0.2"
                     />
                     <path
                       d="M13.668 6.58331L7.83464 12.4166L4.91797 9.49998"
@@ -247,7 +247,7 @@ export default function Contact() {
           </div>
         </div>
       </section>
-      <FAQ titleColor={"text-white"} />
+      <FAQ titleColor={"text-white"} arrowColor={"white"} />
     </div>
   );
 }

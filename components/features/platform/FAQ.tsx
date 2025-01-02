@@ -2,9 +2,13 @@ import { CollapsibleWrap } from "@/components/features/tenant/profile/Collapsibl
 
 interface Props {
   titleColor?: string;
+  arrowColor?: string;
 }
 
-export default function FAQ({ titleColor = "text-[#041E42]" }: Props) {
+export default function FAQ({
+  titleColor = "text-[#041E42]",
+  arrowColor = "black",
+}: Props) {
   return (
     <>
       <section
@@ -15,7 +19,7 @@ export default function FAQ({ titleColor = "text-[#041E42]" }: Props) {
         <h1 className={`text-4xl font-bold ${titleColor}`}>
           Preguntas frecuentes
         </h1>
-        <CollapsibleWrap title={"¿Qué es Propity?"}>
+        <CollapsibleWrap title={"¿Qué es Propity?"} arrowColor={arrowColor}>
           <p className="text-base font-galano py-3">
             Es una plataforma digital que equipa a desarrolladores e
             inmobiliarias con herramientas innovadoras para optimizar ventas y
@@ -23,7 +27,10 @@ export default function FAQ({ titleColor = "text-[#041E42]" }: Props) {
           </p>
         </CollapsibleWrap>
 
-        <CollapsibleWrap title={"¿Qué solución me ofrece Propity?"}>
+        <CollapsibleWrap
+          title={"¿Qué solución me ofrece Propity?"}
+          arrowColor={arrowColor}
+        >
           <p className="text-base font-galano py-3">
             Facilita la organización de inventarios, mejora las conexiones entre
             profesionales y aumenta la eficiencia en ventas dentro de una red
@@ -33,6 +40,7 @@ export default function FAQ({ titleColor = "text-[#041E42]" }: Props) {
 
         <CollapsibleWrap
           title={"¿Cómo accedo a los inventarios de desarrolladores? "}
+          arrowColor={arrowColor}
         >
           <p className="text-base font-galano py-3">
             De forma directa y transparente, solicita mediante la plataforma la
@@ -42,14 +50,20 @@ export default function FAQ({ titleColor = "text-[#041E42]" }: Props) {
           </p>
         </CollapsibleWrap>
 
-        <CollapsibleWrap title={"¿Es seguro usar Propity?"}>
+        <CollapsibleWrap
+          title={"¿Es seguro usar Propity?"}
+          arrowColor={arrowColor}
+        >
           <p className="text-base font-galano py-3">
             Absolutamente, implementamos sistemas avanzados de seguridad para
             proteger tus datos y garantizar la confianza.
           </p>
         </CollapsibleWrap>
 
-        <CollapsibleWrap title={"¿Cómo empiezo a usar Propity? ?"}>
+        <CollapsibleWrap
+          title={"¿Cómo empiezo a usar Propity? ?"}
+          arrowColor={arrowColor}
+        >
           <p className="text-base font-galano py-3">
             Es muy sencillo: Regístrate gratis, explora la oferta disponible,
             solicita una demostración y comienza a aprovechar todas nuestras
