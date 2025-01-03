@@ -25,7 +25,7 @@ export default function NavTenant() {
 
   const pathname = usePathname();
 
-  if (pathname === "/dashboard") return <></>;
+  if (pathname.includes("/dashboard")) return <></>;
 
   function handleOpenAuthDialog(bool: boolean) {
     dispatch(setAuthDialogOpen(bool));

@@ -9,7 +9,7 @@ export default function FooterTenant() {
   const tenantData = useAppSelector((state) => state.tenant.details);
   const pathname = usePathname();
 
-  if (pathname === "/dashboard") return <></>;
+  if (pathname.includes("/dashboard")) return <></>;
 
   return (
     <footer className="flex flex-col gap-2 pt-24 pb-12 bg-white max-w-7xl mx-auto px-4 md:px-0">
