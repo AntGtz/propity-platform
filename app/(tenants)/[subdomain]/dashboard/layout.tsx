@@ -1,4 +1,5 @@
 import { AsideBar } from "@/components/features/tenant/dashboard/AsideBar";
+import { ToggleDashboardNav } from "@/components/features/tenant/dashboard/ToggleDashboardNav";
 
 export default function DashboardLayout({
   children,
@@ -12,9 +13,10 @@ export default function DashboardLayout({
       <AsideBar />
       <main
         className={
-          "bg-white flex-grow shadow-xl my-4 mr-8 rounded-lg border border-[#26293133]"
+          "bg-white flex-grow shadow-xl my-4 mr-8 rounded-lg border border-[#26293133] p-4 flex flex-col"
         }
       >
+        <ToggleDashboardNav />
         {children}
       </main>
     </div>
