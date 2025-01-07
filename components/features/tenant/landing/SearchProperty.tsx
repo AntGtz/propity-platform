@@ -16,6 +16,7 @@ export default function SearchProperty() {
   return (
     <InventoryProvider>
       <section className="flex flex-col gap-2 md:py-16 bg-white font-galano max-w-7xl mx-auto px-4 md:px-0">
+        <h1 className={"text-3xl font-bold -my-2"}>Buscar</h1>
         <div className={"flex items-center gap-3 w-full text-sm"}>
           <span
             className={

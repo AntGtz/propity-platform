@@ -1,5 +1,5 @@
 "use client";
-import PropertyCard from "../PropertyCard2";
+import { useAppSelector } from "@/lib/store/hooks";
 import {
   Carousel,
   CarouselContent,
@@ -7,17 +7,17 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/common/carousel";
-import { useAppSelector } from "@/lib/store/hooks";
+import PropertyCard from "@/components/features/tenant/PropertyCard2";
 
-export default function RealStateAgencyList() {
+export const DevelopmentsAgencysList = () => {
   const agencyList = useAppSelector((state) =>
     state.tenant.communityDetails.filter(
-      (community) => community.type.name === "agency",
+      (community) => community.type.name === "development",
     ),
   );
   return (
     <section className="flex flex-col gap-2 py-16 bg-white max-w-7xl mx-auto px-4 md:px-0 w-full">
-      <h1 className="text-4xl font-galano font-bold">Inmobiliarias</h1>
+      <h1 className="text-4xl font-galano font-bold">Desarrollos</h1>
       <div className="relative px-3 w-full">
         <div
           className={
@@ -36,7 +36,7 @@ export default function RealStateAgencyList() {
                   withPropertyRedirect={false}
                   image={
                     community.properties?.[community.properties.length - 1]
-                      .images[0].thumbnail
+                      ?.images[0].thumbnail ?? "/propity-logo.png"
                   }
                   name={community.name}
                   price={community.properties?.reduce((acc, property) => {
@@ -89,4 +89,4 @@ export default function RealStateAgencyList() {
       </div>
     </section>
   );
-}
+};

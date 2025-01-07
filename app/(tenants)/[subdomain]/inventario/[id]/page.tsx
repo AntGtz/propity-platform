@@ -12,6 +12,7 @@ import { PropertyType } from "@/components/features/tenant/inventory/Filters/Pro
 import { SurfaceSize } from "@/components/features/tenant/inventory/Filters/SurfaceSize";
 import { BedRooms } from "@/components/features/tenant/inventory/Filters/BedRooms";
 import { Bathrooms } from "@/components/features/tenant/inventory/Filters/Bathrooms";
+import { ResultsInfo } from "@/components/features/tenant/inventory/Filters/ResultsInfo";
 
 interface InventarioPageProps {
   params: Promise<{
@@ -55,6 +56,7 @@ export default async function InventarioPage({ params }: InventarioPageProps) {
             </SelectContent>
           </Select>
         </div>
+        <ResultsInfo />
         <InventoryList />
       </InventoryProvider>
     </section>

@@ -57,6 +57,7 @@ export const InventoryCard = ({
           >
             ${Number(price).toLocaleString("es-MX")}{" "}
             <span className={"text-[#00B140] text-sm"}>
+              $
               {(Number(price) * Number(`0.0${comision}`)).toLocaleString(
                 "es-MX",
               )}

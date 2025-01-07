@@ -73,7 +73,7 @@ export default function PropertyCard2({
           href={`${withPropertyRedirect ? `/propiedad/${entityId}/${propertyId}` : `/perfil/${entityId}`}`}
           className=" text-base font-bold my-1.5"
         >
-          Desde {price ? price.toLocaleString("es-MX") : "3,500.000"}
+          Desde ${price ? price.toLocaleString("es-MX") : "3,500.000"}
         </Link>
         <Link
           href={`${withPropertyRedirect ? `/propiedad/${entityId}/${propertyId}` : `/perfil/${entityId}`}`}
