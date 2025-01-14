@@ -1,9 +1,28 @@
 export type TenantData = {
   id: string;
+  name: string;
+  description: string | null;
   subdomain: string;
+  contact: {
+    type: {
+      name: string;
+      display: string;
+    };
+    phone: string;
+    email: string;
+    facebook: string;
+    instagram: string;
+    whatsapp: string;
+  } | null;
   theme: {
+    slogan: string;
     color: ColorScheme;
     logotype: {
+      main: string;
+      dark: string;
+      light: string;
+    };
+    imagetype: {
       main: string;
       dark: string;
       light: string;

@@ -3,10 +3,10 @@
 import { InventoryCard } from "@/components/features/tenant/inventory/InventoryCard";
 import { PropertyData } from "@/type/tenantData";
 import { useInventoryContext } from "@/components/features/tenant/inventory/InventoryContext";
-import Link from "next/link";
 import PropertyCard2 from "@/components/features/tenant/PropertyCard2";
 import { useState } from "react";
 import { InventoryPagination } from "@/components/features/tenant/inventory/InventoryPagination";
+import { useAppSelector } from "@/lib/store/hooks";
 
 interface InventoryListProps {
   gridCols?: number;
@@ -19,7 +19,7 @@ export const InventoryList = ({
   cardType = "inventory",
   pageSize = 12,
 }: InventoryListProps) => {
-  const { propertiesList, entity } = useInventoryContext();
+  const { propertiesList } = useInventoryContext();
 
   const Card = cardType === "inventory" ? InventoryCard : PropertyCard2;
   const [page, setPage] = useState(1);
@@ -31,6 +31,8 @@ export const InventoryList = ({
   const startIndex = (page - 1) * numberOfPropertiesForPage;
   const endIndex = startIndex + numberOfPropertiesForPage;
 
+  const community = useAppSelector((state) => state.tenant.communityDetails);
+
   return (
     <>
       <div
@@ -38,17 +40,16 @@ export const InventoryList = ({
       >
         {propertiesList
           .slice(startIndex, endIndex)
-          .map((property: PropertyData) => (
-            <Link
-              key={property.uuid}
-              href={
-                "/propiedad/" +
-                (entity?.id ?? property.entity.id) +
-                "/" +
-                property.id
-              }
-            >
+          .map((property: PropertyData) => {
+            const entitySelected = community.find(
+              (community) => community.id === property.entity.id,
+            );
+
+            return (
               <Card
+                key={property.id}
+                entityId={property.entity.id}
+                propertyId={property.id.toString() as string}
                 image={property.images[0].thumbnail}
                 address={property.location!.address}
                 price={property.operations[0]!.price}
@@ -56,16 +57,16 @@ export const InventoryList = ({
                 rooms={property.rooms!}
                 bathrooms={property.bathrooms!}
                 phone={property.owner.phone}
-                facebook={entity?.contact?.facebook}
-                instagram={entity?.contact?.instagram}
+                facebook={entitySelected?.contact?.facebook}
+                instagram={entitySelected?.contact?.instagram}
                 totalSpace={property.surface.total}
                 totalBuiltSpace={property.surface.built}
                 logo={property.theme.icon}
                 name={property.entity.name}
                 description={property.description}
               />
-            </Link>
-          ))}
+            );
+          })}
       </div>
       <InventoryPagination
         page={page}

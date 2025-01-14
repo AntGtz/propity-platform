@@ -1,35 +1,75 @@
+"use client";
 import { Button } from "@/components/common/button";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function Hero() {
+  const [clientType, setClientType] = useState<"inmobiliario" | "propietario">(
+    "inmobiliario",
+  );
   return (
-    <section className={"grid grid-cols-2 gap-8 py-16 px-16"}>
+    <section
+      className={
+        "flex flex-col-reverse md:grid md:grid-cols-2 gap-8 py-10 md:py-16 px-4 md:px-0 max-w-7xl mx-auto"
+      }
+    >
       <div className={"flex flex-col gap-3 justify-center"}>
-        <h1
+        <div
           className={
-            "text-5xl font-galano font-bold text-[#041E42] leading-tight"
+            "bg-[#E9EBEE] px-3 py-2 rounded-md flex items-center w-fit font-galano"
           }
         >
-          Guiando su camino hacia un nuevo hogar
+          <span
+            onClick={() => setClientType("inmobiliario")}
+            className={`text-sm ${
+              clientType === "inmobiliario"
+                ? "font-bold bg-white"
+                : "font-normal"
+            }
+             px-4 py-2 rounded-md cursor-pointer`}
+          >
+            Inmobiliario
+          </span>
+          <span
+            onClick={() => setClientType("propietario")}
+            className={`text-sm ${
+              clientType === "propietario"
+                ? "font-bold bg-white"
+                : "font-normal"
+            }
+             px-4 py-2 rounded-md cursor-pointer`}
+          >
+            Propietario
+          </span>
+        </div>
+        <h1
+          className={
+            "md:text-5xl text-3xl font-galano font-bold text-[#041E42] leading-tight"
+          }
+        >
+          El poder de la comunidad en el Mundo Inmobiliario
         </h1>
-        <p className={"text-base text-foreground font-galano"}>
-          Propity es un sitio web de comercio electrónico para la industria de
-          inmobiliarias.
+        <p className={"md:text-base text-sm text-foreground font-galano"}>
+          Conectamos a desarrolladores inmobiliarios y dueños de vivienda con
+          una comunidad vibrante que comercializará sus inventarios de forma
+          eficiente.
         </p>
-        <div className={"flex gap-4 items-center font-galano mt-4"}>
+        <div
+          className={
+            "flex gap-4 items-center font-galano mt-4 md:flex-nowrap flex-wrap"
+          }
+        >
           <Button
             size={"lg"}
-            variant={"default"}
-            className={"bg-[#041E42] [&]:py-5"}
+            variant={"propity"}
+            className={"text-lg md:w-fit w-full"}
           >
             Solicitar una demostración
           </Button>
           <Button
             size={"lg"}
-            variant={"outline"}
-            className={
-              "border-[#041E42] border-2 font-bold text-[#041E42] [&]:py-5"
-            }
+            variant={"propity-outline"}
+            className={"font-bold text-lg md:w-fit w-full"}
           >
             Comenzar gratis
           </Button>
@@ -75,10 +115,10 @@ export default function Hero() {
           <span className={"text-sm"}>Únete al top 1%</span>
         </div>
       </div>
-      <div className={"bg-propity relative pl-16 pt-16"}>
+      <div className={"bg-propity relative pl-20 pt-16 overflow-hidden"}>
         <span
           className={
-            "h-[450px] block w-[550px] bg-[linear-gradient(100deg,rgba(0,0,0,0),rgba(255,255,255,0.4),rgba(255,255,255,1),rgba(255,255,255,1)),url('/demoImg.png')] bg-cover"
+            "md:h-[450px] h-[260px] block w-[550px] bg-[linear-gradient(100deg,rgba(0,0,0,0),rgba(255,255,255,0.4),rgba(255,255,255,1),rgba(255,255,255,1)),url('/demoImg.png')] bg-cover"
           }
         ></span>
       </div>

@@ -8,7 +8,7 @@ export default auth((request: NextRequest) => {
   // Define allowed Domains (localhost and production domain)
   const allowedDomains = [
     "localhost:3000",
-    "tudominio.com",
+    "propity.io",
     "propity-git-development-reylans-projects.vercel.app",
   ];
 

@@ -1,9 +1,20 @@
+"use client";
 import { Input } from "@/components/common/input";
 import { Textarea } from "@/components/common/textarea";
 import { Button } from "@/components/common/button";
 import Image from "next/image";
+import { useAppSelector } from "@/lib/store/hooks";
 
-export const CTAProperty = () => {
+interface CTAPropertyProps {
+  entityId: string;
+  id: string;
+}
+
+export const CTAProperty = ({ entityId, id }: CTAPropertyProps) => {
+  const entity = useAppSelector((state) =>
+    state.tenant.communityDetails.find((e) => e.id === entityId),
+  );
+  const property = entity?.properties?.find((p) => p.id === Number(id));
   return (
     <section
       className={
@@ -52,7 +63,7 @@ export const CTAProperty = () => {
             <Button className={"py-6"}>Enviar email</Button>
           </div>
           <Image
-            src={"/propiedadForm.jpg"}
+            src={property?.images[0].thumbnail ?? "/propiedadForm.jpg"}
             alt={"Propiedad"}
             width={900}
             height={900}

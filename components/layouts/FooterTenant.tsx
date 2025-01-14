@@ -1,12 +1,13 @@
 "use client";
-import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
+import { Facebook, Instagram, Phone } from "lucide-react";
 import Image from "next/image";
 import { useAppSelector } from "@/lib/store/hooks";
+import Link from "next/link";
 
 export default function FooterTenant() {
   const tenantData = useAppSelector((state) => state.tenant.details);
   return (
-    <footer className="flex flex-col gap-2 px-10 md:px-36 pt-24 pb-12 bg-white">
+    <footer className="flex flex-col gap-2 pt-24 pb-12 bg-white max-w-7xl mx-auto px-4 md:px-0">
       <Image
         src={tenantData?.theme?.logotype.main || "/propitylogo.png"}
         height={60}
@@ -48,14 +49,14 @@ export default function FooterTenant() {
           <span className="font-bold md:text-base text-xl">Secciones</span>
           <ul className="flex flex-col gap-2">
             <li>
-              <a href="#" className="text-sm">
+              <Link href="/desarrollos" className="text-sm">
                 Desarrollos
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="text-sm">
+              <Link href="/inmobiliarias" className="text-sm">
                 Inmobiliarias
-              </a>
+              </Link>
             </li>
             <li>
               <a href="#" className="text-sm">
@@ -63,9 +64,9 @@ export default function FooterTenant() {
               </a>
             </li>
             <li>
-              <a href="#" className="text-sm">
+              <Link href="/inventario" className="text-sm">
                 Inventario
-              </a>
+              </Link>
             </li>
             <li>
               <a href="#" className="text-sm">
@@ -83,10 +84,18 @@ export default function FooterTenant() {
         <div className="flex flex-col gap-2">
           <span className="font-bold">Síguenos</span>
           <div className="flex gap-2">
-            <Instagram className="w-5 h-5" />
-            <Facebook className="w-5 h-5" />
-            <Twitter className="w-5 h-5" />
-            <Linkedin className="w-5 h-5" />
+            <Link href={tenantData?.contact?.instagram ?? "#"} target="_blank">
+              <Instagram className="w-5 h-5" />
+            </Link>
+            <Link href={tenantData?.contact?.facebook ?? "#"} target="_blank">
+              <Facebook className="w-5 h-5" />
+            </Link>
+            <Link
+              href={`${tenantData?.contact?.whatsapp ? `whatsapp://send?text=${tenantData?.contact?.whatsapp}` : "#"}`}
+              target="_blank"
+            >
+              <Phone className="w-5 h-5" />
+            </Link>
           </div>
         </div>
       </div>

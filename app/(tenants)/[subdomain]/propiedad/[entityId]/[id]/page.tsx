@@ -3,6 +3,7 @@ import { PropertyCarousel } from "@/components/features/tenant/propierty/Propert
 import { PropertyInfo } from "@/components/features/tenant/propierty/PropertyInfo";
 import { CTAProperty } from "@/components/features/tenant/propierty/CTAProperty";
 import { RelatedProperties } from "@/components/features/tenant/propierty/RelatedProperties";
+import { Breadcrumb } from "@/components/features/tenant/propierty/Breadcrumb";
 
 interface PageProps {
   params: Promise<{
@@ -20,91 +21,7 @@ export default async function Page({ params }: PageProps) {
     <>
       <section className="flex flex-col w-full h-full max-w-7xl mx-auto py-4 md:py-12 md:px-0 px-4 font-galano">
         <div className={"w-full hidden md:flex justify-between items-center"}>
-          <div className={"flex items-center gap-1 text-sm"}>
-            <span className={"flex items-center underline"}>
-              <svg
-                width="26"
-                height="26"
-                viewBox="0 0 26 26"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle cx="13" cy="13" r="13" fill="white" />
-                <path
-                  d="M17.1368 13.0391H10.0459"
-                  stroke="#262931"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M12.4087 10L8.86328 13.0394L12.4087 16.0787"
-                  stroke="#262931"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              Atrás
-            </span>
-            <span className={"ml-16 flex items-center gap-1"}>
-              <span className={"underline"}>Desarrollos</span>
-              <svg
-                width="26"
-                height="26"
-                viewBox="0 0 26 26"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle
-                  cx="13"
-                  cy="13"
-                  r="13"
-                  transform="matrix(-1 0 0 1 26 0)"
-                  fill="white"
-                />
-                <path
-                  d="M8.86319 13.0391H15.9541"
-                  stroke="#262931"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M13.5913 10L17.1367 13.0394L13.5913 16.0787"
-                  stroke="#262931"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              <span className={"underline"}>Ficha de desarrollo</span>
-              <svg
-                width="26"
-                height="26"
-                viewBox="0 0 26 26"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle
-                  cx="13"
-                  cy="13"
-                  r="13"
-                  transform="matrix(-1 0 0 1 26 0)"
-                  fill="white"
-                />
-                <path
-                  d="M8.86319 13.0391H15.9541"
-                  stroke="#262931"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M13.5913 10L17.1367 13.0394L13.5913 16.0787"
-                  stroke="#262931"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              <span>Ver</span>
-            </span>
-          </div>
+          <Breadcrumb entityId={entityId} id={propertyId} />
           <div className={"flex items-center gap-5 text-sm"}>
             <span className={"flex items-center gap-1"}>
               <svg
@@ -157,7 +74,7 @@ export default async function Page({ params }: PageProps) {
         <PropertyCarousel entityId={entityId} id={propertyId} />
         <PropertyInfo propertyId={propertyId} entityId={entityId} />
       </section>
-      <CTAProperty />
+      <CTAProperty id={propertyId} entityId={entityId} />
       <RelatedProperties entityId={entityId} />
     </>
   );

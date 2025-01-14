@@ -24,7 +24,7 @@ export default function Page() {
       <InventoryProvider>
         <section
           className={
-            "max-w-6xl mx-auto px-4 py-10 md:py-14 lg:px-8 font-galano"
+            "max-w-7xl mx-auto px-4 py-10 md:py-14 lg:px-8 font-galano"
           }
         >
           <div className={"flex items-center gap-3 w-full"}>

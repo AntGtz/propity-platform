@@ -4,6 +4,8 @@ import StoreProvider from "@/app/(tenants)/[subdomain]/StoreProvider";
 import { TenantData } from "@/type/tenantData";
 import { ReactNode } from "react";
 import { SessionProvider } from "next-auth/react";
+import { redirect } from "next/navigation";
+import { Metadata } from "next";
 
 interface LayoutProps {
   children: ReactNode;
@@ -12,15 +14,49 @@ interface LayoutProps {
   }>;
 }
 
-export default async function TenantLayout({ children, params }: LayoutProps) {
+export async function generateMetadata({
+  params,
+}: LayoutProps): Promise<Metadata> {
+  const appParams = await params;
+
   const tenantsData = await fetch("https://api.propity.mx/qa/entities/");
   const tenantsList: TenantData[] = await tenantsData.json();
-
-  const appParams = await params;
 
   const getTenant = tenantsList.find(
     (tenant) => tenant.subdomain.split(".")[0] === appParams.subdomain,
   );
+
+  const response: Response = await fetch(
+    `https://api.propity.mx/qa/entities/${getTenant?.id}`,
+  );
+
+  const tenantDetails: TenantData = await response.json();
+
+  return {
+    title: `${tenantDetails.name} - ${tenantDetails.theme.slogan}`,
+    description: tenantDetails.description,
+    openGraph: {
+      images: [tenantDetails.theme.imagetype.main],
+    },
+    icons: {
+      icon: tenantDetails.theme.logotype.main,
+    },
+  };
+}
+
+export default async function TenantLayout({ children, params }: LayoutProps) {
+  const appParams = await params;
+
+  const tenantsData = await fetch("https://api.propity.mx/qa/entities/");
+  const tenantsList: TenantData[] = await tenantsData.json();
+
+  const getTenant = tenantsList.find(
+    (tenant) => tenant.subdomain.split(".")[0] === appParams.subdomain,
+  );
+
+  if (!getTenant) {
+    redirect(`http://localhost:3000/`);
+  }
 
   return (
     <>

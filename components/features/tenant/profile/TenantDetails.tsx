@@ -3,6 +3,7 @@ import { CollapsibleWrap } from "@/components/features/tenant/profile/Collapsibl
 import { useAppSelector } from "@/lib/store/hooks";
 import { ReactNode } from "react";
 import { Button } from "@/components/common/button";
+import { useRouter } from "next/navigation";
 
 interface TenantDetails {
   id: string;
@@ -11,6 +12,7 @@ interface TenantDetails {
 export default function TenantDetails({ id }: TenantDetails) {
   const community = useAppSelector((state) => state.tenant.communityDetails);
   const entity = community?.filter((community) => community.id === id)[0];
+  const router = useRouter();
 
   const config: Record<
     string,
@@ -216,12 +218,18 @@ export default function TenantDetails({ id }: TenantDetails) {
             title={item.title}
             defaultOpen={item.defaultOpen}
             openFixed={item.openFixed}
+            arrowColor={"black"}
           >
             {item.content}
           </CollapsibleWrap>
         ))}
 
-      <Button className={"mt-4 py-6 px-12 md:w-fit"}>Ver Inventario</Button>
+      <Button
+        onClick={() => router.push(`/inventario/${entity.id}`)}
+        className={"mt-4 py-6 px-12 md:w-fit"}
+      >
+        Ver Inventario
+      </Button>
     </>
   );
 }

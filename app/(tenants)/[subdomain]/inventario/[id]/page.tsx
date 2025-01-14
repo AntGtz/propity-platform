@@ -23,7 +23,7 @@ export default async function InventarioPage({ params }: InventarioPageProps) {
   const paramsPage = await params;
   return (
     <section
-      className={"max-w-6xl mx-auto px-4 py-10 md:py-14 lg:px-8 font-galano"}
+      className={"max-w-7xl mx-auto px-4 py-10 md:py-14 lg:px-8 font-galano"}
     >
       <InventoryProvider id={paramsPage.id}>
         <div className={"flex items-center gap-3 w-full"}>
