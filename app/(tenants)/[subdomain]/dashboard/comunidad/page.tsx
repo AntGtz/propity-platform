@@ -1,28 +1,34 @@
+"use client";
 import { Input } from "@/components/common/input";
 import { CommunityTable } from "@/components/features/tenant/dashboard/community/CommunityTable";
+import { useState } from "react";
 
 export default function Comunidad() {
+  const [tab, setTab] = useState(0);
+  const [nameSearch, setNameSearch] = useState("");
+
   return (
     <section className={"flex flex-col"}>
       <h1 className={"text-4xl font-bold mt-6"}>Comunidad</h1>
       <div className={"flex justify-between mt-4"}>
         <span
-          className={
-            "bg-[#E9EBEE] p-0.5 rounded-md flex items-center w-fit font-galano"
-          }
+          className={`bg-[#E9EBEE] p-0.5 rounded-md flex items-center w-fit font-galano`}
         >
           <span
-            className={`text-sm font-bold bg-white px-4 py-2 rounded-md cursor-pointer`}
+            onClick={() => setTab(0)}
+            className={`text-sm ${tab === 0 ? "bg-white font-bold " : ""} px-4 py-2 rounded-md cursor-pointer`}
           >
             Comunidad
           </span>
           <span
-            className={`text-sm font-normal px-4 py-2 rounded-md cursor-pointer`}
+            onClick={() => setTab(1)}
+            className={`text-sm ${tab === 1 ? "bg-white font-bold " : ""} px-4 py-2 rounded-md cursor-pointer`}
           >
             Por Autorizar
           </span>
           <span
-            className={`text-sm font-normal px-4 py-2 rounded-md cursor-pointer`}
+            onClick={() => setTab(2)}
+            className={`text-sm ${tab === 2 ? "bg-white font-bold" : ""} px-4 py-2 rounded-md cursor-pointer`}
           >
             Descubrir
           </span>
@@ -93,12 +99,14 @@ export default function Comunidad() {
           <Input
             id={"search-input"}
             type={"text"}
+            value={nameSearch}
+            onChange={(e) => setNameSearch(e.target.value)}
             placeholder={"Buscar"}
             className={`w-80 pl-8 pr-4 [&]:py-5 md:text-sm text-sm focus:outline-none focus-visible:ring-0 border-[#26293133]`}
           />
         </span>
       </div>
-      <CommunityTable />
+      <CommunityTable tab={tab} nameSearch={nameSearch} />
     </section>
   );
 }

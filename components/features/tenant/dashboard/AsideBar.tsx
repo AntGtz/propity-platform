@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { RootState } from "@/lib/store/store";
 import { collapseMenu } from "@/lib/store/features/dashboard/dashboardSlice";
+import { useRouter } from "next/navigation";
 
 export const AsideBar = () => {
   const dashboardMenuCollapsed = useAppSelector(
@@ -17,10 +18,12 @@ export const AsideBar = () => {
 
   const dispatch = useAppDispatch();
 
+  const router = useRouter();
+
   return (
     <>
       <nav
-        className={`flex flex-col gap-y-6 py-8 px-6 ${!dashboardMenuCollapsed && "w-72"} max-h-svh overflow-y-auto`}
+        className={`flex flex-col gap-y-6 py-8 px-6 ${!dashboardMenuCollapsed && "w-72"} max-h-svh overflow-y-auto sticky top-0`}
       >
         <Image src={"/jomBlack.png"} alt={"Icon Logo"} width={48} height={42} />
         <div className={"border-y border-[#A2A9B7]/40 flex flex-col gap-y-3"}>
@@ -201,6 +204,7 @@ export const AsideBar = () => {
         </div>
         <ul className={"flex flex-col gap-y-4"}>
           <li
+            onClick={() => router.push("/dashboard/comunidad")}
             className={
               "flex items-center gap-3 p-3 cursor-pointer bg-white border border-[#A2A9B7]/40 hover:bg-white/[0.62] shadow-md rounded-xl text-sm font-medium"
             }
@@ -223,6 +227,7 @@ export const AsideBar = () => {
           </li>
 
           <li
+            onClick={() => router.push("/dashboard/socios")}
             className={
               "flex items-center gap-3 p-3 cursor-pointer  rounded-xl text-sm hover:bg-white/[0.32]"
             }
@@ -246,6 +251,7 @@ export const AsideBar = () => {
           </li>
 
           <li
+            onClick={() => router.push("/dashboard/comisiones")}
             className={
               "flex items-center gap-3 p-3 cursor-pointer  rounded-xl text-sm hover:bg-white/[0.32]"
             }
@@ -275,6 +281,7 @@ export const AsideBar = () => {
           </li>
 
           <li
+            onClick={() => router.push("/dashboard/propiedades")}
             className={
               "flex items-center gap-3 p-3 cursor-pointer  rounded-xl text-sm hover:bg-white/[0.32]"
             }
@@ -313,6 +320,7 @@ export const AsideBar = () => {
           </li>
 
           <li
+            onClick={() => router.push("/dashboard/equipo")}
             className={
               "flex items-center gap-3 p-3 cursor-pointer  rounded-xl text-sm hover:bg-white/[0.32]"
             }
@@ -336,6 +344,7 @@ export const AsideBar = () => {
           </li>
 
           <li
+            onClick={() => router.push("/dashboard/guias")}
             className={
               "flex items-center gap-3 p-3 cursor-pointer  rounded-xl text-sm hover:bg-white/[0.32]"
             }
@@ -359,6 +368,7 @@ export const AsideBar = () => {
           </li>
 
           <li
+            onClick={() => router.push("/dashboard/empresa")}
             className={
               "flex items-center gap-3 p-3 cursor-pointer  rounded-xl text-sm hover:bg-white/[0.32]"
             }

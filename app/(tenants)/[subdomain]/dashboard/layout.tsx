@@ -13,7 +13,7 @@ export default function DashboardLayout({
       <AsideBar />
       <main
         className={
-          "bg-white flex-grow shadow-xl my-4 mr-8 rounded-lg border border-[#26293133] p-4 flex flex-col"
+          "bg-white flex-grow shadow-xl my-4 w-9/12 mr-4 rounded-lg border border-[#26293133] p-4 flex flex-col"
         }
       >
         <ToggleDashboardNav />

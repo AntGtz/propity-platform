@@ -1,5 +1,6 @@
 "use client";
 import {
+  ColumnFiltersState,
   createColumnHelper,
   getCoreRowModel,
   getFacetedRowModel,
@@ -10,7 +11,7 @@ import {
 import Image from "next/image";
 import { flexRender, useReactTable } from "@tanstack/react-table";
 import { Button } from "@/components/common/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type CommunityTableData = {
   logo: string;
@@ -1101,21 +1102,27 @@ const testData: CommunityTableData[] = [
   },
   {
     logo: "/picClient.jpg",
-    name: "Propity MX",
+    name: "Falsedad MX",
     address: "Calle de la República, No. 123",
-    isActive: true,
+    isActive: false,
     needsApproval: false,
   },
   {
     logo: "/picClient.jpg",
-    name: "Propity MX",
+    name: "Jom Propiedad",
     address: "Calle de la República, No. 123",
-    isActive: true,
-    needsApproval: false,
+    isActive: false,
+    needsApproval: true,
   },
 ];
 
-export const CommunityTable = () => {
+export const CommunityTable = ({
+  tab,
+  nameSearch,
+}: {
+  tab: number;
+  nameSearch: string;
+}) => {
   const columnHelper = createColumnHelper<CommunityTableData>();
   const columns = [
     columnHelper.accessor("logo", {
@@ -1153,11 +1160,46 @@ export const CommunityTable = () => {
     columnHelper.display({
       id: "actions",
       header: () => <></>,
-      cell: () => (
-        <div className={"flex justify-end"}>
-          <Button variant={"destructive"} size={"sm"} className={"font-galano"}>
-            Eliminar
-          </Button>
+      cell: ({ row }) => (
+        <div className={"flex gap-2 justify-end"}>
+          {row.original.isActive && (
+            <Button
+              variant={"destructive"}
+              size={"sm"}
+              className={"font-galano"}
+            >
+              Eliminar
+            </Button>
+          )}
+          {!row.original.isActive && row.original.needsApproval && (
+            <>
+              <Button
+                variant={"propity"}
+                size={"sm"}
+                className={"font-galano bg-[#00B140] [&]:py-4"}
+              >
+                Aceptar
+              </Button>
+              <Button
+                variant={"destructive"}
+                size={"sm"}
+                className={"font-galano"}
+              >
+                Rechazar
+              </Button>
+            </>
+          )}
+          {!row.original.isActive && !row.original.needsApproval && (
+            <>
+              <Button
+                variant={"propity"}
+                size={"sm"}
+                className={"font-galano bg-[#00B140] [&]:py-4"}
+              >
+                Aceptar
+              </Button>
+            </>
+          )}
         </div>
       ),
     }),
@@ -1167,6 +1209,7 @@ export const CommunityTable = () => {
     pageIndex: 0,
     pageSize: 8,
   });
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
   const table = useReactTable({
     data: testData,
@@ -1177,15 +1220,47 @@ export const CommunityTable = () => {
     getFacetedRowModel: getFacetedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onPaginationChange: setPagination,
+    onColumnFiltersChange: setColumnFilters,
     state: {
       columnVisibility: {
         entityInfo: true,
         isActive: false,
         needsApproval: false,
       },
+      columnFilters,
       pagination,
     },
   });
+
+  useEffect(() => {
+    const isActiveColumn = table.getColumn("isActive");
+    const needsApprovalColumn = table.getColumn("needsApproval");
+    const name = table.getColumn("entityInfo");
+
+    if (nameSearch !== "") {
+      name?.setFilterValue(nameSearch);
+    } else {
+      name?.setFilterValue(undefined);
+    }
+
+    switch (tab) {
+      case 0:
+        isActiveColumn?.setFilterValue(true);
+        needsApprovalColumn?.setFilterValue(false);
+        break;
+      case 1:
+        isActiveColumn?.setFilterValue(false);
+        needsApprovalColumn?.setFilterValue(true);
+        break;
+      case 2:
+        isActiveColumn?.setFilterValue(false);
+        needsApprovalColumn?.setFilterValue(false);
+        break;
+      default:
+        isActiveColumn?.setFilterValue(undefined);
+        needsApprovalColumn?.setFilterValue(undefined);
+    }
+  }, [tab, table, nameSearch]);
 
   const getPaginationPages = () => {
     const range = 8;
