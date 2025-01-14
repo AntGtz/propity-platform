@@ -46,6 +46,15 @@ export default function DevelopmentsList() {
                             : "México"
                         }
                         description={development.description}
+                        price={development.properties?.reduce(
+                          (acc, property) => {
+                            if (acc === 0) return property.operations[0].price;
+                            return acc > property.operations[0].price
+                              ? property.operations[0].price
+                              : acc;
+                          },
+                          0,
+                        )}
                       />
                     </CarouselItem>
                   );

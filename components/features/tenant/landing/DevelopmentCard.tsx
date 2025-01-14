@@ -10,6 +10,7 @@ interface DevelopmentCardProps {
   slogan: string;
   location: string | null;
   description: string | null;
+  price?: number;
 }
 
 export const DevelopmentCard = ({
@@ -20,6 +21,7 @@ export const DevelopmentCard = ({
   slogan,
   location,
   description,
+  price,
 }: DevelopmentCardProps) => {
   return (
     <>
@@ -53,7 +55,9 @@ export const DevelopmentCard = ({
               <span>{slogan ?? "Ciudad de México"}</span>
             </div>
           </div>
-          <span className="font-bold text-base my-1">Desde $3,500.000</span>
+          <span className="font-bold text-base my-1">
+            Desde {price ? `$${price.toLocaleString("es-MX")}` : "$3,500.000"}
+          </span>
           <span className={"text-base my-1"}>
             {location ?? "Quetzal 247, Priv. El Encanto, en Pozos de Caldas"}
           </span>
