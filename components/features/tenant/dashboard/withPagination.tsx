@@ -11,6 +11,7 @@ export const withPagination = <T,>({
     columns,
     onChangeColumnsFilters,
     columnsFilters,
+    columnVisibility,
   }: TableProps<T>) {
     const [pagination, setPagination] = useState({
       pageIndex: 0,
@@ -44,6 +45,7 @@ export const withPagination = <T,>({
           pagination={pagination}
           onPaginationChange={setPagination}
           onFilteredRowCountChange={setFilteredRowCount}
+          columnVisibility={columnVisibility}
         />
         <div className={"flex justify-center w-full"}>
           <div

@@ -2,11 +2,13 @@ import {
   ColumnDef,
   ColumnFiltersState,
   getCoreRowModel,
+  getFacetedRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   OnChangeFn,
   PaginationState,
+  VisibilityState,
 } from "@tanstack/table-core";
 import { flexRender, useReactTable } from "@tanstack/react-table";
 import {
@@ -23,6 +25,7 @@ export type TableProps<T> = {
   data: T[];
   columns: ColumnDef<T, any>[];
   columnsFilters?: ColumnFiltersState;
+  columnVisibility?: VisibilityState;
   onChangeColumnsFilters?: OnChangeFn<ColumnFiltersState>;
   pagination?: PaginationState;
   onPaginationChange?: OnChangeFn<PaginationState>;
@@ -38,6 +41,7 @@ export const TableWrapped: TableWrappedComponent = ({
   onPaginationChange,
   onChangeColumnsFilters,
   columnsFilters,
+  columnVisibility,
   onFilteredRowCountChange,
 }) => {
   const _table = useReactTable({
@@ -46,11 +50,13 @@ export const TableWrapped: TableWrappedComponent = ({
     state: {
       columnFilters: columnsFilters,
       pagination: pagination,
+      columnVisibility: columnVisibility,
     },
     onColumnFiltersChange: onChangeColumnsFilters,
     onPaginationChange: onPaginationChange,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    getFacetedRowModel: getFacetedRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
   });
