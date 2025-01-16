@@ -1,8 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { ColumnFiltersState } from "@tanstack/table-core";
 
 interface DashboardState {
   dashboardMenuCollapsed: boolean;
   menuItemsCollapsable: Record<"userMenu" | "configMenu", boolean>;
+  communityTabSelected: string;
+  communityFilters: ColumnFiltersState;
 }
 
 interface CollapseMenuPayload {
@@ -16,6 +19,8 @@ const initialState: DashboardState = {
     userMenu: false,
     configMenu: false,
   },
+  communityTabSelected: "myCommunity",
+  communityFilters: [],
 };
 
 export const dashboardSlice = createSlice({
@@ -37,9 +42,27 @@ export const dashboardSlice = createSlice({
       } else if (type === "dashboardMenu")
         state.dashboardMenuCollapsed = !state.dashboardMenuCollapsed;
     },
+    setCommunityTabSelected: (state, action: PayloadAction<string>) => {
+      state.communityTabSelected = action.payload;
+    },
+    setCommunityFilters: (state, action: PayloadAction<ColumnFiltersState>) => {
+      // Create a new map to handle each filter by its column ID
+      const filtersMap = new Map(
+        state.communityFilters.map((filter) => [filter.id, filter]),
+      );
+
+      // Update the map with the new filters, replacing entries for the same column ID
+      for (const newFilter of action.payload) {
+        filtersMap.set(newFilter.id, newFilter);
+      }
+
+      // Convert the map back to an array
+      state.communityFilters = Array.from(filtersMap.values());
+    },
   },
 });
 
-export const { collapseMenu } = dashboardSlice.actions;
+export const { collapseMenu, setCommunityTabSelected, setCommunityFilters } =
+  dashboardSlice.actions;
 
 export default dashboardSlice.reducer;

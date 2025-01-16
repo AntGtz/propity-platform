@@ -19,10 +19,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/common/table";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 
 export type TableProps<T> = {
   data: T[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   columns: ColumnDef<T, any>[];
   columnsFilters?: ColumnFiltersState;
   columnVisibility?: VisibilityState;
@@ -61,11 +62,13 @@ export const TableWrapped: TableWrappedComponent = ({
     getPaginationRowModel: getPaginationRowModel(),
   });
 
+  const tableRows = useMemo(() => _table.getRowModel().rows, [_table]);
+
   useEffect(() => {
     if (onFilteredRowCountChange) {
       onFilteredRowCountChange(_table.getFilteredRowModel().rows.length);
     }
-  }, [_table.getFilteredRowModel().rows.length, onFilteredRowCountChange]);
+  }, [_table, tableRows, onFilteredRowCountChange]);
 
   return (
     <div className={"my-4 border rounded-lg border-gray-200 border-collapse"}>
@@ -90,18 +93,36 @@ export const TableWrapped: TableWrappedComponent = ({
           ))}
         </TableHeader>
         <TableBody>
-          {_table.getRowModel().rows.map((row) => (
-            <TableRow key={row.id}>
-              {row.getVisibleCells().map((cell, index) => (
-                <TableCell
-                  className={`${(index === 0 || index === row.getVisibleCells().length - 1) && "px-6"}`}
-                  key={cell.id}
-                >
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </TableCell>
+          {_table.getRowModel().rows.length > 0
+            ? _table.getRowModel().rows.map((row) => (
+                <TableRow key={row.id}>
+                  {row.getVisibleCells().map((cell, index) => (
+                    <TableCell
+                      className={`${cell.column.columnDef.meta ? cell.column.columnDef.meta.className : ""} ${(index === 0 || index === row.getVisibleCells().length - 1) && "px-6"}`}
+                      key={cell.id}
+                    >
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext(),
+                      )}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
+            : _table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header, index) => (
+                    <TableCell
+                      className={`${header.column.columnDef.meta ? header.column.columnDef.meta.className : ""} ${(index === 0 || headerGroup.headers.length === index - 1) && "px-6"}`}
+                      key={header.id}
+                    >
+                      {header.column.columnDef.meta
+                        ? header.column.columnDef.meta.empty
+                        : ""}
+                    </TableCell>
+                  ))}
+                </TableRow>
               ))}
-            </TableRow>
-          ))}
         </TableBody>
       </Table>
     </div>
