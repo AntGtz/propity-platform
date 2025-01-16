@@ -5,7 +5,7 @@ import {
   setCommunityFilters,
   setCommunityTabSelected,
 } from "@/lib/store/features/dashboard/dashboardSlice";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { TabsValue } from "@/components/features/tenant/dashboard/community/types";
 
 type TabsProps = {
@@ -18,29 +18,32 @@ export const Tabs = ({ tabs }: TabsProps) => {
   );
   const dispatch = useAppDispatch();
 
-  const handleFilterByTab = (tab: TabsValue) => {
-    switch (tab) {
-      case "myCommunity":
-        dispatch(
-          setCommunityFilters([
-            { id: "isActive", value: true },
-            { id: "needsApproval", value: false },
-          ]),
-        );
-        break;
-      case "needsApproval":
-        dispatch(setCommunityFilters([{ id: "needsApproval", value: true }]));
-        break;
-      case "discover":
-        dispatch(
-          setCommunityFilters([
-            { id: "isActive", value: false },
-            { id: "needsApproval", value: false },
-          ]),
-        );
-        break;
-    }
-  };
+  const handleFilterByTab = useCallback(
+    (tab: TabsValue) => {
+      switch (tab) {
+        case "myCommunity":
+          dispatch(
+            setCommunityFilters([
+              { id: "isActive", value: true },
+              { id: "needsApproval", value: false },
+            ]),
+          );
+          break;
+        case "needsApproval":
+          dispatch(setCommunityFilters([{ id: "needsApproval", value: true }]));
+          break;
+        case "discover":
+          dispatch(
+            setCommunityFilters([
+              { id: "isActive", value: false },
+              { id: "needsApproval", value: false },
+            ]),
+          );
+          break;
+      }
+    },
+    [dispatch],
+  );
 
   useEffect(() => {
     handleFilterByTab(tabs[0].value);
