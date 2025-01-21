@@ -3,21 +3,21 @@ import Image from "next/image";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { RootState } from "@/lib/store/store";
 import { collapseMenu } from "@/lib/store/features/dashboard/dashboardSlice";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export const AsideBar = () => {
   const dashboardMenuCollapsed = useAppSelector(
-    (state: RootState) => state.dashboard.dashboardMenuCollapsed,
+    (state: RootState) => state.dashboard.dashboardMenuCollapsed
   );
   const userMenu = useAppSelector(
-    (state: RootState) => state.dashboard.menuItemsCollapsable.userMenu,
+    (state: RootState) => state.dashboard.menuItemsCollapsable.userMenu
   );
   const configMenu = useAppSelector(
-    (state: RootState) => state.dashboard.menuItemsCollapsable.configMenu,
+    (state: RootState) => state.dashboard.menuItemsCollapsable.configMenu
   );
 
   const dispatch = useAppDispatch();
-
+  const pathname = usePathname();
   const router = useRouter();
 
   return (
@@ -205,9 +205,7 @@ export const AsideBar = () => {
         <ul className={"flex flex-col gap-y-4"}>
           <li
             onClick={() => router.push("/dashboard/comunidad")}
-            className={
-              "flex items-center gap-3 p-3 cursor-pointer bg-white border border-[#A2A9B7]/40 hover:bg-white/[0.62] shadow-md rounded-xl text-sm font-medium"
-            }
+            className={`flex items-center gap-3 p-3 cursor-pointer rounded-xl ${pathname === "/dashboard/comunidad" ? "bg-white border border-[#A2A9B7]/40 hover:bg-white/[0.62] shadow-md font-medium" : "hover:bg-white/[0.32]"} text-sm`}
           >
             <svg
               width="24"
@@ -228,9 +226,7 @@ export const AsideBar = () => {
 
           <li
             onClick={() => router.push("/dashboard/socios")}
-            className={
-              "flex items-center gap-3 p-3 cursor-pointer  rounded-xl text-sm hover:bg-white/[0.32]"
-            }
+            className={`flex items-center gap-3 p-3 cursor-pointer  rounded-xl text-sm ${pathname === "/dashboard/socios" ? "bg-white border border-[#A2A9B7]/40 hover:bg-white/[0.62] shadow-md font-medium" : "hover:bg-white/[0.32]"}`}
           >
             <svg
               width="24"
@@ -252,9 +248,7 @@ export const AsideBar = () => {
 
           <li
             onClick={() => router.push("/dashboard/comisiones")}
-            className={
-              "flex items-center gap-3 p-3 cursor-pointer  rounded-xl text-sm hover:bg-white/[0.32]"
-            }
+            className={`flex items-center gap-3 p-3 cursor-pointer rounded-xl text-sm ${pathname === "/dashboard/comisiones" ? "bg-white border border-[#A2A9B7]/40 hover:bg-white/[0.62] shadow-md font-medium" : "hover:bg-white/[0.32]"}`}
           >
             <svg
               width="16"
@@ -282,9 +276,7 @@ export const AsideBar = () => {
 
           <li
             onClick={() => router.push("/dashboard/propiedades")}
-            className={
-              "flex items-center gap-3 p-3 cursor-pointer  rounded-xl text-sm hover:bg-white/[0.32]"
-            }
+            className={`flex items-center gap-3 p-3 cursor-pointer rounded-xl text-sm ${pathname === "/dashboard/propiedades" ? "bg-white border border-[#A2A9B7]/40 hover:bg-white/[0.62] shadow-md font-medium" : "hover:bg-white/[0.32]"}`}
           >
             <svg
               width="24"
@@ -321,9 +313,7 @@ export const AsideBar = () => {
 
           <li
             onClick={() => router.push("/dashboard/equipo")}
-            className={
-              "flex items-center gap-3 p-3 cursor-pointer  rounded-xl text-sm hover:bg-white/[0.32]"
-            }
+            className={`flex items-center gap-3 p-3 cursor-pointer rounded-xl text-sm ${pathname === "/dashboard/equipo" ? "bg-white border border-[#A2A9B7]/40 hover:bg-white/[0.62] shadow-md font-medium" : "hover:bg-white/[0.32]"}`}
           >
             <svg
               width="24"
@@ -345,9 +335,7 @@ export const AsideBar = () => {
 
           <li
             onClick={() => router.push("/dashboard/guias")}
-            className={
-              "flex items-center gap-3 p-3 cursor-pointer  rounded-xl text-sm hover:bg-white/[0.32]"
-            }
+            className={`flex items-center gap-3 p-3 cursor-pointer rounded-xl text-sm ${pathname === "/dashboard/guias" ? "bg-white border border-[#A2A9B7]/40 hover:bg-white/[0.62] shadow-md font-medium" : "hover:bg-white/[0.32]"}`}
           >
             <svg
               width="24"
@@ -369,9 +357,7 @@ export const AsideBar = () => {
 
           <li
             onClick={() => router.push("/dashboard/empresa")}
-            className={
-              "flex items-center gap-3 p-3 cursor-pointer  rounded-xl text-sm hover:bg-white/[0.32]"
-            }
+            className={`flex items-center gap-3 p-3 cursor-pointer rounded-xl text-sm ${pathname === "/dashboard/empresa" ? "bg-white border border-[#A2A9B7]/40 hover:bg-white/[0.62] shadow-md font-medium" : "hover:bg-white/[0.32]"}`}
           >
             <svg
               width="24"
@@ -395,9 +381,7 @@ export const AsideBar = () => {
           </li>
           <li
             onClick={() => router.push("/dashboard/asesores")}
-            className={
-              "flex items-center gap-3 p-3 cursor-pointer  rounded-xl text-sm"
-            }
+            className={`flex items-center gap-3 p-3 cursor-pointer rounded-xl text-sm ${pathname === "/dashboard/asesores" ? "bg-white border border-[#A2A9B7]/40 hover:bg-white/[0.62] shadow-md font-medium" : "hover:bg-white/[0.32]"}`}
           >
             <svg
               width="24"
