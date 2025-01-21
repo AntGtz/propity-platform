@@ -1,7 +1,7 @@
 import { CommunityTable } from "@/components/features/tenant/dashboard/community/CommunityTable";
 import { Tabs } from "@/components/features/tenant/dashboard/Tabs";
 import NameFilter from "@/components/features/tenant/dashboard/community/NameFilter";
-import { CommunityTab } from "@/components/features/tenant/dashboard/community/types";
+import { CommunityTab } from "@/type/dashboard";
 
 export default function Comunidad() {
   const tabs: CommunityTab[] = [

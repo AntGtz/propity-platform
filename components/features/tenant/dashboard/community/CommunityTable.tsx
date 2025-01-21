@@ -5,10 +5,7 @@ import {
   VisibilityState,
 } from "@tanstack/table-core";
 import { useEffect, useState } from "react";
-import {
-  CommunityFetchResponse,
-  CommunityTableData,
-} from "@/components/features/tenant/dashboard/community/types";
+import { CommunityFetchResponse, CommunityTableData } from "@/type/dashboard";
 import columns from "@/components/features/tenant/dashboard/community/ColumnDef";
 import { withPagination } from "@/components/features/tenant/dashboard/withPagination";
 import { TableWrapped } from "@/components/features/tenant/dashboard/TableWrapped";
@@ -23,7 +20,7 @@ export const CommunityTable = () => {
   const entity = useAppSelector((state) => state.tenant.details);
   const dispatch = useAppDispatch();
   const handleChangeColumnsFilters: OnChangeFn<ColumnFiltersState> = (
-    updaterOrValue,
+    updaterOrValue
   ) => {
     const newFilters =
       typeof updaterOrValue === "function"
@@ -36,7 +33,7 @@ export const CommunityTable = () => {
   useEffect(() => {
     const fecthCommunityData = async () => {
       const res = await fetch(
-        `https://api.propity.mx/qa/entities/${entity?.id}/community`,
+        `https://api.propity.mx/qa/entities/${entity?.id}/community`
       );
       const { active, pending, not } =
         (await res.json()) as CommunityFetchResponse;
@@ -49,7 +46,7 @@ export const CommunityTable = () => {
           logo: community.theme.logo,
           isActive: true,
           needsApproval: false,
-        }),
+        })
       );
       const formatedPendingCommunity: CommunityTableData[] = pending.map(
         (community) => ({
@@ -60,7 +57,7 @@ export const CommunityTable = () => {
           logo: community.theme.logo,
           isActive: false,
           needsApproval: true,
-        }),
+        })
       );
       const formatedNotCommunity: CommunityTableData[] = not.map(
         (community) => ({
@@ -71,7 +68,7 @@ export const CommunityTable = () => {
           logo: community.theme.logo,
           isActive: false,
           needsApproval: false,
-        }),
+        })
       );
 
       setData([

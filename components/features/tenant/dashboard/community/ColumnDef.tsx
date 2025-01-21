@@ -1,7 +1,7 @@
 import { createColumnHelper } from "@tanstack/table-core";
 import Image from "next/image";
 import { Button } from "@/components/common/button";
-import { CommunityTableData } from "@/components/features/tenant/dashboard/community/types";
+import { CommunityTableData } from "@/type/dashboard";
 
 const columnHelper = createColumnHelper<CommunityTableData>();
 
