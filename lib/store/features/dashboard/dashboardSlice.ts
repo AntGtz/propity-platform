@@ -1,3 +1,4 @@
+import { CommissionData } from "@/type/dashboard";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ColumnFiltersState } from "@tanstack/table-core";
 
@@ -6,6 +7,8 @@ interface DashboardState {
   menuItemsCollapsable: Record<"userMenu" | "configMenu", boolean>;
   communityTabSelected: string;
   communityFilters: ColumnFiltersState;
+  commissionTabSelected: string;
+  commissionsArray: CommissionData;
 }
 
 interface CollapseMenuPayload {
@@ -21,6 +24,8 @@ const initialState: DashboardState = {
   },
   communityTabSelected: "myCommunity",
   communityFilters: [],
+  commissionTabSelected: "",
+  commissionsArray: [],
 };
 
 export const dashboardSlice = createSlice({
@@ -59,10 +64,21 @@ export const dashboardSlice = createSlice({
       // Convert the map back to an array
       state.communityFilters = Array.from(filtersMap.values());
     },
+    setCommissionTabSelected: (state, action: PayloadAction<string>) => {
+      state.commissionTabSelected = action.payload;
+    },
+    setCommissionsArray: (state, action: PayloadAction<CommissionData>) => {
+      state.commissionsArray = action.payload;
+    },
   },
 });
 
-export const { collapseMenu, setCommunityTabSelected, setCommunityFilters } =
-  dashboardSlice.actions;
+export const {
+  collapseMenu,
+  setCommunityTabSelected,
+  setCommunityFilters,
+  setCommissionTabSelected,
+  setCommissionsArray,
+} = dashboardSlice.actions;
 
 export default dashboardSlice.reducer;
