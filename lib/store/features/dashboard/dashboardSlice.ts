@@ -1,4 +1,4 @@
-import { CommissionData } from "@/type/dashboard";
+import { CommissionData, Partner, PartnerData } from "@/type/dashboard";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ColumnFiltersState } from "@tanstack/table-core";
 
@@ -9,6 +9,7 @@ interface DashboardState {
   communityFilters: ColumnFiltersState;
   commissionTabSelected: string;
   commissionsArray: CommissionData;
+  partnersList: PartnerData;
 }
 
 interface CollapseMenuPayload {
@@ -26,6 +27,7 @@ const initialState: DashboardState = {
   communityFilters: [],
   commissionTabSelected: "",
   commissionsArray: [],
+  partnersList: [],
 };
 
 export const dashboardSlice = createSlice({
@@ -70,6 +72,12 @@ export const dashboardSlice = createSlice({
     setCommissionsArray: (state, action: PayloadAction<CommissionData>) => {
       state.commissionsArray = action.payload;
     },
+    setPartnersList: (state, action: PayloadAction<PartnerData>) => {
+      state.partnersList = action.payload;
+    },
+    addPartner: (state, action: PayloadAction<Partner>) => {
+      state.partnersList.push(action.payload);
+    },
   },
 });
 
@@ -79,6 +87,8 @@ export const {
   setCommunityFilters,
   setCommissionTabSelected,
   setCommissionsArray,
+  setPartnersList,
+  addPartner,
 } = dashboardSlice.actions;
 
 export default dashboardSlice.reducer;

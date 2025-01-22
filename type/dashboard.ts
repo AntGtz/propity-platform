@@ -23,15 +23,23 @@ export type CommunityFetchResponse = {
 };
 
 export type CommissionScheme = {
-    id: string;
-    name: string;
-    percents: Record<string, number>;
+  id: string;
+  name: string;
+  percents: Record<string, number>;
 };
 
 export type CommissionData = Array<CommissionScheme>;
 
 export type CommissionTableData = {
-    id: string;
-    name: string;
-    value: string | number;
+  id: string;
+  name: string;
+  value: string | number;
 };
+
+export type Partner = {
+  id: string;
+  name: string;
+  description: string;
+};
+
+export type PartnerData = Array<Partner>;
