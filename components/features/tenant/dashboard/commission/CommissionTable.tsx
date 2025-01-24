@@ -30,7 +30,7 @@ export const CommissionTable = () => {
   useEffect(() => {
     if (commissionsArray.length > 0)
       dispatch(setCommissionTabSelected(commissionsArray[0].id.toString()));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [commissionsArray.length, dispatch]);
 
   const selectedCommission = commissionsArray.find(
@@ -100,7 +100,7 @@ export const CommissionTable = () => {
             {percentsArray.reduce(
               (total, item) => total + Number(item.value),
               0
-            )}
+            ).toFixed(2)}
             %
           </TableCell>
           <TableCell className="px-6 bg-gray-200"></TableCell>
@@ -113,7 +113,7 @@ export const CommissionTable = () => {
             {percentsArray.reduce(
               (total, item) => total - Number(item.value),
               100
-            )}
+            ).toFixed(2)}
             %
           </TableCell>
           <TableCell className="px-6 bg-gray-200"></TableCell>
