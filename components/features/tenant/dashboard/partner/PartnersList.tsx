@@ -1,10 +1,8 @@
 "use client";
-import { useEffect } from "react";
 import { PartnerCard } from "./PartnerCard";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { setPartnersList } from "@/lib/store/features/dashboard/dashboardSlice";
-import { deletePartner, fetchPartners, updatePartner } from "./actions";
-import { PartnerData } from "@/type/dashboard";
+import { deletePartner, updatePartner } from "./actions";
 import { toast } from "react-toastify";
 
 export const PartnersList = () => {
@@ -14,15 +12,6 @@ export const PartnersList = () => {
   const partnersList = useAppSelector((state) => state.dashboard.partnersList);
   const dispatch = useAppDispatch();
   const entityId = useAppSelector((state) => state.tenant.details?.id);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      if (!entityId || partnersList.length > 0) return;
-      const data = (await fetchPartners(entityId)) as PartnerData;
-      dispatch(setPartnersList(data));
-    };
-    fetchData();
-  }, [partnersList.length, dispatch, entityId]);
 
   const onDelete = async (id: string) => {
     if (!entityId) return;

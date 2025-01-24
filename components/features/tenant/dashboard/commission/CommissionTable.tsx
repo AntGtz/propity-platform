@@ -10,12 +10,7 @@ import {
 } from "@/components/common/table";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { useEffect, useMemo } from "react";
-import { fetchCommissions } from "./actions";
-import {
-  setCommissionsArray,
-  setCommissionTabSelected,
-} from "@/lib/store/features/dashboard/dashboardSlice";
-import { CommissionData } from "@/type/dashboard";
+import { setCommissionTabSelected } from "@/lib/store/features/dashboard/dashboardSlice";
 import {
   flexRender,
   getCoreRowModel,
@@ -24,7 +19,6 @@ import {
 import columns from "./ColumnDef";
 
 export const CommissionTable = () => {
-  const tenantId = useAppSelector((state) => state.tenant.details?.id);
   const commissionTabSelected = useAppSelector(
     (state) => state.dashboard.commissionTabSelected
   );
@@ -32,16 +26,6 @@ export const CommissionTable = () => {
     (state) => state.dashboard.commissionsArray
   );
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      if (!tenantId || commissionsArray.length > 0) return;
-      const data = (await fetchCommissions(tenantId)) as CommissionData;
-      dispatch(setCommissionsArray(data));
-    };
-
-    fetchData();
-  }, [tenantId, commissionsArray.length, dispatch]);
 
   useEffect(() => {
     if (commissionsArray.length > 0)
