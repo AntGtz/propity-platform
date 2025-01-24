@@ -1,6 +1,7 @@
 import { CommissionTableData } from "@/type/dashboard";
 import { createColumnHelper } from "@tanstack/table-core";
 import React from "react";
+import { CommissionEditButton } from "./CommissionEditButton";
 
 export const CommissionTableHelper = createColumnHelper<CommissionTableData>();
 
@@ -37,33 +38,7 @@ export const columns = [
       </span>
     ),
     cell: () => (
-      <>
-        <div className="flex justify-end">
-          <svg width="3" height="15" viewBox="0 0 3 15" fill="none">
-            <circle
-              cx="1.5"
-              cy="13.5"
-              r="1.5"
-              transform="rotate(-90 1.5 13.5)"
-              fill="#A2A9B7"
-            />
-            <circle
-              cx="1.5"
-              cy="7.5"
-              r="1.5"
-              transform="rotate(-90 1.5 7.5)"
-              fill="#A2A9B7"
-            />
-            <circle
-              cx="1.5"
-              cy="1.5"
-              r="1.5"
-              transform="rotate(-90 1.5 1.5)"
-              fill="#A2A9B7"
-            />
-          </svg>
-        </div>
-      </>
+      <CommissionEditButton />
     ),
     meta: {
       className: "px-8 w-20",

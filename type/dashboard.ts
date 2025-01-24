@@ -25,7 +25,7 @@ export type CommunityFetchResponse = {
 export type CommissionScheme = {
   id: string;
   name: string;
-  percents: Record<string, number>;
+  percents: Record<string, number | string>;
 };
 
 export type CommissionData = Array<CommissionScheme>;

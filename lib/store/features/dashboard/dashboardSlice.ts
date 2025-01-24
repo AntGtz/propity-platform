@@ -1,4 +1,9 @@
-import { CommissionData, Partner, PartnerData } from "@/type/dashboard";
+import {
+  CommissionData,
+  CommissionScheme,
+  Partner,
+  PartnerData,
+} from "@/type/dashboard";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ColumnFiltersState } from "@tanstack/table-core";
 
@@ -55,7 +60,7 @@ export const dashboardSlice = createSlice({
     setCommunityFilters: (state, action: PayloadAction<ColumnFiltersState>) => {
       // Create a new map to handle each filter by its column ID
       const filtersMap = new Map(
-        state.communityFilters.map((filter) => [filter.id, filter]),
+        state.communityFilters.map((filter) => [filter.id, filter])
       );
 
       // Update the map with the new filters, replacing entries for the same column ID
@@ -78,6 +83,16 @@ export const dashboardSlice = createSlice({
     addPartner: (state, action: PayloadAction<Partner>) => {
       state.partnersList.push(action.payload);
     },
+    addCommission: (state, action: PayloadAction<CommissionScheme>) => {
+      state.commissionsArray.push(action.payload);
+    },
+    deleteCommissionById: (state, action: PayloadAction<string>) => {
+      state.commissionTabSelected =
+        state.commissionsArray[0].id.toString() || "";
+      state.commissionsArray = state.commissionsArray.filter(
+        (commission) => commission.id !== action.payload
+      );
+    },
   },
 });
 
@@ -89,6 +104,8 @@ export const {
   setCommissionsArray,
   setPartnersList,
   addPartner,
+  addCommission,
+  deleteCommissionById,
 } = dashboardSlice.actions;
 
 export default dashboardSlice.reducer;
