@@ -78,7 +78,7 @@ export const TableWrapped: TableWrappedComponent = ({
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header, index) => (
                 <TableHead
-                  className={`${(index === 0 || headerGroup.headers.length === index - 1) && "px-6"}`}
+                  className={`${(index === 0 || headerGroup.headers.length === index - 1) && "px-6"} ${header.column.columnDef.meta?.header.className}`}
                   key={header.id}
                 >
                   {header.isPlaceholder

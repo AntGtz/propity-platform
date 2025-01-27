@@ -31,6 +31,7 @@ interface CustomUser extends User {
   email: string;
   phone: string;
   accessToken: string;
+  all: string;
 }
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -85,6 +86,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 name: userAttributes?.name,
                 email: userAttributes?.email,
                 phone: userAttributes?.phone_number,
+                all: JSON.stringify(userAttributes),
                 accessToken,
               } as CustomUser;
             } catch (error) {
@@ -120,16 +122,18 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         token.email = user.email;
         token.phone = (user as CustomUser).phone;
         token.accessToken = (user as CustomUser).accessToken;
+        token.all = (user as CustomUser).all;
       }
       return token;
     },
     session: async ({ session, token }) => {
-      (session.user as CustomUser) = {
+      (session.user as unknown as CustomUser) = {
         id: token.id as string,
         name: token.name as string,
         email: token.email as string,
         phone: token.phone as string,
         accessToken: token.accessToken as string,
+        all: token.all as string,
       };
       return session;
     },

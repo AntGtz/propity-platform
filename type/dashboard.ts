@@ -43,3 +43,111 @@ export type Partner = {
 };
 
 export type PartnerData = Array<Partner>;
+
+export type TeamResponse = {
+  id: string,
+  photo: {
+    original: string,
+    thumbnail: string
+  } | null,
+  firstName: string,
+  lastName: string,
+  phone: string,
+  email: string,
+  status: {
+    name: string,
+    display: string
+  },
+  role: {
+    jom: {
+      name: string,
+      display: string
+    },
+    team: {
+      name: string,
+      display: string
+    },
+    trade: null
+  }
+};
+
+export type Team = {
+  id: string,
+  name: string,
+  role: string,
+  photo: {
+    original: string,
+    thumbnail: string
+  }
+};
+
+export type TeamData = Array<Team>;
+
+export type UsersResponse = {
+  id: string,
+  photo: null | {
+    original: string,
+    thumbnail: string
+  },
+  username: string,
+  firstName: string,
+  lastName: string,
+  email: string,
+  phone: string,
+  dream: null,
+  aboutMe: null,
+  register: string,
+  parent: null | {
+    id: string,
+    phone: string,
+    name: string,
+    mail: string
+  },
+  agent: null | {
+    id: string,
+    phone: string,
+    name: string,
+    mail: string
+  },
+  lastEntry: null,
+  lastUpdate: string,
+  status: {
+    name: string,
+    display: string
+  },
+  role: {
+    jom: {
+      name: string,
+      display: string
+    },
+    team: null | {
+      name: string,
+      display: string
+    },
+    trade: null | {
+      name: string,
+      display: string
+    }
+  }
+}
+
+export type Guide = {
+  id: string,
+  photo: {
+    original: string
+    thumbnail: string
+  } | null,
+  name: string,
+  email: string,
+  registerDate: string,
+  upline: {
+    id: string
+    name: string
+  } | null,
+  adviser: {
+    id: string
+    name: string
+  } | null,
+}
+
+export type GuideData = Array<Guide>;
