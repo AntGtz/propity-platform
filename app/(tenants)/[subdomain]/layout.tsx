@@ -33,7 +33,7 @@ export async function generateMetadata({
   const tenantDetails: TenantData = await response.json();
 
   return {
-    title: `${tenantDetails.name} - ${tenantDetails.theme.slogan}`,
+    title: `${tenantDetails.name} - ${tenantDetails.theme?.slogan}`,
     description: tenantDetails.description,
     openGraph: {
       images: [tenantDetails.theme.imagetype.main],

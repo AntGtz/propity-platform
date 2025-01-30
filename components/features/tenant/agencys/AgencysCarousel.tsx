@@ -37,7 +37,7 @@ export default function AgencysCarousel() {
                         image={null}
                         logo={development.theme.logotype.main}
                         name={development.name}
-                        slogan={development.theme.slogan}
+                        slogan={development.theme?.slogan}
                         location={
                           location
                             ? `${location.division?.name}, ${
