@@ -1,3 +1,4 @@
+"use client";
 import { ChevronDown } from "lucide-react";
 import {
   defaultFilters,
@@ -6,7 +7,7 @@ import {
 } from "@/components/features/tenant/inventory/InventoryContext";
 
 export const ResultsInfo = () => {
-  const { propertiesList, filters } = useInventoryContext();
+  const { propertiesList, filters, entity } = useInventoryContext();
 
   const isAnyFilterApplied = Object.entries(filters).some(([key, filter]) => {
     const defaultValue = defaultFilters[key as keyof Filters];
@@ -29,7 +30,7 @@ export const ResultsInfo = () => {
     <div className={"flex flex-col gap-2 mt-2 md:mt-6"}>
       <span className={"font-bold font-galano text-xl md:text-3xl"}>
         {filters.location
-          ? `${filters.location}, ${propertyTypeText}`
+          ? `${filters.location}, ${propertyTypeText} ${entity ? `de ${entity.name}` : "encontradas"}`
           : propertyTypeText}
       </span>
       <div className={"flex md:flex-row flex-col md:gap-2 md:items-center"}>

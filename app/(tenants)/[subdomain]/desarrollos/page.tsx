@@ -1,6 +1,7 @@
 import DevelopmentsCarousel from "@/components/features/tenant/developments/DevelopmentsCarousel";
 import DevelopmentsList from "@/components/features/tenant/developments/DevelopmentsList";
 import JoinToDevelopments from "@/components/features/tenant/developments/JoinToDevelopments";
+import { DevelopmentsAgencysList } from "@/components/features/tenant/landing/DevelopmentsAgencysList";
 
 export default function Desarrollos() {
   return (
@@ -8,6 +9,7 @@ export default function Desarrollos() {
       <JoinToDevelopments />
       <DevelopmentsCarousel />
       <DevelopmentsList />
+      <DevelopmentsAgencysList />
     </main>
   );
 }

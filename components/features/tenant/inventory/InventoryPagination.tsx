@@ -84,7 +84,7 @@ export const InventoryPagination = ({
             <span
               key={pg}
               onClick={() => setPage(pg)}
-              className={`border rounded-lg py-1.5 px-2 md:px-4 md:py-2 text-xs md:text-sm font-bold cursor-pointer ${
+              className={`border rounded-lg py-1.5 px-2 md:px-4 md:py-2 text-xs md:text-sm font-bold cursor-pointer min-w-8 text-center ${
                 pg === page
                   ? "bg-green-400 text-white border-transparent"
                   : "border-gray-400"

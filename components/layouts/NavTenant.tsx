@@ -25,6 +25,8 @@ export default function NavTenant() {
 
   const pathname = usePathname();
 
+  if (pathname.includes("/dashboard")) return <></>;
+
   function handleOpenAuthDialog(bool: boolean) {
     dispatch(setAuthDialogOpen(bool));
   }
@@ -140,7 +142,7 @@ export default function NavTenant() {
                     fill="#041E42"
                   />
                 </svg>
-                {session?.user.name}
+                {JSON.stringify(session.user.profile)}
               </span>
             )}
           </div>
