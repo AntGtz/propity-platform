@@ -14,6 +14,7 @@ import {
   SelectItem,
   SelectTrigger,
 } from "@/components/common/select";
+import { ResultsInfo } from "@/components/features/tenant/inventory/Filters/ResultsInfo";
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -56,6 +57,7 @@ export default function Page() {
               </SelectContent>
             </Select>
           </div>
+          <ResultsInfo />
           <InventoryList />
         </section>
       </InventoryProvider>

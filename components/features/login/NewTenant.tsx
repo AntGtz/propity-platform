@@ -10,7 +10,7 @@ import {
 } from "@/components/common/select";
 import { cn } from "@/lib/utils";
 import { EyeIcon } from "lucide-react";
-import { forwardRef, useId } from "react";
+import { forwardRef, useId, useState } from "react";
 
 export default function NewTenant() {
   const nameFieldId = useId();
@@ -26,6 +26,8 @@ export default function NewTenant() {
     />
   ));
   InputComponent.displayName = "InputComponent";
+
+  const [type, setType] = useState("");
 
   return (
     <div className="flex flex-col gap-2 mt-6 mb-2 md:text-base text-sm">
@@ -48,14 +50,13 @@ export default function NewTenant() {
       <label htmlFor={nameFieldId} className="font-galano">
         Tipo de Empresa
       </label>
-      <Select>
+      <Select value={type} onValueChange={setType}>
         <SelectTrigger className="w-full [&]:px-3 [&]:py-6 font-galano md:text-base text-sm">
           <SelectValue placeholder="Tipo" />
         </SelectTrigger>
         <SelectContent className="font-galano">
-          <SelectItem value="light">Desarrollo</SelectItem>
-          <SelectItem value="dark">Inmobiliaria</SelectItem>
-          <SelectItem value="system">Consultoría</SelectItem>
+          <SelectItem value="development">Desarrollo</SelectItem>
+          <SelectItem value="agency">Inmobiliaria</SelectItem>
         </SelectContent>
       </Select>
       <label htmlFor={nameFieldId} className="font-galano">

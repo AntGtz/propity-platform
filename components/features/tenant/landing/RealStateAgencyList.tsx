@@ -16,7 +16,7 @@ export default function RealStateAgencyList() {
     ),
   );
   return (
-    <section className="flex flex-col gap-2 py-16 bg-white max-w-7xl mx-auto px-4 md:px-0">
+    <section className="flex flex-col gap-2 py-16 bg-white max-w-7xl mx-auto px-4 md:px-0 w-full">
       <h1 className="text-4xl font-galano font-bold">Inmobiliarias</h1>
       <div className="relative px-3 w-full">
         <div

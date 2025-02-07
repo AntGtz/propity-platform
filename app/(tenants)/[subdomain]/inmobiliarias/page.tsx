@@ -1,6 +1,7 @@
 import JoinToAgencys from "@/components/features/tenant/agencys/JoinToAgencys";
 import AgencysCarousel from "@/components/features/tenant/agencys/AgencysCarousel";
 import AgencysList from "@/components/features/tenant/agencys/AgencysList";
+import RealStateAgencyList from "@/components/features/tenant/landing/RealStateAgencyList";
 
 export default function Inmobiliarias() {
   return (
@@ -8,6 +9,7 @@ export default function Inmobiliarias() {
       <JoinToAgencys />
       <AgencysCarousel />
       <AgencysList />
+      <RealStateAgencyList />
     </main>
   );
 }

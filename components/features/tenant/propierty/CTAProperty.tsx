@@ -65,9 +65,9 @@ export const CTAProperty = ({ entityId, id }: CTAPropertyProps) => {
           <Image
             src={property?.images[0].thumbnail ?? "/propiedadForm.jpg"}
             alt={"Propiedad"}
-            width={900}
-            height={900}
-            className={"w-8/12"}
+            width={600}
+            height={540}
+            className={"w-8/12 h-[540px] object-cover min-w-[600px]"}
           />
         </div>
       </div>
