@@ -40,7 +40,7 @@ export const columns = [
   }),
   columnHelper.accessor("email", {
     header: "Ventas",
-    cell: (info) => "39",
+    cell: () => "39",
   }),
   columnHelper.accessor("status", {
     header: "Estado",

@@ -60,7 +60,7 @@ export const columns = [
   columnHelper.display({
     id: "actions",
     header: () => <></>,
-    cell: ({ row }) => (
+    cell: () => (
       <div className={"flex gap-2 justify-end"}>
         <Dialog>
           <DialogTrigger asChild>

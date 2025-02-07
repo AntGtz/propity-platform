@@ -6,7 +6,7 @@ import {
   setCommunityTabSelected,
 } from "@/lib/store/features/dashboard/dashboardSlice";
 import { useCallback, useEffect } from "react";
-import { TabsValue } from "@/components/features/tenant/dashboard/community/types";
+import { TabsValue } from "@/type/dashboard";
 
 type TabsProps = {
   tabs: { display: string; value: TabsValue }[];
