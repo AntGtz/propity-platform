@@ -22,8 +22,10 @@ export async function generateMetadata({
   const tenantsData = await fetch("https://api.propity.mx/qa/entities/");
   const tenantsList: TenantData[] = await tenantsData.json();
 
+  const IfQAJOM = appParams.subdomain.split(".")[0] === "qajom";
+
   const getTenant = tenantsList.find(
-    (tenant) => tenant.subdomain.split(".")[0] === appParams.subdomain,
+    (tenant) => tenant.subdomain.split(".")[0] === (IfQAJOM ? "jom" : appParams.subdomain),
   );
 
   const response: Response = await fetch(
@@ -49,9 +51,11 @@ export default async function TenantLayout({ children, params }: LayoutProps) {
 
   const tenantsData = await fetch("https://api.propity.mx/qa/entities/");
   const tenantsList: TenantData[] = await tenantsData.json();
+  
+  const ifQAJOM = appParams.subdomain.split(".")[0] === "qajom";
 
   const getTenant = tenantsList.find(
-    (tenant) => tenant.subdomain.split(".")[0] === appParams.subdomain,
+    (tenant) => tenant.subdomain.split(".")[0] === (ifQAJOM ? "jom" : appParams.subdomain),
   );
 
   if (!getTenant) {
