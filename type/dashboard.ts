@@ -131,6 +131,25 @@ export type UsersResponse = {
   }
 }
 
+export type AgentsResponse = {
+  id: string,
+  photo: {
+    original: string
+    thumbnail: string
+  } | null,
+  firstName: string,
+  lastName: string,
+  phone: string,
+  email: string,
+  status: {
+    name: string,
+    display: string
+  },
+  leads: number,
+  appointments: number,
+  trade: string | null
+}
+
 export type Guide = {
   id: string,
   photo: {
@@ -139,6 +158,7 @@ export type Guide = {
   } | null,
   name: string,
   email: string,
+  phone: string,
   registerDate: string,
   upline: {
     id: string
@@ -151,3 +171,19 @@ export type Guide = {
 }
 
 export type GuideData = Array<Guide>;
+
+export type Agent = {
+  id: string,
+  photo: {
+    original: string
+    thumbnail: string
+  } | null,
+  name: string,
+  email: string,
+  leads: number,
+  status: string | null,
+  appointments: number,
+  trade: null | string
+}
+
+export type AgentData = Array<Agent>;

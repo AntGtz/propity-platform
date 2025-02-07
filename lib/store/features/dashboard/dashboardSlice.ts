@@ -1,4 +1,5 @@
 import {
+  AgentData,
   CommissionData,
   CommissionScheme,
   GuideData,
@@ -20,6 +21,10 @@ interface DashboardState {
   partnersList: PartnerData;
   teamList: Team[];
   guidesList: GuideData;
+  guidesFilters: ColumnFiltersState;
+  agentsList: AgentData;
+  agentsFilters: ColumnFiltersState;
+  propertyTabSelected: "table" | "form";
 }
 
 interface CollapseMenuPayload {
@@ -40,6 +45,10 @@ const initialState: DashboardState = {
   partnersList: [],
   teamList: [],
   guidesList: [],
+  guidesFilters: [],
+  agentsList: [],
+  agentsFilters: [],
+  propertyTabSelected: "table",
 };
 
 export const dashboardSlice = createSlice({
@@ -106,6 +115,40 @@ export const dashboardSlice = createSlice({
     setGuidesList: (state, action: PayloadAction<GuideData>) => {
       state.guidesList = action.payload;
     },
+    setPropertyTabSelected: (state, action: PayloadAction<"table" | "form">) => {
+      state.propertyTabSelected = action.payload;
+    },
+    setGuidesFilters: (state, action: PayloadAction<ColumnFiltersState>) => {
+      // Create a new map to handle each filter by its column ID
+      const filtersMap = new Map(
+        state.guidesFilters.map((filter) => [filter.id, filter])
+      );
+
+      // Update the map with the new filters, replacing entries for the same column ID
+      for (const newFilter of action.payload) {
+        filtersMap.set(newFilter.id, newFilter);
+      }
+
+      // Convert the map back to an array
+      state.guidesFilters = Array.from(filtersMap.values());
+    },
+    setAgentsList: (state, action: PayloadAction<AgentData>) => {
+      state.agentsList = action.payload;
+    },
+    setAgentsFilters: (state, action: PayloadAction<ColumnFiltersState>) => {
+      // Create a new map to handle each filter by its column ID
+      const filtersMap = new Map(
+        state.agentsFilters.map((filter) => [filter.id, filter])
+      );
+
+      // Update the map with the new filters, replacing entries for the same column ID
+      for (const newFilter of action.payload) {
+        filtersMap.set(newFilter.id, newFilter);
+      }
+
+      // Convert the map back to an array
+      state.agentsFilters = Array.from(filtersMap.values());
+    },
   },
 });
 
@@ -121,6 +164,10 @@ export const {
   deleteCommissionById,
   setTeamList,
   setGuidesList,
+  setPropertyTabSelected,
+  setGuidesFilters,
+  setAgentsList,
+  setAgentsFilters,
 } = dashboardSlice.actions;
 
 export default dashboardSlice.reducer;

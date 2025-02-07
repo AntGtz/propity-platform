@@ -142,7 +142,7 @@ export default function NavTenant() {
                     fill="#041E42"
                   />
                 </svg>
-                {session?.user.name}
+                {JSON.stringify(session)}
               </span>
             )}
           </div>

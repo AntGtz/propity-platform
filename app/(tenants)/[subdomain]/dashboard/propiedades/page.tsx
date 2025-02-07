@@ -14,6 +14,9 @@ import {
 } from "@/components/common/dialog";
 import { TableWrapped } from "@/components/features/tenant/dashboard/TableWrapped";
 import { withPagination } from "@/components/features/tenant/dashboard/withPagination";
+import { AddPropertyButton } from "@/components/features/tenant/dashboard/properties/AddPropertyButton";
+import { useAppSelector } from "@/lib/store/hooks";
+import { NewPropertyForm } from "@/components/features/tenant/dashboard/properties/NewPropertyForm";
 
 type PropiedadesTableData = {
   image: string;
@@ -310,6 +313,9 @@ const testData: PropiedadesTableData[] = [
 export default function Propiedades() {
   const [tab, setTab] = useState(0);
   const [nameSearch, setNameSearch] = useState("");
+  const propertyTabSelected = useAppSelector(
+    (state) => state.dashboard.propertyTabSelected
+  );
 
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const columnHelper = createColumnHelper<PropiedadesTableData>();
@@ -519,7 +525,7 @@ export default function Propiedades() {
     Table: TableWrapped,
   });
 
-  return (
+  return propertyTabSelected === "table" ? (
     <section className={"flex flex-col font-galano"}>
       <h1 className={"text-4xl font-bold mt-6"}>Propiedades</h1>
       <div className={"flex justify-between my-4"}>
@@ -627,17 +633,7 @@ export default function Propiedades() {
               className={`4xl:w-80 3xl:w-48 w-full pl-8 pr-4 [&]:py-5 md:text-sm text-sm focus:outline-none focus-visible:ring-0 border-[#26293133]`}
             />
           </span>
-          <Button className={"py-5 px-6"}>
-            Añadir Propiedad
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-              <path
-                d="M1.33301 5.9987H5.99967M5.99967 5.9987H10.6663M5.99967 5.9987V1.33203M5.99967 5.9987V10.6654"
-                stroke="white"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </Button>
+          <AddPropertyButton />
         </div>
       </div>
 
@@ -648,5 +644,7 @@ export default function Propiedades() {
         onChangeColumnsFilters={setColumnFilters}
       />
     </section>
+  ) : (
+    <NewPropertyForm />
   );
 }

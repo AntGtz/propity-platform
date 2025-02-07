@@ -12,7 +12,7 @@ export const SignIn = async ({
   try {
     return await signIn("credentials", {
       redirect: false,
-      username: username.split("@")[0],
+      username: username,
       password,
     });
   } catch (error) {

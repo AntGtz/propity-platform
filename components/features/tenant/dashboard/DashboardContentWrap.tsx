@@ -3,8 +3,8 @@
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { useEffect } from "react";
 import { fetchCommissions } from "./commission/actions";
-import { setCommissionsArray, setGuidesList, setPartnersList, setTeamList } from "@/lib/store/features/dashboard/dashboardSlice";
-import { CommissionData, Guide, PartnerData, TeamData, UsersResponse } from "@/type/dashboard";
+import { setAgentsList, setCommissionsArray, setGuidesList, setPartnersList, setTeamList } from "@/lib/store/features/dashboard/dashboardSlice";
+import { Agent, AgentsResponse, CommissionData, Guide, PartnerData, TeamData, UsersResponse } from "@/type/dashboard";
 import { fetchPartners } from "./partner/actions";
 import { fetchTeams } from "./team/actions";
 import { useSession } from "next-auth/react";
@@ -74,6 +74,7 @@ export const DashboardContentWrap = ({
                     } : null,
                     name: `${guide.firstName} ${guide.lastName}`,
                     email: guide.email,
+                    phone: guide.phone,
                     registerDate: guide.register,
                     upline: guide.parent ? {
                         id: guide.parent.id,
@@ -85,6 +86,37 @@ export const DashboardContentWrap = ({
                     } : null
                 }));
             dispatch(setGuidesList(formattedGuides));
+
+            const responseAgents = await fetch(
+              `https://api.propity.mx/qa/entities/${tenantId}/agents
+`,
+              {
+                  cache: "no-cache",
+                  headers: {
+                      "Content-Type": "application/json",
+                      "Authorization": `Bearer ${session.user.accessToken}`
+                  }
+              }
+          );
+          if (!responseAgents.ok) {
+              throw new Error(`HTTP error! status: ${responseAgents.status}`);
+          }
+          const agentsData: AgentsResponse[] = await responseAgents.json();
+            const formattedAgents: Agent[] = agentsData
+                .map(agent => ({
+                    id: agent.id,
+                    photo: agent.photo ? {
+                        original: agent.photo.original,
+                        thumbnail: agent.photo.thumbnail
+                    } : null,
+                    name: `${agent.firstName} ${agent.lastName}`,
+                    email: agent.email,
+                    leads: agent.leads,
+                    status: agent.status.name,
+                    appointments: agent.appointments,
+                    trade: agent.trade ? agent.trade : null
+                }));
+            dispatch(setAgentsList(formattedAgents));
         } catch (error) {
             console.error("Failed to fetch users data:", error);
         }

@@ -1,39 +1,41 @@
 "use client";
 import { withPagination } from "@/components/features/tenant/dashboard/withPagination";
 import { TableWrapped } from "@/components/features/tenant/dashboard/TableWrapped";
+import { columns } from "./ColumnsDefs";
+import { Agent } from "@/type/dashboard";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import { columns } from "./ColumnDef";
-import { Guide } from "@/type/dashboard";
 import { ColumnFiltersState, OnChangeFn } from "@tanstack/table-core";
-import { setGuidesFilters } from "@/lib/store/features/dashboard/dashboardSlice";
+import { setAgentsFilters } from "@/lib/store/features/dashboard/dashboardSlice";
 
-export const GuidesTable = () => {
-  const Table = withPagination<Guide>({
+export const AgentsTable = () => {
+  const Table = withPagination<Agent>({
     Table: TableWrapped,
   });
-  const guidesList = useAppSelector((state) => state.dashboard.guidesList);
-  const guidesFilters = useAppSelector(
-    (state) => state.dashboard.guidesFilters
+  const agentsList = useAppSelector((state) => state.dashboard.agentsList);
+  const agentsFilters = useAppSelector(
+    (state) => state.dashboard.agentsFilters
   );
+
   const dispatch = useAppDispatch();
   const handleChangeColumnsFilters: OnChangeFn<ColumnFiltersState> = (
     updaterOrValue
   ) => {
     const newFilters =
       typeof updaterOrValue === "function"
-        ? updaterOrValue(guidesFilters)
+        ? updaterOrValue(agentsFilters)
         : updaterOrValue;
-    dispatch(setGuidesFilters(newFilters));
+    dispatch(setAgentsFilters(newFilters));
   };
 
   return (
     <Table
-      columnsFilters={guidesFilters}
-      onChangeColumnsFilters={handleChangeColumnsFilters}
-      data={guidesList}
+      data={agentsList}
       columns={columns}
+      columnsFilters={agentsFilters}
+      onChangeColumnsFilters={handleChangeColumnsFilters}
       columnVisibility={{
         id: false,
+        status: false,
       }}
     />
   );

@@ -7,6 +7,7 @@ import {
   InitiateAuthCommand,
   NotAuthorizedException,
   UserNotConfirmedException,
+  UserNotFoundException,
 } from "@aws-sdk/client-cognito-identity-provider";
 
 const cognitoClient = new CognitoIdentityProviderClient({
@@ -30,6 +31,7 @@ interface CustomUser extends User {
   name: string;
   email: string;
   phone: string;
+  profile: string;
   accessToken: string;
   all: string;
 }
@@ -83,6 +85,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
               return {
                 id: userAttributes?.sub,
+                profile: userAttributes?.profile,
                 name: userAttributes?.name,
                 email: userAttributes?.email,
                 phone: userAttributes?.phone_number,
@@ -99,6 +102,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             return null;
           }
         } catch (error) {
+          if (error instanceof UserNotFoundException) {
+            throw new AuthenticationError("Usuario incorrecto");
+          }
           if (error instanceof NotAuthorizedException) {
             throw new AuthenticationError("Usuario o contraseña incorrectos");
           }
@@ -121,6 +127,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         token.name = user.name;
         token.email = user.email;
         token.phone = (user as CustomUser).phone;
+        token.profile = (user as CustomUser).profile;
         token.accessToken = (user as CustomUser).accessToken;
         token.all = (user as CustomUser).all;
       }
@@ -132,6 +139,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         name: token.name as string,
         email: token.email as string,
         phone: token.phone as string,
+        profile: token.profile as string,
         accessToken: token.accessToken as string,
         all: token.all as string,
       };
