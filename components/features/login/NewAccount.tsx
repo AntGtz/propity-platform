@@ -2,6 +2,7 @@ import { Button } from "@/components/common/button";
 import { Checkbox } from "@/components/common/checkbox";
 import { Input } from "@/components/common/input";
 import { PhoneInput } from "@/components/common/phone-input";
+import { useAppSelector } from "@/lib/store/hooks";
 import { cn } from "@/lib/utils";
 import { EyeIcon } from "lucide-react";
 import { forwardRef, useId, useState } from "react";
@@ -15,6 +16,8 @@ interface Props {
 export default function NewAccount({ setTab }: Props) {
   const nameFieldId = useId();
   const passwordFieldId = useId();
+
+  const entityId = useAppSelector((state) => state.tenant.details?.id);
 
   const [form, setForm] = useState({
     name: "",
@@ -63,6 +66,7 @@ export default function NewAccount({ setTab }: Props) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "cache-control": "no-cache",
       },
       body: JSON.stringify({
         username: form.email.split("@")[0],
@@ -70,8 +74,12 @@ export default function NewAccount({ setTab }: Props) {
         name: form.name,
         phone: form.phone,
         email: form.email,
+        entityId: entityId,
       }),
     });
+
+    const responseT = await response.json();
+    alert(JSON.stringify(responseT))
 
     if (response.ok) {
       setTab("userConfirmation");

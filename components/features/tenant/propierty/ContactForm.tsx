@@ -11,7 +11,7 @@ export const ContactForm = ({ id }: { id: string }) => {
   const entity = useAppSelector((state) =>
     state.tenant.communityDetails.find((e) => e.id === id),
   );
-
+  const tenant = useAppSelector((state) => state.tenant.details);
   const InputComponent = forwardRef<
     HTMLInputElement,
     React.ComponentProps<"input">
@@ -30,7 +30,9 @@ export const ContactForm = ({ id }: { id: string }) => {
         "font-galano flex flex-col gap-y-4 w-full border border-gray-300 rounded-sm px-4 py-4 text-sm"
       }
     >
-      <span className={"font-bold text-2xl"}>Conecta con {entity?.name}</span>
+      <span className={"font-bold text-2xl"}>
+        Conecta con {tenant?.subdomain.split(".")[0] === "app" ? entity?.name : tenant?.name}
+      </span>
       <div className={"flex flex-col gap-y-1.5"}>
         <span className={"text-gray-600"}>Nombre y apellido</span>
         <Input

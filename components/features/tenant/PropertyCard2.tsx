@@ -1,4 +1,5 @@
 "use client";
+import { useAppSelector } from "@/lib/store/hooks";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -10,6 +11,7 @@ interface PropertyCardProps {
   logo?: string | undefined;
   name?: string;
   price?: number | undefined;
+  comision?: number | undefined;
   address?: string | null;
   description?: string | null;
   instagram?: string | undefined;
@@ -24,11 +26,15 @@ export default function PropertyCard2({
   logo,
   name,
   price,
+  comision,
   address,
   description,
   instagram,
   facebook,
 }: PropertyCardProps) {
+  const userState = useAppSelector((state) => state.user);
+  const tenantDetails = useAppSelector((state) => state.tenant.details);
+
   return (
     <>
       <article className="md:max-w-[264px] w-full flex flex-col min-h-32 font-galano cursor-pointer">
@@ -48,13 +54,22 @@ export default function PropertyCard2({
               fill
             />
           </Link>
+          {userState.role.jom.name === "guide" && comision !== undefined && (
+            <span className="text-xs bg-[#69D790] rounded-3xl px-2.5 py-1.5 absolute z-10 font-jakarta ml-4 top-4">
+              {comision}%
+            </span>
+          )}
         </header>
         <Link
           href={`perfil/${entityId}`}
           className={"flex items-center gap-1.5 mt-2.5"}
         >
           <Image
-            src={logo ?? "/jomLogo.png"}
+            src={
+              tenantDetails?.subdomain.split(".")[0] === "app"
+                ? (logo ?? "/jomLogo.png")
+                : (tenantDetails?.theme.logotype.main ?? "/jomLogo.png")
+            }
             alt="JomLogo"
             width={45}
             height={45}
@@ -62,7 +77,7 @@ export default function PropertyCard2({
           />
           <div className="flex flex-col">
             <span className="font-bold text-base text-whiteGray leading-5">
-              {name ?? "Constructora Hogar"}
+              {tenantDetails?.subdomain.split(".")[0] === "app" ? name : tenantDetails?.name ?? "Constructora Hogar"}
             </span>
             <span className="text-xs">
               {address ?? "Quetzal 247, Priv. El Encanto"}

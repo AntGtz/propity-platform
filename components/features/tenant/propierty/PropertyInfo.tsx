@@ -15,9 +15,11 @@ export const PropertyInfo = ({
   entityId: string;
 }) => {
   const entity = useAppSelector((state) =>
-    state.tenant.communityDetails.find((e) => e.id === entityId),
+    state.tenant.communityDetails.find((e) => e.id === entityId)
   );
+  const tenant = useAppSelector((state) => state.tenant.details);
   const property = entity?.properties?.find((p) => p.id === Number(propertyId));
+  const userState = useAppSelector((state) => state.user);
 
   const config: Array<{
     title: string | ReactNode;
@@ -252,7 +254,11 @@ export const PropertyInfo = ({
     <>
       <section className={"w-full flex gap-6 mt-8 font-galano"}>
         <div className={"md:w-7/12 flex flex-col"}>
-          <h1 className={"font-bold text-xl"}>{property?.entity.name}</h1>
+          {tenant?.subdomain.split(".")[0] === "app" ? (
+            <h1 className={"font-bold text-xl"}>{property?.entity.name}</h1>
+          ): (
+            <h1 className={"font-bold text-xl"}>{tenant?.name}</h1>
+          )}
           <h2 className={"font-bold text-4xl mt-2"}>
             $ {property?.operations[0]!.price.toLocaleString("es-MX")}
           </h2>
@@ -406,7 +412,7 @@ export const PropertyInfo = ({
                   ${" "}
                   {Number(
                     (property?.operations[0].price ?? 1) /
-                      (property?.surface.built ?? 1),
+                      (property?.surface.built ?? 1)
                   )
                     .toFixed(2)
                     .toLocaleUpperCase("es-MX")}
@@ -416,21 +422,23 @@ export const PropertyInfo = ({
             </span>
           </div>
 
-          <div
-            className={
-              "mt-8 flex md:flex-row flex-col gap-4 items-center pb-8 border-b border-gray-400"
-            }
-          >
-            <Button className={"[&]:py-6 [&]:px-6 w-full md:w-auto"}>
-              Contactar propietario
-            </Button>
-            <Button
-              variant={"outline"}
-              className={"[&]:py-6 [&]:px-6 w-full md:w-auto"}
+          {userState.role.jom.name === "agent" && (
+            <div
+              className={
+                "mt-8 flex md:flex-row flex-col gap-4 items-center pb-8 border-b border-gray-400"
+              }
             >
-              Compartir esta {property?.operations[0].display}
-            </Button>
-          </div>
+              <Button className={"[&]:py-6 [&]:px-6 w-full md:w-auto"}>
+                Contactar propietario
+              </Button>
+              <Button
+                variant={"outline"}
+                className={"[&]:py-6 [&]:px-6 w-full md:w-auto"}
+              >
+                Compartir esta {property?.operations[0].display}
+              </Button>
+            </div>
+          )}
           {config.map((item, index) => (
             <CollapsibleWrap
               key={index}
@@ -459,8 +467,12 @@ export const PropertyInfo = ({
             className={"w-full h-96 rounded-xl"}
           ></iframe>
           <div className={"mt-12 pl-24 flex flex-col gap-y-9"}>
-            <ContactCard id={entity?.id ?? ""} />
-            <ContactForm id={entity?.id ?? ""} />
+            {userState.role.jom.name === "agent" && (
+              <>
+                <ContactCard id={entity?.id ?? ""} />
+                <ContactForm id={entity?.id ?? ""} />
+              </>
+            )}
           </div>
         </div>
       </section>

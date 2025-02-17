@@ -1,58 +1,82 @@
 // app/api/auth/register/route.ts
 
 import { NextResponse } from "next/server";
-import {
-  CognitoIdentityProviderClient,
-  SignUpCommand,
-  UsernameExistsException,
-} from "@aws-sdk/client-cognito-identity-provider";
+export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
   try {
-    const { username, password, name, email } = await request.json();
+    const { username, password, name, email, phone, entityId } =
+      await request.json();
 
-    const cognitoClient = new CognitoIdentityProviderClient({
-      region: process.env.COGNITO_REGION,
-      credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+    const createUserResponse = await fetch("https://api.propity.mx/qa/users/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "cache-control": "no-cache",
       },
+      body: JSON.stringify({
+        username: username,
+        firstName: name.split(" ")[0],
+        lastName: name.split(" ")[1],
+        phone: phone,
+        email: email,
+        dream: "",
+        newPass: password,
+        aboutMe: "",
+        contact: {
+          type: "personal",
+          phone: phone,
+          email: email,
+          facebook: "",
+          instagram: "",
+          whatsapp: phone,
+        },
+      }),
     });
 
-    const params = {
-      ClientId: process.env.COGNITO_CLIENT_ID!,
-      Username: username,
-      Password: password,
-      UserAttributes: [
-        {
-          Name: "email",
-          Value: `${email}`,
-        },
-        {
-          Name: "name",
-          Value: `${name}`,
-        },
-      ],
-    };
+    const createUserData = await createUserResponse.json();
+    console.log("createUser response:", createUserData);
 
-    const command = new SignUpCommand(params);
-    await cognitoClient.send(command);
-    return NextResponse.json(
-      { message: "Usuario registrado con éxito" },
-      { status: 201 },
-    );
-  } catch (error) {
-    if (error instanceof UsernameExistsException) {
-      return NextResponse.json(
-        { message: "El usuario ya existe" },
-        { status: 400 },
-      );
+    if (!createUserResponse.ok) {
+      throw new Error(`HTTP error! status: ${createUserResponse.status}`);
     }
 
+    const inserUserToTenant = await fetch(
+      `https://api.propity.mx/qa/entities/${entityId}/users`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userEmail: email,
+          parentId: "",
+          role: "guide",
+        }),
+      }
+    );
+
+    const inserUserToTenantJson = await inserUserToTenant.json();
+    console.log(
+      JSON.stringify(inserUserToTenantJson) + "inserUserToTenantJson"
+    );
+
+    if (inserUserToTenant.ok) {
+      return NextResponse.json(
+        { message: "Usuario registrado con éxito" },
+        { status: 200 }
+      );
+    } else {
+      return NextResponse.json(
+        { message: "Error al registrar usuario en la entidad" },
+        { status: 500 }
+      );
+    }
+  } catch (error) {
     console.error("Error during user registration:", error);
     return NextResponse.json(
       { message: "Error al registrar usuario" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }

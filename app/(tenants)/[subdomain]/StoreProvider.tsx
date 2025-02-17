@@ -26,7 +26,7 @@ export default function StoreProvider({
     const fetchTenantDetails = async () => {
       if (!storeRef.current) return; // Ensure storeRef.current is defined
       const tenantData = await fetch(
-        `https://api.propity.mx/qa/entities/${tenantId}`,
+        `https://api.propity.mx/qa/entities/${tenantId}`
       );
       const tenantDetails = await tenantData.json();
       storeRef.current.dispatch(setTenant(tenantDetails));
@@ -34,21 +34,21 @@ export default function StoreProvider({
     const fetchCommunityDetails = async () => {
       if (!storeRef.current) return; // Ensure storeRef.current is defined
       const communityData = await fetch(
-        `https://api.propity.mx/qa/entities/${tenantId}/community`,
+        `https://api.propity.mx/qa/entities/${tenantId}/community`
       );
       const communityList = await communityData.json();
       storeRef.current.dispatch(setCommunityList(communityList.active));
 
       const getCommunityDetails = async (communityId: string) => {
         const communityData = await fetch(
-          `https://api.propity.mx/qa/entities/${communityId}`,
+          `https://api.propity.mx/qa/entities/${communityId}`
         );
         return await communityData.json();
       };
 
       const getCommunityProperties = async (communityId: string) => {
         const communityData = await fetch(
-          `https://api.propity.mx/qa/entities/${communityId}/properties`,
+          `https://api.propity.mx/qa/entities/${communityId}/properties`
         );
         return await communityData.json();
       };
@@ -71,7 +71,7 @@ export default function StoreProvider({
         } catch (error) {
           console.error(
             `Failed to fetch details for community ${community.id}`,
-            error,
+            error
           );
         }
       };
@@ -84,7 +84,11 @@ export default function StoreProvider({
 
       fetchAllCommunityDetails();
     };
-    Promise.all([fetchTenantDetails(), fetchCommunityDetails()]);
+
+    Promise.all([
+      fetchTenantDetails(),
+      fetchCommunityDetails(),
+    ]);
   }, [tenantId]);
 
   return <Provider store={storeRef.current}>{children}</Provider>;

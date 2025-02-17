@@ -1,6 +1,17 @@
+"use client";
 import Image from "next/image";
 import { formatPhoneNumber } from "@/utils";
 import Link from "next/link";
+import { useAppSelector } from "@/lib/store/hooks";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/common/dialog";
+import { Button } from "@/components/common/button";
+import { useState } from "react";
 
 interface InventoryCardProps {
   entityId: string;
@@ -33,21 +44,55 @@ export const InventoryCard = ({
   totalSpace,
   totalBuiltSpace,
 }: InventoryCardProps) => {
+  const userState = useAppSelector((state) => state.user);
+  const [open, setOpen] = useState(false);
+
   return (
     <>
       <article className={"flex flex-col gap-3 w-full cursor-pointer"}>
-        <Link
-          className={"w-full h-full cursor-pointer"}
-          href={`/propiedad/${entityId}/${propertyId}`}
-        >
-          <Image
-            src={image ?? "/apartment1.jpg"}
-            alt="Apartment"
-            width={700}
-            className={"rounded-md object-cover w-full h-[360px]"}
-            height={320}
-          />
-        </Link>
+        <div className="relative">
+          <Link
+            className={"w-full h-full cursor-pointer relative"}
+            href={`/propiedad/${entityId}/${propertyId}`}
+          >
+            <Image
+              src={image ?? "/apartment1.jpg"}
+              alt="Apartment"
+              width={700}
+              className={"rounded-md object-cover w-full h-[360px]"}
+              height={320}
+            />
+            {userState.role.jom.name === "agent" && (
+              <span className="text-xs bg-[#69D790] rounded-3xl px-2.5 py-1.5 absolute z-10 font-jakarta ml-4 top-4">
+                {comision}%
+              </span>
+            )}
+          </Link>
+          {userState.role.jom.name === "agent" && (
+            <Dialog open={open} onOpenChange={setOpen}>
+              <DialogTrigger>
+                <span className="text-xs bg-primary text-primary-foreground rounded-3xl px-2.5 py-1.5 absolute z-10 font-jakarta right-4 top-4">
+                  Agregar
+                </span>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogTitle className={"font-galano text-xl"}>
+                  {" "}
+                  Desea agregar esta propiedad a su inventario?
+                </DialogTitle>
+
+                <DialogFooter>
+                  <Button onClick={() => setOpen(false)} className={"py-6 w-full"}>
+                    Agregar
+                  </Button>
+                  <Button variant={"outline"} onClick={() => setOpen(false)} className={"py-6 w-full"}>
+                    Cancelar
+                  </Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+          )}
+        </div>
         <div className={"flex flex-col items-center"}>
           <Link
             href={`/propiedad/${entityId}/${propertyId}`}
@@ -56,12 +101,6 @@ export const InventoryCard = ({
             }
           >
             ${Number(price).toLocaleString("es-MX")}{" "}
-            <span className={"text-[#00B140] text-sm"}>
-              $
-              {(Number(price) * Number(`0.0${comision}`)).toLocaleString(
-                "es-MX",
-              )}
-            </span>
           </Link>
           <Link
             className={"flex justify-start w-full"}
