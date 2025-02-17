@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "../common/button";
 import { Dialog, DialogContent, DialogTrigger } from "../common/dialog";
 import AuthDialog from "../features/login/AuthDialog";
@@ -14,14 +14,39 @@ import {
   setAuthDialogType,
 } from "@/lib/store/features/app/appSlice";
 import { usePathname } from "next/navigation";
+import { setUserData } from "@/lib/store/features/user/userSlice";
 
 export default function NavTenant() {
   const tenantData = useAppSelector((state) => state.tenant.details);
   useTenantTheme(tenantData?.theme?.color);
   const appState = useAppSelector((state) => state.app);
+  const userState = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
-
   const { data: session } = useSession();
+  const tenantId = useAppSelector((state) => state.tenant.details?.id);
+
+  useEffect(() => {
+    const fetchUserDataInCurrentTenant = async () => {
+      if (!session?.user.profile || !tenantId) return;
+      try {
+        const response = await fetch(
+          `https://api.propity.mx/qa/users/${session?.user.profile}/roles/${tenantId}`,
+          {
+            cache: "no-cache",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const data = await response.json();
+        dispatch(setUserData(data));
+      } catch (error) {
+        console.error(error + "fetchUserDataInCurrentTenant error");
+      }
+    };
+
+    fetchUserDataInCurrentTenant();
+  }, [session?.user.profile, tenantId]);
 
   const pathname = usePathname();
 
@@ -40,29 +65,33 @@ export default function NavTenant() {
           }
         >
           <MobileMenu />
-          <li className="md:flex hidden items-center gap-4 font-galano">
-            <Link
-              href="/desarrollos"
-              className={`text-sm ${pathname.includes("/desarrollos") ? "font-extrabold" : "font-medium"}`}
-            >
-              Desarrollos
-            </Link>
-            <Link
-              href="/inmobiliarias"
-              className={`text-sm ${pathname.includes("/inmobiliarias") ? "font-extrabold" : "font-medium"}`}
-            >
-              Inmobiliarias
-            </Link>
-            <Link
-              href="/inventario"
-              className={`text-sm ${pathname.includes("/inventario") ? "font-extrabold" : "font-medium"}`}
-            >
-              Inventario
-            </Link>
-          </li>
+          {tenantData?.subdomain.split(".")[0] == "app" && (
+            <>
+              <li className="md:flex hidden items-center gap-4 font-galano">
+                <Link
+                  href="/desarrollos"
+                  className={`text-sm ${pathname.includes("/desarrollos") ? "font-extrabold" : "font-medium"}`}
+                >
+                  Desarrollos
+                </Link>
+                <Link
+                  href="/inmobiliarias"
+                  className={`text-sm ${pathname.includes("/inmobiliarias") ? "font-extrabold" : "font-medium"}`}
+                >
+                  Inmobiliarias
+                </Link>
+                <Link
+                  href="/inventario"
+                  className={`text-sm ${pathname.includes("/inventario") ? "font-extrabold" : "font-medium"}`}
+                >
+                  Inventario
+                </Link>
+              </li>
+            </>
+          )}
           <Link
             href={`/`}
-            className="text-sm font-medium md:absolute md:top-1/2 md:-translate-y-1/2 md:left-1/2 md:-translate-x-1/2 transform"
+            className={`text-sm font-medium ${tenantData?.subdomain.split(".")[0] == "app" ? "md:absolute md:top-1/2 md:-translate-y-1/2 md:left-1/2 md:-translate-x-1/2 transform" : ""}`}
           >
             <Image
               src={tenantData?.theme?.logotype.main || "/logotype.svg"}
@@ -142,7 +171,7 @@ export default function NavTenant() {
                     fill="#041E42"
                   />
                 </svg>
-                {JSON.stringify(session.user.profile)}
+                {userState.firstName}
               </span>
             )}
           </div>
