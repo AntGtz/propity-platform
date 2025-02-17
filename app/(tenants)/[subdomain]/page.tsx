@@ -10,12 +10,15 @@ import { Button } from "@/components/common/button";
 export default async function TenantPage({
   params,
 }: {
-  params: { subdomain: string };
+  params: Promise<{
+    subdomain: string;
+  }>;
 }) {
+  const tenantData = await params;
   return (
     <main>
       <Hero />
-      {params.subdomain == "app" ? (
+      {tenantData.subdomain == "app" ? (
         <>
           <CreateCommunity />
           <section
