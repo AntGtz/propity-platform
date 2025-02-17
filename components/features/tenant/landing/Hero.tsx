@@ -4,9 +4,11 @@ import { Input } from "@/components/common/input";
 import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
+import { useAppSelector } from "@/lib/store/hooks";
 
 export default function Hero() {
   const [search, setSearch] = useState("");
+  const tenantData = useAppSelector((state) => state.tenant.details);
 
   return (
     <section className="flex flex-col justify-center gap-4 py-16  md:h-[600px] relative text-white ">
@@ -20,8 +22,10 @@ export default function Hero() {
       <div
         className={"flex flex-col max-w-7xl mx-auto gap-4 w-full px-4 md:px-0"}
       >
-        <h1 className="md:text-6xl text-3xl font-jakarta font-bold xl:w-3/6 leading-tight">
-          Guiando su camino hacia un nuevo hogar
+        <h1 className={`md:text-6xl text-3xl font-jakarta font-bold ${tenantData?.subdomain.split(".")[0] !== "app" ? "w-full" : "xl:w-3/6"} leading-tight`}>
+          {tenantData?.subdomain.split(".")[0] !== "app"
+            ? "¡Hagamos Comunidad!"
+            : "Guiando su camino hacia un nuevo hogar"}
         </h1>
         <div className="flex items-center gap-5 font-galano">
           <span className="py-1 px-1 border-b-2 border-white cursor-pointer md:text-base text-sm">

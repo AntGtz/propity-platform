@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import tenantReducer from "./features/tenants/tenantSlice";
 import appReducer from "@/lib/store/features/app/appSlice";
 import dashboardReducer from "@/lib/store/features/dashboard/dashboardSlice";
+import userReducer from "@/lib/store/features/user/userSlice";
 
 export const makeStore = () => {
   return configureStore({
@@ -9,6 +10,7 @@ export const makeStore = () => {
       tenant: tenantReducer,
       app: appReducer,
       dashboard: dashboardReducer,
+      user: userReducer
     },
     devTools: process.env.NODE_ENV !== "production",
   });

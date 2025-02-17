@@ -10,6 +10,11 @@ export const EntityPusblish = ({ entityId }: EntityPusblishProps) => {
   const entity = useAppSelector((state) =>
     state.tenant.communityDetails.find((e) => e.id === entityId),
   );
+  const tenantState = useAppSelector((state) => state.tenant);
+  const userState = useAppSelector((state) => state.user);
+  if (userState.role.jom.name !== "guide" && userState.role.jom.name !== "agent") return null;
+  if (tenantState?.details?.subdomain.split(".")[0] !== "app") return null;
+
   return (
     <>
       <div className={"w-full flex items-center gap-3 mt-8"}>
