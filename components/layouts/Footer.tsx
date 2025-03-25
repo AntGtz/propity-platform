@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Linkedin, Twitter, X } from "lucide-react";
+import { Facebook, Instagram, Linkedin, X } from "lucide-react";
 import Image from "next/image";
 
 export default function FooterTenant() {
@@ -82,7 +82,7 @@ export default function FooterTenant() {
           <div className="flex gap-2">
             <a href="https://www.instagram.com/propity.io/"><Instagram className="w-5 h-5" /></a>
             <a href="https://www.facebook.com/propity.io"><Facebook className="w-5 h-5" /></a>
-            <Twitter className="w-5 h-5" />
+            <X className="w-5 h-5" />
             <a href="https://www.linkedin.com/company/propity/"><Linkedin className="w-5 h-5" /></a>
           </div>
         </div>
