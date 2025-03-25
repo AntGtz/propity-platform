@@ -63,7 +63,7 @@ export default function NavPlatform() {
           <MobileMenuPlatform />
           <Link href={`/`} className="text-sm font-medium">
             <Image
-              src={"/propityLogo.png"}
+              src={"/propitylogo.png"}
               height={80}
               quality={100}
               width={190}
