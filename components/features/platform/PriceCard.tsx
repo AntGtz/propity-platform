@@ -35,7 +35,8 @@ export default function PriceCard({
             <>
               <span className={"flex items-baseline"}>
                 {price}
-                <span className={"text-sm"}>/mes</span>
+                <span className={"text-sm"}></span>
+                {/* <span className={"text-sm"}>/mes</span> */}
               </span>
             </>
           ) : (

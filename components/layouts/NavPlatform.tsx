@@ -32,7 +32,7 @@ export default function NavPlatform() {
                 strokeLinejoin="round"
               />
             </svg>
-            +52 444 2215761
+            +52 55 9752 3838
           </span>
 
           <span className={"flex gap-1 items-center"}>

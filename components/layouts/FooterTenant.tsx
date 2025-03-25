@@ -38,13 +38,13 @@ export default function FooterTenant() {
               </a>
             </li>
             <li>
-              <a href="#" className="text-sm">
-                +56 4 1234 5678
+              <a href="tel:525597523838" className="text-sm">
+              +52 55 9752 3838
               </a>
             </li>
             <li>
-              <a href="#" className="text-sm">
-                ricado.gomez@propity.io
+              <a href="mailto:ricardo.gomez@propity.io" className="text-sm">
+                ricardo.gomez@propity.io
               </a>
             </li>
           </ul>

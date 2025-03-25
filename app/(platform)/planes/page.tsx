@@ -30,6 +30,7 @@ export default function Plans() {
           >
             <PriceCard
               title={"Starter"}
+              price={"Próximamente"}
               features={[
                 "Ve los inventarios de tus Desarrolladores",
                 "Descubre nuevos desarrollos",
@@ -39,7 +40,7 @@ export default function Plans() {
             />
             <PriceCard
               title={"Basico"}
-              price={"$1,800.00"}
+              price={"Próximamente"}
               features={[
                 "Ve los inventarios de tus Desarrolladores",
                 "Descubre nuevos desarrollos",
@@ -52,7 +53,7 @@ export default function Plans() {
             />
             <PriceCard
               title={"Pro"}
-              price={"$2,700.00"}
+              price={"Próximamente"}
               features={[
                 "Ve los inventarios de tus Desarrolladores",
                 "Descubre nuevos desarrollos",
@@ -212,14 +213,14 @@ export default function Plans() {
                 <Checkbox
                   className={
                     "bg-[#00B14040] py-3 px-3 h-auto w-auto border-transparent"
-                  }
+                  } style={{ pointerEvents: 'none' }}
                 />
               </span>
               <span className={"flex justify-start w-full"}>
                 <Checkbox
                   className={
                     "bg-[#00B14040] py-3 px-3 h-auto w-auto border-transparent"
-                  }
+                  } style={{ pointerEvents: 'none' }}
                 />
               </span>
             </div>
@@ -238,7 +239,7 @@ export default function Plans() {
                 <Checkbox
                   className={
                     "bg-[#00B14040] py-3 px-3 h-auto w-auto border-transparent"
-                  }
+                  } style={{ pointerEvents: 'none' }}
                 />
               </span>
               <span className={"flex justify-start w-full"}>
@@ -253,7 +254,7 @@ export default function Plans() {
                 <Checkbox
                   className={
                     "bg-[#00B14040] py-3 px-3 h-auto w-auto border-transparent"
-                  }
+                  } style={{ pointerEvents: 'none' }}
                 />
               </span>
             </div>
@@ -272,7 +273,7 @@ export default function Plans() {
                 <Checkbox
                   className={
                     "bg-[#00B14040] py-3 px-3 h-auto w-auto border-transparent"
-                  }
+                  } style={{ pointerEvents: 'none' }}
                 />
               </span>
               <span className={"flex justify-start w-full"}>
@@ -307,7 +308,7 @@ export default function Plans() {
                 <Checkbox
                   className={
                     "bg-[#00B14040] py-3 px-3 h-auto w-auto border-transparent"
-                  }
+                  } style={{ pointerEvents: 'none' }}
                 />
               </span>
               <span className={"flex justify-start w-full"}>
@@ -342,7 +343,7 @@ export default function Plans() {
                 <Checkbox
                   className={
                     "bg-[#00B14040] py-3 px-3 h-auto w-auto border-transparent"
-                  }
+                  } style={{ pointerEvents: 'none' }}
                 />
               </span>
               <span className={"flex justify-start w-full"}>
@@ -377,14 +378,14 @@ export default function Plans() {
                 <Checkbox
                   className={
                     "bg-[#00B14040] py-3 px-3 h-auto w-auto border-transparent"
-                  }
+                  } style={{ pointerEvents: 'none' }}
                 />
               </span>
               <span className={"flex justify-start w-full"}>
                 <Checkbox
                   className={
-                    "bg-[#00B14040] py-3 px-3 h-auto w-auto border-transparent"
-                  }
+                    "bg-[#00B14040] py-3 px-3 h-auto w-auto border-transparent "
+                  } style={{ pointerEvents: 'none' }}
                 />
               </span>
               <span className={"flex justify-start w-full"}>

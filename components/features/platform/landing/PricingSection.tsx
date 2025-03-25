@@ -27,6 +27,7 @@ export default function PricingSection() {
       >
         <PriceCard
           title={"Starter"}
+          price={"Próximamente"}
           features={[
             "Ve los inventarios de tus Desarrolladores",
             "Descubre nuevos desarrollos",
@@ -36,7 +37,7 @@ export default function PricingSection() {
         />
         <PriceCard
           title={"Basico"}
-          price={"$1,800.00"}
+          price={"Próximamente"}
           features={[
             "Ve los inventarios de tus Desarrolladores",
             "Descubre nuevos desarrollos",
@@ -49,7 +50,7 @@ export default function PricingSection() {
         />
         <PriceCard
           title={"Pro"}
-          price={"$2,700.00"}
+          price={"Próximamente"}
           features={[
             "Ve los inventarios de tus Desarrolladores",
             "Descubre nuevos desarrollos",

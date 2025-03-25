@@ -63,49 +63,53 @@ export default function Hero() {
             size={"lg"}
             variant={"propity"}
             className={"text-lg md:w-fit w-full"}
-          >
-            Solicitar una demostración
+          > 
+            <a href="https://crm.propity.mx/asesoria">
+              Solicitar una demostración
+            </a>
           </Button>
           <Button
             size={"lg"}
             variant={"propity-outline"}
             className={"font-bold text-lg md:w-fit w-full"}
           >
-            Comenzar gratis
+            <a href="https://crm.propity.mx/">
+              Comenzar gratis
+            </a>
           </Button>
         </div>
         <div className={"flex gap-3 items-center w-full mt-1 font-galano"}>
           <span className={"flex items-center"}>
             <Image
-              src={"/picClient.jpg"}
+              src={"/asesor1.jpg"}
               alt={"Propity logo"}
               width={50}
               className={"rounded-full h-[50px] w-[50px] object-cover"}
               height={50}
             />
             <Image
-              src={"/picClient.jpg"}
+              src={"/asesor2.jpg"}
               alt={"Propity logo"}
               width={50}
               className={"rounded-full h-[50px] w-[50px] object-cover -ml-6"}
               height={50}
             />
             <Image
-              src={"/picClient.jpg"}
+              src={"/asesor3.jpg"}
               alt={"Propity logo"}
               width={50}
               className={"rounded-full h-[50px] w-[50px] object-cover -ml-6"}
               height={50}
             />
             <Image
-              src={"/picClient.jpg"}
+              src={"/asesor4.jpg"}
               alt={"Propity logo"}
               width={50}
               className={"rounded-full h-[50px] w-[50px] object-cover -ml-6"}
               height={50}
             />
             <Image
-              src={"/picClient.jpg"}
+              src={"/asesor5.jpg"}
               alt={"Propity logo"}
               width={50}
               className={"rounded-full h-[50px] w-[50px] object-cover -ml-6"}
@@ -118,7 +122,7 @@ export default function Hero() {
       <div className={"bg-propity relative pl-20 pt-16 overflow-hidden"}>
         <span
           className={
-            "md:h-[450px] h-[260px] block w-[550px] bg-[linear-gradient(100deg,rgba(0,0,0,0),rgba(255,255,255,0.4),rgba(255,255,255,1),rgba(255,255,255,1)),url('/demoImg.png')] bg-cover"
+            "md:h-[450px] h-[260px] block w-[550px] bg-[linear-gradient(100deg,rgba(0,0,0,0),rgba(255,255,255,0.4),rgba(255,255,255,1),rgba(255,255,255,1)),url('/preview.png')] bg-cover"
           }
         ></span>
       </div>
