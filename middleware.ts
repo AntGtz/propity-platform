@@ -31,12 +31,12 @@ export default auth((request: NextRequest) => {
     }
   }
 
-  if (subdomain) {
-    // Rewrite the URL in the dynamic route based in the subdomain
-    return NextResponse.rewrite(
-      new URL(`/${subdomain}${url.pathname}`, request.url),
-    );
-  }
+  // if (subdomain) {
+  //   // Rewrite the URL in the dynamic route based in the subdomain
+  //   return NextResponse.rewrite(
+  //     new URL(`/${subdomain}${url.pathname}`, request.url),
+  //   );
+  // }
 
   return new Response(null, { status: 404 });
 });
