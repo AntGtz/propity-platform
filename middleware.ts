@@ -7,10 +7,10 @@ export default auth((request: NextRequest) => {
 
   // Define allowed Domains (localhost and production domain)
   const allowedDomains = [
-    "vercel.app",
-    "propity.mx",
     "localhost:3000",
     "propity.io",
+    "propity-platform.vercel.app",
+    "propity.mx",
     "propity-git-development-reylans-projects.vercel.app",
   ];
 
