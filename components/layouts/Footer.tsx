@@ -82,7 +82,7 @@ export default function FooterTenant() {
           <div className="flex gap-2">
             <a href="https://www.instagram.com/propity.io/"><Instagram className="w-5 h-5" /></a>
             <a href="https://www.facebook.com/propity.io"><Facebook className="w-5 h-5" /></a>
-            <X className="w-5 h-5" />
+            <Twitter className="w-5 h-5" />
             <a href="https://www.linkedin.com/company/propity/"><Linkedin className="w-5 h-5" /></a>
           </div>
         </div>
